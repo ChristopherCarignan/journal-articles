@@ -26,7 +26,7 @@ vowels  <- c("i:","a:")
 subdata <- vt.data[vt.data$word %in% c("bat","biete","Dieter","Rate","Rita","Tat"),]
 subdata <- subdata[subdata$stress=="N",]
 subdata$vowel <- droplevels(subdata$vowel)
-subdata$vowel <- factor(subdata$vowel, levels=vowels)
+subdata$vowel <- factor(subdata$vowel, levels=vowels, ordered=T)
 contrasts(subdata$vowel) <- "contr.treatment"
 
 
@@ -35,8 +35,8 @@ contrasts(subdata$vowel) <- "contr.treatment"
 
 # Base model
 m1 <- mgcv::bam(aperture ~ vowel
-                + te(time.norm, gridline.norm, k=20)
-                + te(time.norm, gridline.norm, by=vowel, k=15)
+                + te(time.norm, gridline.norm, k=12)
+                + te(time.norm, gridline.norm, by=vowel, k=12)
                 + s(time.norm, speaker, bs="fs", m=1, xt="tp", k=4)
                 + s(gridline.norm, speaker, bs="fs", m=1, xt="tp", k=4)
                 + s(word, bs="re", m=1),
@@ -47,13 +47,16 @@ valRho <- itsadug::acf_resid(m1, split_pred=c("gridline.norm"), plot=F)[2]
 
 # New model, corrected for autocorrelation
 m1.rho <- mgcv::bam(aperture ~ vowel
-                    + te(time.norm, gridline.norm, k=20)
-                    + te(time.norm, gridline.norm, by=vowel, k=15)
+                    + te(time.norm, gridline.norm, k=12)
+                    + te(time.norm, gridline.norm, by=vowel, k=12)
                     + s(time.norm, speaker, bs="fs", m=1, xt="tp", k=4)
                     + s(gridline.norm, speaker, bs="fs", m=1, xt="tp", k=4)
                     + s(word, bs="re", m=1),
                     AR.start=AR.start, rho=valRho,
                     data=subdata, method="fREML")
+
+# Summary of final model
+summary(m1.rho)
 
 
 ## Plot separate articulatory heatmaps for /i:/ and /a:/, save as TIFF
@@ -90,7 +93,7 @@ tiff(filename="GAMM_difference_i:-a:.tiff", h=7, w=9, units="in", res=300, point
 par(mfrow=c(1,1), cex=1, mar=c(4,5,2,3), mgp=c(1.5,0.75,0))
 itsadug::plot_diff2(m1.rho, view=c("time.norm", "gridline.norm"), comp=list(vowel=vowels),
                     main="VT aperture difference of /i:/ − /a:/", xlab="Time (normalized)", ylab="", yaxt="n",
-                    rm.ranef=F, show.diff=T, zlim=c(-14,14), alpha.diff=0.4, hide.label=T,
+                    rm.ranef=F, show.diff=T, zlim=c(-14.2,14.2), alpha.diff=0.4, hide.label=T,
                     color=diffcols, add.color.legend=F,  col="black",
                     n.grid=30, cex.lab=0.8, cex.axis=0.7, cex.main=0.8)
 gradientLegend(c(-14,14), pos=.875, side=4, color=diffcols, inside=F)
@@ -110,7 +113,7 @@ vowels  <- c("aI","a:")
 subdata <- vt.data[vt.data$word %in% c("bahne","bat","wate","weine","weinte","weihte"),]
 subdata <- subdata[subdata$stress=="N",]
 subdata$vowel <- droplevels(subdata$vowel)
-subdata$vowel <- factor(subdata$vowel, levels=vowels)
+subdata$vowel <- factor(subdata$vowel, levels=vowels, ordered=T)
 contrasts(subdata$vowel) <- "contr.treatment"
 
 
@@ -121,8 +124,8 @@ contrasts(subdata$vowel) <- "contr.treatment"
 m2 <- mgcv::bam(aperture ~ vowel
                 + te(time.norm, gridline.norm, k=15)
                 + te(time.norm, gridline.norm, by=vowel, k=15)
-                + s(time.norm, speaker, bs="fs", m=1, xt="tp", k=3)
-                + s(gridline.norm, speaker, bs="fs", m=1, xt="tp", k=3)
+                + s(time.norm, speaker, bs="fs", m=1, xt="tp", k=4)
+                + s(gridline.norm, speaker, bs="fs", m=1, xt="tp", k=4)
                 + s(word, bs="re", m=1),
                 data=subdata, method="fREML")
 
@@ -133,11 +136,14 @@ valRho <- itsadug::acf_resid(m2, split_pred=c("gridline.norm"), plot=F)[2]
 m2.rho <- mgcv::bam(aperture ~ vowel
                     + te(time.norm, gridline.norm, k=15)
                     + te(time.norm, gridline.norm, by=vowel, k=15)
-                    + s(time.norm, speaker, bs="fs", m=1, xt="tp", k=3)
-                    + s(gridline.norm, speaker, bs="fs", m=1, xt="tp", k=3)
+                    + s(time.norm, speaker, bs="fs", m=1, xt="tp", k=4)
+                    + s(gridline.norm, speaker, bs="fs", m=1, xt="tp", k=4)
                     + s(word, bs="re", m=1),
                     AR.start=AR.start, rho=valRho,
                     data=subdata, method="fREML")
+
+# Summary of final model
+summary(m2.rho)
 
 
 ## Plot articulatory differences between /aI/ and /a:/, highlighting areas of significant difference, save as TIFF
@@ -167,7 +173,7 @@ stresses <- c("A","N")
 subdata  <- vt.data[vt.data$word %in% c('ahnde','ahnte','sahnst','sahnt','sahst'),]
 subdata  <- subdata[subdata$stress %in% stresses,]
 subdata$stress <- droplevels(subdata$stress)
-subdata$stress <- factor(subdata$stress, ordered=F)
+subdata$stress <- factor(subdata$stress, levels=stresses, ordered=T)
 contrasts(subdata$stress) <- "contr.treatment"
 
 
@@ -176,10 +182,10 @@ contrasts(subdata$stress) <- "contr.treatment"
 
 # Base model
 m3 <- mgcv::bam(aperture ~ stress
-                + te(time.norm, gridline.norm, k=12)
-                + te(time.norm, gridline.norm, by=stress, k=12)
-                + s(time.norm, speaker, bs="fs", m=1, xt="tp", k=3)
-                + s(gridline.norm, speaker, bs="fs", m=1, xt="tp", k=3)
+                + te(time.norm, gridline.norm, k=15)
+                + te(time.norm, gridline.norm, by=stress, k=15)
+                + s(time.norm, speaker, bs="fs", m=1, xt="tp", k=4)
+                + s(gridline.norm, speaker, bs="fs", m=1, xt="tp", k=4)
                 + s(word, bs="re", m=1),
                 data=subdata, method="fREML")
 
@@ -188,13 +194,16 @@ valRho <- itsadug::acf_resid(m3, split_pred=c("gridline.norm"), plot=F)[2]
 
 # New model, corrected for autocorrelation
 m3.rho <- mgcv::bam(aperture ~ stress
-                    + te(time.norm, gridline.norm, k=12)
-                    + te(time.norm, gridline.norm, by=stress, k=12)
-                    + s(time.norm, speaker, bs="fs", m=1, xt="tp", k=3)
-                    + s(gridline.norm, speaker, bs="fs", m=1, xt="tp", k=3)
+                    + te(time.norm, gridline.norm, k=15)
+                    + te(time.norm, gridline.norm, by=stress, k=15)
+                    + s(time.norm, speaker, bs="fs", m=1, xt="tp", k=4)
+                    + s(gridline.norm, speaker, bs="fs", m=1, xt="tp", k=4)
                     + s(word, bs="re", m=1),
                     AR.start=AR.start, rho=valRho,
                     data=subdata, method="fREML")
+
+# Summary of final model
+summary(m3.rho)
 
 
 ## Plot articulatory differences between /i:/ and /a:/, highlighting areas of significant difference, save as TIFF
