@@ -90,7 +90,8 @@ tiff(filename="GAMM_difference_i:-a:.tiff", h=7, w=9, units="in", res=300, point
 par(mfrow=c(1,1), cex=1, mar=c(4,5,2,3), mgp=c(1.5,0.75,0))
 itsadug::plot_diff2(m1.rho, view=c("time.norm", "gridline.norm"), comp=list(vowel=vowels),
                     main="VT aperture difference of /i:/ − /a:/", xlab="Time (normalized)", ylab="", yaxt="n",
-                    rm.ranef=F, show.diff=T, zlim=c(-14,14), color=diffcols, add.color.legend=F, alpha.diff=0.4, hide.label=T, col="black",
+                    rm.ranef=F, show.diff=T, zlim=c(-14,14), alpha.diff=0.4, hide.label=T,
+                    color=diffcols, add.color.legend=F,  col="black",
                     n.grid=30, cex.lab=0.8, cex.axis=0.7, cex.main=0.8)
 gradientLegend(c(-14,14), pos=.875, side=4, color=diffcols, inside=F)
 abline(v=0.2, lwd=1.5, lty=2)
@@ -146,7 +147,8 @@ tiff(filename="GAMM_difference_aI-a:.tiff", h=7, w=9, units="in", res=300, point
 par(mfrow=c(1,1), cex=1, mar=c(4,5,2,3), mgp=c(1.5,0.75,0))
 itsadug::plot_diff2(m2.rho, view=c("time.norm", "gridline.norm"), comp=list(vowel=vowels),
                     main="VT aperture difference of /aɪ/ − /a:/", xlab="Time (normalized)", ylab="", yaxt="n",
-                    rm.ranef=F, show.diff=T, zlim=c(-8,8), color=diffcols, add.color.legend=F, alpha.diff=0.4, hide.label=T, col="black",
+                    rm.ranef=F, show.diff=T, zlim=c(-8,8), alpha.diff=0.4, hide.label=T, 
+                    color=diffcols, add.color.legend=F,  col="black",
                     n.grid=30, cex.lab=0.8, cex.axis=0.7, cex.main=0.8)
 gradientLegend(c(-8,8), pos=.875, side=4, color=diffcols, inside=F)
 abline(v=0.2, lwd=1.5, lty=2)
@@ -202,7 +204,8 @@ tiff(filename="GAMM_difference_stress_A-N.tiff", h=7, w=9, units="in", res=300, 
 par(mfrow=c(1,1), cex=1, mar=c(4,5,2,3), mgp=c(1.5,0.75,0))
 itsadug::plot_diff2(m3.rho, view=c("time.norm", "gridline.norm"), comp=list(stress=stresses),
                     main="A − N stress difference in /a:/", xlab="Time (normalized)", ylab="", yaxt="n",
-                    rm.ranef=F, show.diff=T, zlim=c(-8,8), color=diffcols, add.color.legend=F, alpha.diff=0.4, hide.label=T, col="black",
+                    rm.ranef=F, show.diff=T, zlim=c(-8,8), alpha.diff=0.4, hide.label=T, 
+                    color=diffcols, add.color.legend=F,  col="black",
                     n.grid=30, cex.lab=0.8, cex.axis=0.7, cex.main=0.8)
 gradientLegend(c(-8,8), pos=.875, side=4, color=diffcols, inside=F)
 abline(v=0.2, lwd=1.5, lty=2)
