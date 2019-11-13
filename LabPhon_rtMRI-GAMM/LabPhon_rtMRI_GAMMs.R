@@ -58,6 +58,11 @@ m1.rho <- mgcv::bam(aperture ~ vowel
 # Summary of final model
 summary(m1.rho)
 
+# Inspect random effects
+par(mfrow=c(1,2))
+plot(m1.rho, select=3)
+plot(m1.rho, select=4)
+
 
 ## Plot separate articulatory heatmaps for /i:/ and /a:/, save as TIFF
 tiff(filename="GAMM_heatmaps_i:-a:.tiff", h=6, w=14, units="in", res=280, pointsize=24)
@@ -145,6 +150,11 @@ m2.rho <- mgcv::bam(aperture ~ vowel
 # Summary of final model
 summary(m2.rho)
 
+# Inspect random effects
+par(mfrow=c(1,2))
+plot(m2.rho, select=3)
+plot(m2.rho, select=4)
+
 
 ## Plot articulatory differences between /aI/ and /a:/, highlighting areas of significant difference, save as TIFF
 tiff(filename="GAMM_difference_aI-a:.tiff", h=7, w=9, units="in", res=300, pointsize=24)
@@ -204,6 +214,11 @@ m3.rho <- mgcv::bam(aperture ~ stress
 
 # Summary of final model
 summary(m3.rho)
+
+# Inspect random effects
+par(mfrow=c(1,2))
+plot(m3.rho, select=3)
+plot(m3.rho, select=4)
 
 
 ## Plot articulatory differences between /i:/ and /a:/, highlighting areas of significant difference, save as TIFF
