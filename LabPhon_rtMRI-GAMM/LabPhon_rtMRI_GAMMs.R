@@ -3,7 +3,7 @@ require(mgcv)
 require(itsadug)
 require(dichromat)
 
-# Load data and create AR.start variable
+# Load MRI vocal tract aperture data
 load("GAMM_data.Rda")
 
 
@@ -12,7 +12,7 @@ load("GAMM_data.Rda")
 mapcols  <- rev(colorRamps::matlab.like2(100))
 diffcols <- rev(colorRampPalette(colorschemes$BluetoOrange.12, space="Lab")(12))
 # labels for axes
-ticknames <- c('glottis','hypo-\n pharynx','hyper-\n pharynx','velum','palate','alveolar\n ridge')
+ticknames <- c("glottis","hypo-\n pharynx","hyper-\n pharynx","velum","palate","alveolar\n ridge")
 tickvals  <- c(1,5.6,11.2,16.8,22.4,28)
 
 
@@ -22,7 +22,7 @@ tickvals  <- c(1,5.6,11.2,16.8,22.4,28)
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # Subset the data 
-vowels  <- c("i:","a:")
+vowels  <- c("a:","i:")
 subdata <- vt.data[vt.data$word %in% c("bat","biete","Dieter","Rate","Rita","Tat"),]
 subdata <- subdata[subdata$stress=="N",]
 subdata$vowel <- droplevels(subdata$vowel)
@@ -64,26 +64,26 @@ plot(m1.rho, select=3)
 plot(m1.rho, select=4)
 
 
-## Plot separate articulatory heatmaps for /i:/ and /a:/, save as TIFF
-tiff(filename="GAMM_heatmaps_i:-a:.tiff", h=6, w=14, units="in", res=280, pointsize=24)
+## Plot separate articulatory heatmaps for /a:/ and /i:/, save as TIFF
+tiff(filename="GAMM_heatmaps_a:-i:.tiff", h=6, w=14, units="in", res=280, pointsize=24)
 
-# Articulatory heatmap figure for /i:/
+# Articulatory heatmap figure for /a:/
 # NB: change the n.grid value from 30 (default) to 500 to create the high-resolution figures shown in the paper
 par(mfrow=c(1,2), cex=1, mar=c(3.5,4,1.5,2), mgp=c(1.5,0.75,0))
 itsadug::fvisgam(m1.rho, view=c("time.norm", "gridline.norm"),
                  cond=list(vowel=vowels[1]), add.color.legend=F,
-                 main="VT aperture of /i:/", xlab="Time (normalized)", ylab="", yaxt="n",
+                 main="VT aperture of /a:/", xlab="Time (normalized)", ylab="", yaxt="n",
                  rm.ranef=F, zlim=c(-1.5,17), color=mapcols, hide.label=T,
                  n.grid=30, nCol=100, cex.lab=0.8, cex.axis=0.7, cex.main=0.8)
 gradientLegend(c(0,16), pos=.875, side=4, color=mapcols, inside = F)
 axis(2, at=tickvals, labels=ticknames, las=2, cex.axis=0.7)
 
-# Articulatory heatmap figure for /a:/
+# Articulatory heatmap figure for /i:/
 # NB: change the n.grid value from 30 (default) to 500 to create the high-resolution figures shown in the paper
 par(cex=1, mar=c(3.5,3.5,1.5,2.5), mgp=c(1.5,0.75,0))
 itsadug::fvisgam(m1.rho, view=c("time.norm", "gridline.norm"),
                  cond=list(vowel=vowels[2]), add.color.legend=F,
-                 main="VT aperture of /a:/", xlab="Time (normalized)", ylab="", yaxt="n",
+                 main="VT aperture of /i:/", xlab="Time (normalized)", ylab="", yaxt="n",
                  rm.ranef=F, zlim = c(-1.5,17), color=mapcols, hide.label=T,
                  n.grid=30, nCol=100, cex.lab=0.8, cex.axis=0.7, cex.main=0.8)
 gradientLegend(c(0,16), pos=.875, side=4, color=mapcols, inside = F)
@@ -91,13 +91,13 @@ axis(2, at=tickvals, labels=ticknames, las=2, cex.axis=0.7)
 dev.off()
 
 
-## Plot articulatory differences between /i:/ and /a:/, highlighting areas of significant difference, save as TIFF
+## Plot articulatory differences between /a:/ and /i:/, highlighting areas of significant difference, save as TIFF
 tiff(filename="GAMM_difference_i:-a:.tiff", h=7, w=9, units="in", res=300, pointsize=24)
 
 # NB: change the n.grid value from 30 (default) to 500 to create the high-resolution figures shown in the paper
 par(mfrow=c(1,1), cex=1, mar=c(4,5,2,3), mgp=c(1.5,0.75,0))
 itsadug::plot_diff2(m1.rho, view=c("time.norm", "gridline.norm"), comp=list(vowel=vowels),
-                    main="VT aperture difference of /i:/ − /a:/", xlab="Time (normalized)", ylab="", yaxt="n",
+                    main="VT aperture difference of /a:/ − /i:/", xlab="Time (normalized)", ylab="", yaxt="n",
                     rm.ranef=F, show.diff=T, zlim=c(-14.2,14.2), alpha.diff=0.4, hide.label=T,
                     color=diffcols, add.color.legend=F,  col="black",
                     n.grid=30, cex.lab=0.8, cex.axis=0.7, cex.main=0.8)
@@ -109,12 +109,12 @@ dev.off()
 
 
 
-# # # # # # # # # # # # # # # # # # # # # # # # # #
-# Monophthongs: Differences between /aI/ and /a:/ #
-# # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # #
+# Diphthongs: Differences between /aI/ and /a:/ #
+# # # # # # # # # # # # # # # # # # # # # # # # #
 
 # Subset the data
-vowels  <- c("aI","a:")
+vowels  <- c("a:","aI")
 subdata <- vt.data[vt.data$word %in% c("bahne","bat","wate","weine","weinte","weihte"),]
 subdata <- subdata[subdata$stress=="N",]
 subdata$vowel <- droplevels(subdata$vowel)
@@ -156,16 +156,16 @@ plot(m2.rho, select=3)
 plot(m2.rho, select=4)
 
 
-## Plot articulatory differences between /aI/ and /a:/, highlighting areas of significant difference, save as TIFF
-tiff(filename="GAMM_difference_aI-a:.tiff", h=7, w=9, units="in", res=300, pointsize=24)
+## Plot articulatory differences between /a:/ and /aI/, highlighting areas of significant difference, save as TIFF
+tiff(filename="GAMM_difference_a:-aI.tiff", h=7, w=9, units="in", res=300, pointsize=24)
 
 # NB: change the n.grid value from 30 (default) to 500 to create the high-resolution figures shown in the paper
 par(mfrow=c(1,1), cex=1, mar=c(4,5,2,3), mgp=c(1.5,0.75,0))
 itsadug::plot_diff2(m2.rho, view=c("time.norm", "gridline.norm"), comp=list(vowel=vowels),
-                    main="VT aperture difference of /aɪ/ − /a:/", xlab="Time (normalized)", ylab="", yaxt="n",
+                    main="VT aperture difference of /a:/ - /aɪ/", xlab="Time (normalized)", ylab="", yaxt="n",
                     rm.ranef=F, show.diff=T, zlim=c(-7,7), alpha.diff=0.4, hide.label=T, 
                     color=diffcols, add.color.legend=F,  col="black",
-                    n.grid=30, cex.lab=0.8, cex.axis=0.7, cex.main=0.8)
+                    n.grid=500, cex.lab=0.8, cex.axis=0.7, cex.main=0.8)
 gradientLegend(c(-8,8), pos=.875, side=4, color=diffcols, inside=F)
 abline(v=0.2, lwd=1.5, lty=2)
 abline(v=0.8, lwd=1.5, lty=2)
