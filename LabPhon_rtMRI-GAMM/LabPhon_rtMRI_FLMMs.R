@@ -124,7 +124,7 @@ cov.fit.80    <- intercept.80 + y_mean.80 + y_cov1.80
 
 ## PLOTTING ##
 
-cairo_pdf("FLMM_VT_i:-a:.pdf", h=7, w=26, onefile=T)
+cairo_pdf("FLMM_i:-a:.pdf", h=7, w=26, onefile=T)
 
 # Prepare the 2-panel plot layout
 par(mfrow=c(1,2))
@@ -198,7 +198,7 @@ dev.off()
 # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # Subset the data
-vowels  <- c("aI","a:")
+vowels  <- c("a:","aI")
 subdata <- vt.data[vt.data$word %in% c("bahne","bat","wate","weine","weinte","weihte"),]
 subdata <- subdata[subdata$stress=="N",]
 subdata$vowel <- droplevels(subdata$vowel)
@@ -386,7 +386,7 @@ contrasts(subdata$stress) <- "contr.treatment"
 
 
 # Prepare FLMM table for 20% of the vowel interval
-FLMM.table <- subdata[,c("aperture.20","gridline.scale","ident","speaker","word","vowel")]
+FLMM.table <- subdata[,c("aperture.20","gridline.scale","ident","speaker","word","stress")]
 names(FLMM.table) <- c("y_vec","t","n_long","subject_long","word_long","covariate.1")
 
 # Identity coding for covariates
@@ -409,8 +409,8 @@ for (i in unique(FLMM.table$word_long)){
 }
 
 # Dummy code factor levels
-FLMM.table$covariate.new[FLMM.table$covariate.1==vowels[1]] <- 0
-FLMM.table$covariate.new[FLMM.table$covariate.1==vowels[2]] <- 1
+FLMM.table$covariate.new[FLMM.table$covariate.1==stresses[1]] <- 0
+FLMM.table$covariate.new[FLMM.table$covariate.1==stresses[2]] <- 1
 
 # Create the FLMM table
 FLMM.table <- cbind(FLMM.table[,c("y_vec","t","curve1","subject1","word1","covariate.new")])
@@ -514,7 +514,7 @@ lines(x=my_grid.20, y=(cov.fit.20 - se_cov1.20), lty=1, lwd=2,
       col=cols[10])
 
 # Create legend
-legend("topleft", legend=c(vowels[1], vowels[2]), bty="o", col=c(cols[1], cols[10]),
+legend("topleft", legend=c(stresses[1], stresses[2]), bty="o", col=c(cols[1], cols[10]),
        lty=c(1,4), lwd=4, cex=1.5, box.col="black")
 
 
@@ -544,7 +544,7 @@ lines(x=my_grid.80, y=(cov.fit.80 - se_cov1.80), lty=1, lwd=2,
       col=cols[10])
 
 # Create legend
-legend("topleft", legend=c(vowels[1], vowels[2]), bty="o", col=c(cols[1], cols[10]),
+legend("topleft", legend=c(stresses[1], stresses[2]), bty="o", col=c(cols[1], cols[10]),
        lty=c(1,4), lwd=4, cex=1.5, box.col="black")
 
 dev.off()
