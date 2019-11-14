@@ -58,13 +58,13 @@ m1.rho <- mgcv::bam(aperture ~ vowel
 # Summary of final model
 summary(m1.rho)
 
-# Inspect random effects
+# Inspect random effects (Figure 5 in paper)
 par(mfrow=c(1,2))
 plot(m1.rho, select=3)
 plot(m1.rho, select=4)
 
 
-## Plot separate articulatory heatmaps for /a:/ and /i:/, save as TIFF
+## Plot separate articulatory heatmaps for /a:/ and /i:/, save as TIFF (Figure 3 in paper)
 tiff(filename="GAMM_heatmaps_a:-i:.tiff", h=6, w=14, units="in", res=280, pointsize=24)
 
 # Articulatory heatmap figure for /a:/
@@ -91,7 +91,7 @@ axis(2, at=tickvals, labels=ticknames, las=2, cex.axis=0.7)
 dev.off()
 
 
-## Plot articulatory differences between /a:/ and /i:/, highlighting areas of significant difference, save as TIFF
+## Plot articulatory differences between /a:/ and /i:/, highlighting areas of significant difference, save as TIFF (Figure 4 in paper)
 tiff(filename="GAMM_difference_i:-a:.tiff", h=7, w=9, units="in", res=300, pointsize=24)
 
 # NB: change the n.grid value from 30 (default) to 500 to create the high-resolution figures shown in the paper
@@ -150,20 +150,20 @@ m2.rho <- mgcv::bam(aperture ~ vowel
 # Summary of final model
 summary(m2.rho)
 
-# Inspect random effects
+# Inspect random effects (Figure 8 in paper)
 par(mfrow=c(1,2))
 plot(m2.rho, select=3)
 plot(m2.rho, select=4)
 
 
-## Plot articulatory differences between /a:/ and /aI/, highlighting areas of significant difference, save as TIFF
+## Plot articulatory differences between /a:/ and /aI/, highlighting areas of significant difference, save as TIFF (Figure 7 in paper)
 tiff(filename="GAMM_difference_a:-aI.tiff", h=7, w=9, units="in", res=300, pointsize=24)
 
 # NB: change the n.grid value from 30 (default) to 500 to create the high-resolution figures shown in the paper
 par(mfrow=c(1,1), cex=1, mar=c(4,5,2,3), mgp=c(1.5,0.75,0))
 itsadug::plot_diff2(m2.rho, view=c("time.norm", "gridline.norm"), comp=list(vowel=vowels),
                     main="VT aperture difference of /a:/ - /aɪ/", xlab="Time (normalized)", ylab="", yaxt="n",
-                    rm.ranef=F, show.diff=T, zlim=c(-7,7), alpha.diff=0.4, hide.label=T, 
+                    rm.ranef=F, show.diff=T, zlim=c(-8,8), alpha.diff=0.4, hide.label=T, 
                     color=diffcols, add.color.legend=F,  col="black",
                     n.grid=500, cex.lab=0.8, cex.axis=0.7, cex.main=0.8)
 gradientLegend(c(-8,8), pos=.875, side=4, color=diffcols, inside=F)
@@ -215,13 +215,13 @@ m3.rho <- mgcv::bam(aperture ~ stress
 # Summary of final model
 summary(m3.rho)
 
-# Inspect random effects
+# Inspect random effects (Figure 11 in paper)
 par(mfrow=c(1,2))
 plot(m3.rho, select=3)
 plot(m3.rho, select=4)
 
 
-## Plot articulatory differences between /i:/ and /a:/, highlighting areas of significant difference, save as TIFF
+## Plot articulatory differences between /i:/ and /a:/, highlighting areas of significant difference, save as TIFF (Figure 10 in paper)
 tiff(filename="GAMM_difference_stress_A-N.tiff", h=7, w=9, units="in", res=300, pointsize=24)
 
 # NB: change the n.grid value from 30 (default) to 500 to create the high-resolution figures shown in the paper

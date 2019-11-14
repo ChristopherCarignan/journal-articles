@@ -124,6 +124,7 @@ cov.fit.80    <- intercept.80 + y_mean.80 + y_cov1.80
 
 ## PLOTTING ##
 
+# Figure 6 in paper
 cairo_pdf("FLMM_i:-a:.pdf", h=7, w=26, onefile=T)
 
 # Prepare the 2-panel plot layout
@@ -303,6 +304,7 @@ cov.fit.80    <- intercept.80 + y_mean.80 + y_cov1.80
 
 ## PLOTTING ##
 
+# Figure 9 in paper
 cairo_pdf("FLMM_aI-a:.pdf", h=7, w=26, onefile=T)
 
 # Prepare the 2-panel plot layout
@@ -482,6 +484,7 @@ cov.fit.80    <- intercept.80 + y_mean.80 + y_cov1.80
 
 ## PLOTTING ##
 
+# Figure 12 in paper
 cairo_pdf("FLMM_stress_A-N.pdf", h=7, w=26, onefile=T)
 
 # Prepare the 2-panel plot layout
