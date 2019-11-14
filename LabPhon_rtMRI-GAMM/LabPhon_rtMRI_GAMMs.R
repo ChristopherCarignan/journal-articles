@@ -1,3 +1,15 @@
+# Filename: LabPhon_rtMRI_GAMMs.R
+# Date: 2019-11-14
+# Author: Christopher Carignan
+# Email: c.carignan@ucl.ac.uk
+# Institution: Speech, Hearing & Phonetic Sciences, University College London
+# Description:
+#   Code to recreate the generalized additive mixed models (GAMMs) and associated figures appearing in:
+#   Carignan, C., Hoole, P., Kunay, E., Pouplier, M., Joseph, A., Voit, D., Frahm, J., & Harrington, J. (under revision), 
+#     "Analyzing speech in both time and space: Generalized additive mixed models can uncover systematic patterns of variation 
+#     in vocal tract shape in real-time MRI", Laboratory Phonology.
+
+
 # Load required packages
 require(mgcv)
 require(itsadug)
@@ -165,7 +177,7 @@ itsadug::plot_diff2(m2.rho, view=c("time.norm", "gridline.norm"), comp=list(vowe
                     main="VT aperture difference of /a:/ - /aɪ/", xlab="Time (normalized)", ylab="", yaxt="n",
                     rm.ranef=F, show.diff=T, zlim=c(-8,8), alpha.diff=0.4, hide.label=T, 
                     color=diffcols, add.color.legend=F,  col="black",
-                    n.grid=500, cex.lab=0.8, cex.axis=0.7, cex.main=0.8)
+                    n.grid=30, cex.lab=0.8, cex.axis=0.7, cex.main=0.8)
 gradientLegend(c(-8,8), pos=.875, side=4, color=diffcols, inside=F)
 abline(v=0.2, lwd=1.5, lty=2)
 abline(v=0.8, lwd=1.5, lty=2)

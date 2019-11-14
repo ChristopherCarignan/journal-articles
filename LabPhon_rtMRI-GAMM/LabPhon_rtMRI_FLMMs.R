@@ -1,3 +1,16 @@
+# Filename: LabPhon_rtMRI_FLMMs.R
+# Date: 2019-11-14
+# Author: Christopher Carignan
+# Email: c.carignan@ucl.ac.uk
+# Institution: Speech, Hearing & Phonetic Sciences, University College London
+# Description:
+#   Code to recreate the functional linear mixed models (FLMMs) and associated figures appearing in:
+#   Carignan, C., Hoole, P., Kunay, E., Pouplier, M., Joseph, A., Voit, D., Frahm, J., & Harrington, J. (under revision), 
+#     "Analyzing speech in both time and space: Generalized additive mixed models can uncover systematic patterns of variation 
+#     in vocal tract shape in real-time MRI", Laboratory Phonology.
+
+
+# Load required packages
 library(sparseFLMM)
 
 # Load MRI vocal tract aperture data for 20% and 80% of the vowel interval
