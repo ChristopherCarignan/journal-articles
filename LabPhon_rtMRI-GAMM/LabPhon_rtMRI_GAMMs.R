@@ -5,7 +5,7 @@ require(dichromat)
 
 # Load data and create AR.start variable
 load("GAMM_data.Rda")
-vt.data$AR.start <- vt.data$gridline==1
+
 
 ## plotting parameters to use throughout the script
 # colors
@@ -52,7 +52,7 @@ m1.rho <- mgcv::bam(aperture ~ vowel
                     + s(time.norm, speaker, bs="fs", m=1, xt="tp", k=4)
                     + s(gridline.norm, speaker, bs="fs", m=1, xt="tp", k=4)
                     + s(word, bs="re", m=1),
-                    AR.start=AR.start, rho=valRho,
+                    AR.start=grid.start, rho=valRho,
                     data=subdata, method="fREML")
 
 # Summary of final model
@@ -144,7 +144,7 @@ m2.rho <- mgcv::bam(aperture ~ vowel
                     + s(time.norm, speaker, bs="fs", m=1, xt="tp", k=4)
                     + s(gridline.norm, speaker, bs="fs", m=1, xt="tp", k=4)
                     + s(word, bs="re", m=1),
-                    AR.start=AR.start, rho=valRho,
+                    AR.start=grid.start, rho=valRho,
                     data=subdata, method="fREML")
 
 # Summary of final model
@@ -163,7 +163,7 @@ tiff(filename="GAMM_difference_aI-a:.tiff", h=7, w=9, units="in", res=300, point
 par(mfrow=c(1,1), cex=1, mar=c(4,5,2,3), mgp=c(1.5,0.75,0))
 itsadug::plot_diff2(m2.rho, view=c("time.norm", "gridline.norm"), comp=list(vowel=vowels),
                     main="VT aperture difference of /aɪ/ − /a:/", xlab="Time (normalized)", ylab="", yaxt="n",
-                    rm.ranef=F, show.diff=T, zlim=c(-8,8), alpha.diff=0.4, hide.label=T, 
+                    rm.ranef=F, show.diff=T, zlim=c(-7,7), alpha.diff=0.4, hide.label=T, 
                     color=diffcols, add.color.legend=F,  col="black",
                     n.grid=30, cex.lab=0.8, cex.axis=0.7, cex.main=0.8)
 gradientLegend(c(-8,8), pos=.875, side=4, color=diffcols, inside=F)
@@ -209,7 +209,7 @@ m3.rho <- mgcv::bam(aperture ~ stress
                     + s(time.norm, speaker, bs="fs", m=1, xt="tp", k=4)
                     + s(gridline.norm, speaker, bs="fs", m=1, xt="tp", k=4)
                     + s(word, bs="re", m=1),
-                    AR.start=AR.start, rho=valRho,
+                    AR.start=grid.start, rho=valRho,
                     data=subdata, method="fREML")
 
 # Summary of final model
