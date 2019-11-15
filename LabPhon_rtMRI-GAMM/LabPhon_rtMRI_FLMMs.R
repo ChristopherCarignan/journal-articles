@@ -21,7 +21,7 @@ load("FLMM_data.Rda")
 cols    <- rainbow(12)
 xticks  <- seq(0,1, by=0.2)
 xlabs   <- c("glottis","hypo-pharynx","hyper-pharynx","velum","palate","alveolar ridge")
-yticks  <- seq(0,30, by=5)
+yticks  <- seq(0,20, by=2)
 miny    <- 0
 maxy    <- 16
 
@@ -138,7 +138,7 @@ cov.fit.80    <- intercept.80 + y_mean.80 + y_cov1.80
 ## PLOTTING ##
 
 # Figure 6 in paper
-cairo_pdf("FLMM_i:-a:.pdf", h=7, w=26, onefile=T)
+cairo_pdf("FLMM_a:-i:.pdf", h=7, w=26, onefile=T)
 
 # Prepare the 2-panel plot layout
 par(mfrow=c(1,2))
@@ -318,7 +318,7 @@ cov.fit.80    <- intercept.80 + y_mean.80 + y_cov1.80
 ## PLOTTING ##
 
 # Figure 9 in paper
-cairo_pdf("FLMM_aI-a:.pdf", h=7, w=26, onefile=T)
+cairo_pdf("FLMM_a:-aI.pdf", h=7, w=26, onefile=T)
 
 # Prepare the 2-panel plot layout
 par(mfrow=c(1,2))
