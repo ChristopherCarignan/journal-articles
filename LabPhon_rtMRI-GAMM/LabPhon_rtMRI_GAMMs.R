@@ -71,7 +71,7 @@ m1.rho <- mgcv::bam(aperture ~ vowel
 summary(m1.rho)
 
 # Inspect random effects (Figure 5 in paper)
-par(mfrow=c(1,2))
+par(mfrow=c(1,2),mar=c(4,5,1,1))
 plot(m1.rho, select=3)
 plot(m1.rho, select=4)
 
@@ -163,7 +163,7 @@ m2.rho <- mgcv::bam(aperture ~ vowel
 summary(m2.rho)
 
 # Inspect random effects (Figure 8 in paper)
-par(mfrow=c(1,2))
+par(mfrow=c(1,2),mar=c(4,5,1,1))
 plot(m2.rho, select=3)
 plot(m2.rho, select=4)
 
@@ -228,7 +228,7 @@ m3.rho <- mgcv::bam(aperture ~ stress
 summary(m3.rho)
 
 # Inspect random effects (Figure 11 in paper)
-par(mfrow=c(1,2))
+par(mfrow=c(1,2),mar=c(4,5,1,1))
 plot(m3.rho, select=3)
 plot(m3.rho, select=4)
 
