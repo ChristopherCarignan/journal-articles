@@ -29,7 +29,7 @@ maxy    <- 16
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # #
-# Monophthongs: Differences between /i:/ and /a:/ #
+# Monophthongs: Differences between /a:/ and /i:/ #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # Subset the data 
@@ -209,7 +209,7 @@ dev.off()
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # #
-# Diphthongs: Differences between /aI/ and /a:/ #
+# Diphthongs: Differences between /a:/ and /aI/ #
 # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # Subset the data

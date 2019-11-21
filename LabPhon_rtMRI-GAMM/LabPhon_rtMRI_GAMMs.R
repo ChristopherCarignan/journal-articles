@@ -30,7 +30,7 @@ tickvals  <- c(1,5.6,11.2,16.8,22.4,28)
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # #
-# Monophthongs: Differences between /i:/ and /a:/ #
+# Monophthongs: Differences between /a:/ and /i:/ #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # Subset the data 
@@ -122,7 +122,7 @@ dev.off()
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # #
-# Diphthongs: Differences between /aI/ and /a:/ #
+# Diphthongs: Differences between /a:/ and /aI/ #
 # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # Subset the data
