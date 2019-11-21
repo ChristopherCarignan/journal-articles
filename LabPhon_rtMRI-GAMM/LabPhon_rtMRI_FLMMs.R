@@ -12,6 +12,7 @@
 
 # Load required packages
 library(sparseFLMM)
+library(data.table)
 
 # Load MRI vocal tract aperture data for 20% and 80% of the vowel interval
 load("FLMM_data.Rda")
@@ -72,7 +73,7 @@ FLMM.table <- cbind(FLMM.table[,c("y_vec","t","curve1","subject1","word1","covar
 names(FLMM.table) <- c("y_vec","t","n_long","subject_long","word_long","covariate.1")
 FLMM.table$n_long <- as.integer(FLMM.table$n_long)
 FLMM.table$subject_long <- as.integer(FLMM.table$subject_long)
-FLMM.table <- as.data.table(FLMM.table)
+FLMM.table <- data.table::as.data.table(FLMM.table)
 
 
 # Build the FLMM for 20% of the vowel interval
@@ -252,7 +253,7 @@ FLMM.table <- cbind(FLMM.table[,c("y_vec","t","curve1","subject1","word1","covar
 names(FLMM.table) <- c("y_vec","t","n_long","subject_long","word_long","covariate.1")
 FLMM.table$n_long <- as.integer(FLMM.table$n_long)
 FLMM.table$subject_long <- as.integer(FLMM.table$subject_long)
-FLMM.table <- as.data.table(FLMM.table)
+FLMM.table <- data.table::as.data.table(FLMM.table)
 
 
 # Build the FLMM for 20% of the vowel interval
@@ -432,7 +433,7 @@ FLMM.table <- cbind(FLMM.table[,c("y_vec","t","curve1","subject1","word1","covar
 names(FLMM.table) <- c("y_vec","t","n_long","subject_long","word_long","covariate.1")
 FLMM.table$n_long <- as.integer(FLMM.table$n_long)
 FLMM.table$subject_long <- as.integer(FLMM.table$subject_long)
-FLMM.table <- as.data.table(FLMM.table)
+FLMM.table <- data.table::as.data.table(FLMM.table)
 
 
 # Build the FLMM for 20% of the vowel interval
