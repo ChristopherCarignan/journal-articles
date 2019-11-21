@@ -77,6 +77,8 @@ FLMM.table <- data.table::as.data.table(FLMM.table)
 
 
 # Build the FLMM for 20% of the vowel interval
+# NB: the number of covariate basis functions (bf_covs) is the same as the number of knots 
+#   used in the GAMM smooths, which was determined by model diagnosis using gamm.check()
 flmm.20 <- sparseFLMM::sparseFLMM(curve_info=FLMM.table,
                                   use_RI=T, 
                                   use_simple=F,
@@ -257,6 +259,8 @@ FLMM.table <- data.table::as.data.table(FLMM.table)
 
 
 # Build the FLMM for 20% of the vowel interval
+# NB: the number of covariate basis functions (bf_covs) is the same as the number of knots 
+#   used in the GAMM smooths, which was determined by model diagnosis using gamm.check()
 flmm.20 <- sparseFLMM::sparseFLMM(curve_info=FLMM.table,
                                   use_RI=T, 
                                   use_simple=F,
@@ -437,6 +441,8 @@ FLMM.table <- data.table::as.data.table(FLMM.table)
 
 
 # Build the FLMM for 20% of the vowel interval
+# NB: the number of covariate basis functions (bf_covs) is the same as the number of knots 
+#   used in the GAMM smooths, which was determined by model diagnosis using gamm.check()
 flmm.20 <- sparseFLMM::sparseFLMM(curve_info=FLMM.table,
                                   use_RI=T, 
                                   use_simple=F,
