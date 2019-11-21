@@ -84,7 +84,7 @@ flmm.20 <- sparseFLMM::sparseFLMM(curve_info=FLMM.table,
                                   num_covariates=1,
                                   covariate_form="by",
                                   interaction=T,
-                                  bf_covs=c(10,10),
+                                  bf_covs=c(4,4),
                                   m_covs=list(c(2,3), c(2,3)),
                                   use_famm=T
 )
@@ -100,7 +100,7 @@ flmm.80 <- sparseFLMM::sparseFLMM(curve_info=FLMM.table,
                                   num_covariates=1,
                                   covariate_form="by",
                                   interaction=T,
-                                  bf_covs=c(10,10),
+                                  bf_covs=c(4,4),
                                   m_covs=list(c(2,3), c(2,3)),
                                   use_famm=T
 )
@@ -264,7 +264,7 @@ flmm.20 <- sparseFLMM::sparseFLMM(curve_info=FLMM.table,
                                   num_covariates=1,
                                   covariate_form="by",
                                   interaction=T,
-                                  bf_covs=c(10,10),
+                                  bf_covs=c(4,4),
                                   m_covs=list(c(2,3), c(2,3)),
                                   use_famm=T
 )
@@ -280,7 +280,7 @@ flmm.80 <- sparseFLMM::sparseFLMM(curve_info=FLMM.table,
                                   num_covariates=1,
                                   covariate_form="by",
                                   interaction=T,
-                                  bf_covs=c(10,10),
+                                  bf_covs=c(4,4),
                                   m_covs=list(c(2,3), c(2,3)),
                                   use_famm=T
 )
@@ -444,7 +444,7 @@ flmm.20 <- sparseFLMM::sparseFLMM(curve_info=FLMM.table,
                                   num_covariates=1,
                                   covariate_form="by",
                                   interaction=T,
-                                  bf_covs=c(10,10),
+                                  bf_covs=c(4,4),
                                   m_covs=list(c(2,3), c(2,3)),
                                   use_famm=T
 )
@@ -460,7 +460,7 @@ flmm.80 <- sparseFLMM::sparseFLMM(curve_info=FLMM.table,
                                   num_covariates=1,
                                   covariate_form="by",
                                   interaction=T,
-                                  bf_covs=c(10,10),
+                                  bf_covs=c(4,4),
                                   m_covs=list(c(2,3), c(2,3)),
                                   use_famm=T
 )
