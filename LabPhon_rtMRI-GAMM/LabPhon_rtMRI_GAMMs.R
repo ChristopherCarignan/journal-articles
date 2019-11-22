@@ -81,7 +81,7 @@ tiff(filename="GAMM_heatmaps_a:-i:.tiff", h=6, w=14, units="in", res=280, points
 
 # Articulatory heatmap figure for /a:/
 # NB: change the n.grid value from 30 (default) to 500 to create the high-resolution figures shown in the paper
-par(mfrow=c(1,2), cex=1, mar=c(3.5,4,1.5,2), mgp=c(1.5,0.75,0))
+par(mfrow=c(1,2), cex=1, mar=c(3,3.5,1.5,2), mgp=c(1.5,0.75,0))
 itsadug::fvisgam(m1.rho, view=c("time.norm", "gridline.norm"),
                  cond=list(vowel=vowels[1]), add.color.legend=F,
                  main="VT aperture of /a:/", xlab="Time (normalized)", ylab="", yaxt="n",
@@ -92,7 +92,7 @@ axis(2, at=tickvals, labels=ticknames, las=2, cex.axis=0.7)
 
 # Articulatory heatmap figure for /i:/
 # NB: change the n.grid value from 30 (default) to 500 to create the high-resolution figures shown in the paper
-par(cex=1, mar=c(3.5,3.5,1.5,2.5), mgp=c(1.5,0.75,0))
+par(cex=1, mar=c(3,3.5,1.5,2.25), mgp=c(1.5,0.75,0))
 itsadug::fvisgam(m1.rho, view=c("time.norm", "gridline.norm"),
                  cond=list(vowel=vowels[2]), add.color.legend=F,
                  main="VT aperture of /i:/", xlab="Time (normalized)", ylab="", yaxt="n",
@@ -107,7 +107,7 @@ dev.off()
 tiff(filename="GAMM_difference_i:-a:.tiff", h=7, w=9, units="in", res=300, pointsize=24)
 
 # NB: change the n.grid value from 30 (default) to 500 to create the high-resolution figures shown in the paper
-par(mfrow=c(1,1), cex=1, mar=c(4,5,2,3), mgp=c(1.5,0.75,0))
+par(mfrow=c(1,1), cex=1, mar=c(3,3.5,1.5,2.5), mgp=c(1.5,0.75,0))
 itsadug::plot_diff2(m1.rho, view=c("time.norm", "gridline.norm"), comp=list(vowel=vowels),
                     main="VT aperture difference of /a:/ − /i:/", xlab="Time (normalized)", ylab="", yaxt="n",
                     rm.ranef=F, show.diff=T, zlim=c(-14.2,14.2), alpha.diff=0.4, hide.label=T,
@@ -172,7 +172,7 @@ plot(m2.rho, select=4)
 tiff(filename="GAMM_difference_a:-aI.tiff", h=7, w=9, units="in", res=300, pointsize=24)
 
 # NB: change the n.grid value from 30 (default) to 500 to create the high-resolution figures shown in the paper
-par(mfrow=c(1,1), cex=1, mar=c(4,5,2,3), mgp=c(1.5,0.75,0))
+par(mfrow=c(1,1), cex=1, mar=c(3,3.5,1.5,2.5), mgp=c(1.5,0.75,0))
 itsadug::plot_diff2(m2.rho, view=c("time.norm", "gridline.norm"), comp=list(vowel=vowels),
                     main="VT aperture difference of /a:/ - /aɪ/", xlab="Time (normalized)", ylab="", yaxt="n",
                     rm.ranef=F, show.diff=T, zlim=c(-8,8), alpha.diff=0.4, hide.label=T, 
@@ -237,7 +237,7 @@ plot(m3.rho, select=4)
 tiff(filename="GAMM_difference_stress_A-N.tiff", h=7, w=9, units="in", res=300, pointsize=24)
 
 # NB: change the n.grid value from 30 (default) to 500 to create the high-resolution figures shown in the paper
-par(mfrow=c(1,1), cex=1, mar=c(4,5,2,3), mgp=c(1.5,0.75,0))
+par(mfrow=c(1,1), cex=1, mar=c(3,3.5,1.5,2.5), mgp=c(1.5,0.75,0))
 itsadug::plot_diff2(m3.rho, view=c("time.norm", "gridline.norm"), comp=list(stress=stresses),
                     main="A − N stress difference in /a:/", xlab="Time (normalized)", ylab="", yaxt="n",
                     rm.ranef=F, show.diff=T, zlim=c(-8,8), alpha.diff=0.4, hide.label=T, 
