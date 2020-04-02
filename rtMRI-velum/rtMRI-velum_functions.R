@@ -2,6 +2,7 @@ require(brms)
 require(tidyverse)
 require(lme4)
 require(MuMIn)
+require(parallel)
 
 setwd("/home/chris/Documents/research/Language_Nasality/")
 
