@@ -153,7 +153,7 @@ m1 <- brms::brm(
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   prior = priors,
-  file = "cache/dur",
+  file = "models/dur",
   save_all_pars = TRUE
 )
 
