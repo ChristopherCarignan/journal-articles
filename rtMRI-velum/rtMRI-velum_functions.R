@@ -4,7 +4,7 @@ require(lme4)
 require(MuMIn)
 require(parallel)
 
-setwd("/home/chris/Documents/research/journal-articles/rtMRI-velum/")
+# setwd("/home/chris/Documents/research/journal-articles/rtMRI-velum/")
 
 #### Prepare data ####
 options(mc.cores=parallel::detectCores())
