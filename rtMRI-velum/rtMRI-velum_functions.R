@@ -12,7 +12,7 @@ options(mc.cores=parallel::detectCores())
 my.seed <- 123
 set.seed(my.seed)
 
-matdat <- read.csv('velum_data.csv', header=T)
+matdat <- read.csv('./rtMRI-velum/velum_data.csv', header=T)
 matdat$word <- paste0(matdat$prev,matdat$vowel)
 
 # separate coda contexts by alveolar voiced stop vs. alveolar voiceless stop
