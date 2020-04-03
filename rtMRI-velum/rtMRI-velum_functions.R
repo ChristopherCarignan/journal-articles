@@ -173,7 +173,7 @@ m1_null <- brms::brm(
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   prior = priors_null,
-  file = "cache/dur_null",
+  file = "./rtMRI-velum/models/dur_null",
   save_all_pars = TRUE
 )
 
@@ -244,7 +244,7 @@ m2 <- brms::brm(
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   prior = priors,
-  file = "cache/offset",
+  file = "./rtMRI-velum/models/offset",
   save_all_pars = TRUE
 )
 
@@ -263,7 +263,7 @@ m2_null <- brms::brm(
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   prior = priors_null,
-  file = "cache/offset_null",
+  file = "./rtMRI-velum/models/offset_null",
   save_all_pars = TRUE
 )
 
@@ -334,7 +334,7 @@ m3 <- brms::brm(
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   prior = priors,
-  file = "cache/onset",
+  file = "./rtMRI-velum/models/onset",
   save_all_pars = TRUE
 )
 
@@ -353,7 +353,7 @@ m3_null <- brms::brm(
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   prior = priors_null,
-  file = "cache/onset_null",
+  file = "./rtMRI-velum/models/onset_null",
   save_all_pars = TRUE
 )
 
@@ -424,7 +424,7 @@ m4 <- brms::brm(
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   prior = priors,
-  file = "cache/gest_max",
+  file = "./rtMRI-velum/models/gest_max",
   save_all_pars = TRUE
 )
 
@@ -443,7 +443,7 @@ m4_null <- brms::brm(
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   prior = priors_null,
-  file = "cache/gest_max_null",
+  file = "./rtMRI-velum/models/gest_max_null",
   save_all_pars = TRUE
 )
 
@@ -514,7 +514,7 @@ m5 <- brms::brm(
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   prior = priors,
-  file = "cache/gest_max_mag",
+  file = "./rtMRI-velum/models/gest_max_mag",
   save_all_pars = TRUE
 )
 
@@ -533,7 +533,7 @@ m5_null <- brms::brm(
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   prior = priors_null,
-  file = "cache/gest_max_mag_null",
+  file = "./rtMRI-velum/models/gest_max_mag_null",
   save_all_pars = TRUE
 )
 
@@ -637,7 +637,7 @@ m6 <- brms::brm(
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   prior = priors,
-  file = "cache/rate_v_nasal",
+  file = "./rtMRI-velum/models/rate_v_nasal",
   save_all_pars = TRUE
 )
 
@@ -656,7 +656,7 @@ m6_null <- brms::brm(
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   prior = priors_null,
-  file = "cache/rate_v_nasal_null",
+  file = "./rtMRI-velum/models/rate_v_nasal_null",
   save_all_pars = TRUE
 )
 
@@ -721,7 +721,7 @@ m7 <- brms::brm(
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   prior = priors,
-  file = "cache/rate_n_nasal",
+  file = "./rtMRI-velum/models/rate_n_nasal",
   save_all_pars = TRUE
 )
 
@@ -740,7 +740,7 @@ m7_null <- brms::brm(
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   prior = priors_null,
-  file = "cache/rate_n_nasal_null",
+  file = "./rtMRI-velum/models/rate_n_nasal_null",
   save_all_pars = TRUE
 )
 
