@@ -99,7 +99,7 @@ nd.ylims <- nd.xlims*-sqrt(r2.nd) + int.nd
 
 
 ## create Figure 3
-pdf(file="plots/trading_relation.pdf",width=5,height=3,onefile=T,pointsize=16)
+pdf(file="rtMRI-velum/plots/trading_relation.pdf",width=5,height=3,onefile=T,pointsize=16)
 ggplot(subdat,aes(x=dur.NN, y=dur.VN, col=voicing, shape=voicing)) + 
   geom_point(alpha=0.7,cex=2) + scale_shape_manual(values=c(2,4)) +
   geom_segment(x=nt.xlims[1],xend=nt.xlims[2],y=nt.ylims[1],yend=nt.ylims[2],lty=2,lwd=0.6,col='black') +
@@ -196,7 +196,7 @@ nd.ci <- quantile(m1_post$DV[m1_post$context=="nd"], probs=c(0.05,0.95))
 nt.ci <- quantile(m1_post$DV[m1_post$context=="nt"], probs=c(0.05,0.95))
 
 ## create Figure 5
-pdf(file="plots/duration.pdf",width=7,height=3,onefile=T,pointsize=16)
+pdf(file="rtMRI-velum/plots/duration.pdf",width=7,height=3,onefile=T,pointsize=16)
 # perceptually distinct colors that are also safe for B/W printing
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
@@ -286,7 +286,7 @@ nd.ci <- quantile(m2_post$DV[m2_post$context=="nd"], probs=c(0.05,0.95))
 nt.ci <- quantile(m2_post$DV[m2_post$context=="nt"], probs=c(0.05,0.95))
 
 ## create Figure 6
-pdf(file="plots/offset.pdf",width=7,height=3,onefile=T,pointsize=16)
+pdf(file="rtMRI-velum/plots/offset.pdf",width=7,height=3,onefile=T,pointsize=16)
 # perceptually distinct colors that are also safe for B/W printing
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
@@ -376,7 +376,7 @@ nd.ci <- quantile(m3_post$DV[m3_post$context=="nd"], probs=c(0.05,0.95))
 nt.ci <- quantile(m3_post$DV[m3_post$context=="nt"], probs=c(0.05,0.95))
 
 ## create Figure 7
-pdf(file="plots/onset.pdf",width=7,height=3,onefile=T,pointsize=16)
+pdf(file="rtMRI-velum/plots/onset.pdf",width=7,height=3,onefile=T,pointsize=16)
 # perceptually distinct colors that are also safe for B/W printing
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
@@ -466,7 +466,7 @@ nd.ci <- quantile(m4_post$DV[m4_post$context=="nd"], probs=c(0.05,0.95))
 nt.ci <- quantile(m4_post$DV[m4_post$context=="nt"], probs=c(0.05,0.95))
 
 ## create Figure 8
-pdf(file="plots/gest_max.pdf",width=7,height=3,onefile=T,pointsize=16)
+pdf(file="rtMRI-velum/plots/gest_max.pdf",width=7,height=3,onefile=T,pointsize=16)
 # perceptually distinct colors that are also safe for B/W printing
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
@@ -556,7 +556,7 @@ nd.ci <- quantile(m5_post$DV[m5_post$context=="nd"], probs=c(0.05,0.95))
 nt.ci <- quantile(m5_post$DV[m5_post$context=="nt"], probs=c(0.05,0.95))
 
 ## create Figure 9
-pdf(file="plots/gest_max_mag.pdf",width=7,height=3,onefile=T,pointsize=16)
+pdf(file="rtMRI-velum/plots/gest_max_mag.pdf",width=7,height=3,onefile=T,pointsize=16)
 # perceptually distinct colors that are also safe for B/W printing
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
@@ -679,7 +679,7 @@ norm.ci <- quantile(m6_post$DV[m6_post$context=="normal"], probs=c(0.05,0.95))
 fast.ci <- quantile(m6_post$DV[m6_post$context=="fast"], probs=c(0.05,0.95))
 
 ## create Figure 10
-pdf(file="plots/speech_rate_v_nasal.pdf",width=7,height=3,onefile=T,pointsize=16)
+pdf(file="rtMRI-velum/plots/speech_rate_v_nasal.pdf",width=7,height=3,onefile=T,pointsize=16)
 # perceptually distinct colors that are also safe for B/W printing
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
@@ -764,7 +764,7 @@ fast.ci <- quantile(m7_post$DV[m7_post$context=="fast"], probs=c(0.05,0.95))
 
 
 ## create Figure 11
-pdf(file="plots/speech_rate_n_nasal.pdf",width=7,height=3,onefile=T,pointsize=16)
+pdf(file="rtMRI-velum/plots/speech_rate_n_nasal.pdf",width=7,height=3,onefile=T,pointsize=16)
 # perceptually distinct colors that are also safe for B/W printing
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
