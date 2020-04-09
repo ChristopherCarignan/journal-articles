@@ -1,10 +1,9 @@
 require(brms)
+require(bayesplot)
 require(tidyverse)
 require(lme4)
 require(MuMIn)
 require(parallel)
-
-# setwd("/home/chris/Documents/research/journal-articles/rtMRI-velum/")
 
 #### Prepare data ####
 options(mc.cores=parallel::detectCores())
@@ -30,6 +29,9 @@ subdat <- matdat[matdat$post %in% coda & matdat$stress %in% stresses, ]
 subdat$voicing <- c()
 subdat$voicing[subdat$post %in% voiceless] <- "voiceless"
 subdat$voicing[subdat$post %in% voiced] <- "voiced"
+
+# Center the speech rate
+subdat <- subdat %>% mutate(speech_rate_c = sp_rate - mean(sp_rate))
 
 
 
@@ -99,7 +101,7 @@ nd.ylims <- nd.xlims*-sqrt(r2.nd) + int.nd
 
 
 ## create Figure 3
-pdf(file="plots/trading_relation.pdf",width=5,height=3,onefile=T,pointsize=16)
+pdf(file="./rtMRI-velum/plots/trading_relation.pdf",width=5,height=3,onefile=T,pointsize=16)
 ggplot(subdat,aes(x=dur.NN, y=dur.VN, col=voicing, shape=voicing)) + 
   geom_point(alpha=0.7,cex=2) + scale_shape_manual(values=c(2,4)) +
   geom_segment(x=nt.xlims[1],xend=nt.xlims[2],y=nt.ylims[1],yend=nt.ylims[2],lty=2,lwd=0.6,col='black') +
@@ -119,18 +121,21 @@ dev.off()
 
 # full model priors:
 priors <- c(
-  prior(normal(0, 100), class = Intercept),
-  prior(normal(0, 100), class = b, coef = voicingvoiceless),
-  prior(cauchy(0, 10), class = sd),
-  prior(cauchy(0, 10), class = sigma),
+  prior(normal(0, 3), class = Intercept),
+  prior(normal(0, 1), class = b, coef = voicingvoiceless),
+  prior(normal(0, 1), class = b, coef = speech_rate_c),
+  prior(cauchy(0, 0.1), class = sd),
+  prior(cauchy(0, 0.1), class = sigma),
   prior(lkj(2), class = cor)
 )
 
 # null model priors:
 priors_null <- c(
-  prior(normal(0, 100), class = Intercept),
-  prior(cauchy(0, 10), class = sd),
-  prior(cauchy(0, 10), class = sigma)
+  prior(normal(0, 3), class = Intercept),
+  prior(normal(0, 1), class = b, coef = speech_rate_c),
+  prior(cauchy(0, 0.1), class = sd),
+  prior(cauchy(0, 0.1), class = sigma),
+  prior(lkj(2), class = cor)
 )
 
 
@@ -144,17 +149,17 @@ subdat$DV <- subdat$velumopening_maxvel_dur*1000
 
 # full model
 m1 <- brms::brm(
-  formula = DV ~ voicing + (1+voicing|speaker) + (1|word),
+  DV ~ voicing +
+    speech_rate_c +
+    (1 + voicing + speech_rate_c|speaker) +
+    (1 + voicing + speech_rate_c|word),
   data = subdat,
-  family = gaussian(),
-  chains = 4,
-  iter = 6000,
-  warmup = 2000,
+  family = lognormal,
+  prior = priors,
   seed = my.seed,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
-  prior = priors,
-  file = "models/dur",
+  file = "./rtMRI-velum/models/dur",
   save_all_pars = TRUE
 )
 
@@ -163,16 +168,16 @@ summary(m1)
 
 # reduced/null model
 m1_null <- brms::brm(
-  formula = DV ~ (1|speaker) + (1|word),
+  DV ~ 
+    speech_rate_c +
+    (1 + voicing + speech_rate_c|speaker) +
+    (1 + voicing + speech_rate_c|word),
   data = subdat,
-  family = gaussian(),
-  chains = 4,
-  iter = 6000,
-  warmup = 2000,
+  family = lognormal,
+  prior = priors_null,
   seed = my.seed,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
-  prior = priors_null,
   file = "./rtMRI-velum/models/dur_null",
   save_all_pars = TRUE
 )
@@ -189,14 +194,14 @@ m1_post <- brms::posterior_samples(m1, pars="b_") %>%
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
 
-# calculate the 90% credible intervals
-# 90% CI of /nd/ items
-nd.ci <- quantile(m1_post$DV[m1_post$context=="nd"], probs=c(0.05,0.95))
-# 90% CI of /nt/ items
-nt.ci <- quantile(m1_post$DV[m1_post$context=="nt"], probs=c(0.05,0.95))
+# calculate the 95% credible intervals
+# 95% CI of /nd/ items
+nd.ci <- quantile(m1_post$DV[m1_post$context=="nd"], probs=c(0.025,0.975))
+# 95% CI of /nt/ items
+nt.ci <- quantile(m1_post$DV[m1_post$context=="nt"], probs=c(0.025,0.975))
 
 ## create Figure 5
-pdf(file="plots/duration.pdf",width=7,height=3,onefile=T,pointsize=16)
+pdf(file="./rtMRI-velum/plots/duration.pdf",width=7,height=3,onefile=T,pointsize=16)
 # perceptually distinct colors that are also safe for B/W printing
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
@@ -234,16 +239,16 @@ subdat$DV <- (subdat$velumopening_maxvel_off - subdat$Vokal_off)*1000
 
 # full model
 m2 <- brms::brm(
-  formula = DV ~ voicing + (1+voicing|speaker) + (1|word),
+  DV ~ voicing +
+    speech_rate_c +
+    (1 + voicing + speech_rate_c|speaker) +
+    (1 + voicing + speech_rate_c|word),
   data = subdat,
-  family = gaussian(),
-  chains = 4,
-  iter = 6000,
-  warmup = 2000,
+  family = lognormal,
+  prior = priors,
   seed = my.seed,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
-  prior = priors,
   file = "./rtMRI-velum/models/offset",
   save_all_pars = TRUE
 )
@@ -253,17 +258,17 @@ summary(m2)
 
 # reduced/null model
 m2_null <- brms::brm(
-  formula = DV ~ (1|speaker) + (1|word),
+  DV ~ 
+    speech_rate_c +
+    (1 + voicing + speech_rate_c|speaker) +
+    (1 + voicing + speech_rate_c|word),
   data = subdat,
-  family = gaussian(),
-  chains = 4,
-  iter = 6000,
-  warmup = 2000,
+  family = lognormal,
+  prior = priors_null,
   seed = my.seed,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
-  prior = priors_null,
-  file = "./rtMRI-velum/models/offset_null",
+  file = "./rtMRI-velum/models/off_null",
   save_all_pars = TRUE
 )
 
@@ -286,7 +291,7 @@ nd.ci <- quantile(m2_post$DV[m2_post$context=="nd"], probs=c(0.05,0.95))
 nt.ci <- quantile(m2_post$DV[m2_post$context=="nt"], probs=c(0.05,0.95))
 
 ## create Figure 6
-pdf(file="plots/offset.pdf",width=7,height=3,onefile=T,pointsize=16)
+pdf(file="./rtMRI-velum/plots/offset.pdf",width=7,height=3,onefile=T,pointsize=16)
 # perceptually distinct colors that are also safe for B/W printing
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
@@ -324,16 +329,16 @@ subdat$DV <- (subdat$velumopening_maxvel_on - subdat$Vokal_off)*1000
 
 # full model
 m3 <- brms::brm(
-  formula = DV ~ voicing + (1+voicing|speaker) + (1|word),
+  DV ~ voicing +
+    speech_rate_c +
+    (1 + voicing + speech_rate_c|speaker) +
+    (1 + voicing + speech_rate_c|word),
   data = subdat,
-  family = gaussian(),
-  chains = 4,
-  iter = 6000,
-  warmup = 2000,
+  family = lognormal,
+  prior = priors,
   seed = my.seed,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
-  prior = priors,
   file = "./rtMRI-velum/models/onset",
   save_all_pars = TRUE
 )
@@ -343,16 +348,16 @@ summary(m3)
 
 # reduced/null model
 m3_null <- brms::brm(
-  formula = DV ~ (1|speaker) + (1|word),
+  DV ~ 
+    speech_rate_c +
+    (1 + voicing + speech_rate_c|speaker) +
+    (1 + voicing + speech_rate_c|word),
   data = subdat,
-  family = gaussian(),
-  chains = 4,
-  iter = 6000,
-  warmup = 2000,
+  family = lognormal,
+  prior = priors_null,
   seed = my.seed,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
-  prior = priors_null,
   file = "./rtMRI-velum/models/onset_null",
   save_all_pars = TRUE
 )
@@ -376,7 +381,7 @@ nd.ci <- quantile(m3_post$DV[m3_post$context=="nd"], probs=c(0.05,0.95))
 nt.ci <- quantile(m3_post$DV[m3_post$context=="nt"], probs=c(0.05,0.95))
 
 ## create Figure 7
-pdf(file="plots/onset.pdf",width=7,height=3,onefile=T,pointsize=16)
+pdf(file="./rtMRI-velum/plots/onset.pdf",width=7,height=3,onefile=T,pointsize=16)
 # perceptually distinct colors that are also safe for B/W printing
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
@@ -414,16 +419,16 @@ subdat$DV <- (subdat$velumopening_maxcon_on - subdat$Vokal_off)*1000
 
 # full model
 m4 <- brms::brm(
-  formula = DV ~ voicing + (1+voicing|speaker) + (1|word),
+  DV ~ voicing +
+    speech_rate_c +
+    (1 + voicing + speech_rate_c|speaker) +
+    (1 + voicing + speech_rate_c|word),
   data = subdat,
-  family = gaussian(),
-  chains = 4,
-  iter = 6000,
-  warmup = 2000,
+  family = lognormal,
+  prior = priors,
   seed = my.seed,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
-  prior = priors,
   file = "./rtMRI-velum/models/gest_max",
   save_all_pars = TRUE
 )
@@ -433,16 +438,16 @@ summary(m4)
 
 # reduced/null model
 m4_null <- brms::brm(
-  formula = DV ~ (1|speaker) + (1|word),
+  DV ~ 
+    speech_rate_c +
+    (1 + voicing + speech_rate_c|speaker) +
+    (1 + voicing + speech_rate_c|word),
   data = subdat,
-  family = gaussian(),
-  chains = 4,
-  iter = 6000,
-  warmup = 2000,
+  family = lognormal,
+  prior = priors_null,
   seed = my.seed,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
-  prior = priors_null,
   file = "./rtMRI-velum/models/gest_max_null",
   save_all_pars = TRUE
 )
@@ -466,7 +471,7 @@ nd.ci <- quantile(m4_post$DV[m4_post$context=="nd"], probs=c(0.05,0.95))
 nt.ci <- quantile(m4_post$DV[m4_post$context=="nt"], probs=c(0.05,0.95))
 
 ## create Figure 8
-pdf(file="plots/gest_max.pdf",width=7,height=3,onefile=T,pointsize=16)
+pdf(file="./rtMRI-velum/plots/gest_max.pdf",width=7,height=3,onefile=T,pointsize=16)
 # perceptually distinct colors that are also safe for B/W printing
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
@@ -504,16 +509,16 @@ subdat$DV <- subdat$velum2US_velumopening_maxcon_onset
 
 # full model
 m5 <- brms::brm(
-  formula = DV ~ voicing + (1+voicing|speaker) + (1|word),
+  DV ~ voicing +
+    speech_rate_c +
+    (1 + voicing + speech_rate_c|speaker) +
+    (1 + voicing + speech_rate_c|word),
   data = subdat,
-  family = gaussian(),
-  chains = 4,
-  iter = 6000,
-  warmup = 2000,
+  family = lognormal,
+  prior = priors,
   seed = my.seed,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
-  prior = priors,
   file = "./rtMRI-velum/models/gest_max_mag",
   save_all_pars = TRUE
 )
@@ -523,19 +528,20 @@ summary(m5)
 
 # reduced/null model
 m5_null <- brms::brm(
-  formula = DV ~ (1|speaker) + (1|word),
+  DV ~ 
+    speech_rate_c +
+    (1 + voicing + speech_rate_c|speaker) +
+    (1 + voicing + speech_rate_c|word),
   data = subdat,
-  family = gaussian(),
-  chains = 4,
-  iter = 6000,
-  warmup = 2000,
+  family = lognormal,
+  prior = priors_null,
   seed = my.seed,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
-  prior = priors_null,
   file = "./rtMRI-velum/models/gest_max_mag_null",
   save_all_pars = TRUE
 )
+
 
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(m5, m5_null)
@@ -556,7 +562,7 @@ nd.ci <- quantile(m5_post$DV[m5_post$context=="nd"], probs=c(0.05,0.95))
 nt.ci <- quantile(m5_post$DV[m5_post$context=="nt"], probs=c(0.05,0.95))
 
 ## create Figure 9
-pdf(file="plots/gest_max_mag.pdf",width=7,height=3,onefile=T,pointsize=16)
+pdf(file="./rtMRI-velum/plots/gest_max_mag.pdf",width=7,height=3,onefile=T,pointsize=16)
 # perceptually distinct colors that are also safe for B/W printing
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
@@ -593,10 +599,11 @@ dev.off()
 
 # full model priors:
 priors <- c(
-  prior(normal(0, 100), class = Intercept),
-  prior(normal(0, 100), class = b, coef = stressF),
-  prior(cauchy(0, 10), class = sd),
-  prior(cauchy(0, 10), class = sigma),
+  prior(normal(0, 3), class = Intercept),
+  prior(normal(0, 1), class = b, coef = stressF),
+  prior(normal(0, 1), class = b, coef = speech_rate_c),
+  prior(cauchy(0, 0.1), class = sd),
+  prior(cauchy(0, 0.1), class = sigma),
   prior(lkj(2), class = cor)
 )
 
@@ -627,35 +634,36 @@ subdat$DV <- subdat$dur.VN
 
 # full model
 m6 <- brms::brm(
-  formula = DV ~ stress + (1+stress|speaker) + (1|word),
+  DV ~ stress +
+    speech_rate_c +
+    (1 + stress + speech_rate_c|speaker) +
+    (1 + stress + speech_rate_c|word),
   data = subdat,
-  family = gaussian(),
-  chains = 4,
-  iter = 6000,
-  warmup = 2000,
+  family = lognormal,
+  prior = priors,
   seed = my.seed,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
-  prior = priors,
   file = "./rtMRI-velum/models/rate_v_nasal",
   save_all_pars = TRUE
 )
+
 
 # model summary
 summary(m6)
 
 # reduced/null model
 m6_null <- brms::brm(
-  formula = DV ~ (1|speaker) + (1|word),
+  DV ~ 
+    speech_rate_c +
+    (1 + stress + speech_rate_c|speaker) +
+    (1 + stress + speech_rate_c|word),
   data = subdat,
-  family = gaussian(),
-  chains = 4,
-  iter = 6000,
-  warmup = 2000,
+  family = lognormal,
+  prior = priors_null,
   seed = my.seed,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
-  prior = priors_null,
   file = "./rtMRI-velum/models/rate_v_nasal_null",
   save_all_pars = TRUE
 )
@@ -679,7 +687,7 @@ norm.ci <- quantile(m6_post$DV[m6_post$context=="normal"], probs=c(0.05,0.95))
 fast.ci <- quantile(m6_post$DV[m6_post$context=="fast"], probs=c(0.05,0.95))
 
 ## create Figure 10
-pdf(file="plots/speech_rate_v_nasal.pdf",width=7,height=3,onefile=T,pointsize=16)
+pdf(file="./rtMRI-velum/plots/speech_rate_v_nasal.pdf",width=7,height=3,onefile=T,pointsize=16)
 # perceptually distinct colors that are also safe for B/W printing
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
@@ -711,16 +719,16 @@ subdat$DV <- subdat$dur.NN
 
 # full model
 m7 <- brms::brm(
-  formula = DV ~ stress + (1+stress|speaker) + (1|word),
+  DV ~ stress +
+    speech_rate_c +
+    (1 + stress + speech_rate_c|speaker) +
+    (1 + stress + speech_rate_c|word),
   data = subdat,
-  family = gaussian(),
-  chains = 4,
-  iter = 6000,
-  warmup = 2000,
+  family = lognormal,
+  prior = priors,
   seed = my.seed,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
-  prior = priors,
   file = "./rtMRI-velum/models/rate_n_nasal",
   save_all_pars = TRUE
 )
@@ -730,16 +738,16 @@ summary(m7)
 
 # reduced/null model
 m7_null <- brms::brm(
-  formula = DV ~ (1|speaker) + (1|word),
+  DV ~ 
+    speech_rate_c +
+    (1 + stress + speech_rate_c|speaker) +
+    (1 + stress + speech_rate_c|word),
   data = subdat,
-  family = gaussian(),
-  chains = 4,
-  iter = 6000,
-  warmup = 2000,
+  family = lognormal,
+  prior = priors_null,
   seed = my.seed,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
-  prior = priors_null,
   file = "./rtMRI-velum/models/rate_n_nasal_null",
   save_all_pars = TRUE
 )
@@ -764,7 +772,7 @@ fast.ci <- quantile(m7_post$DV[m7_post$context=="fast"], probs=c(0.05,0.95))
 
 
 ## create Figure 11
-pdf(file="plots/speech_rate_n_nasal.pdf",width=7,height=3,onefile=T,pointsize=16)
+pdf(file="./rtMRI-velum/plots/speech_rate_n_nasal.pdf",width=7,height=3,onefile=T,pointsize=16)
 # perceptually distinct colors that are also safe for B/W printing
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
