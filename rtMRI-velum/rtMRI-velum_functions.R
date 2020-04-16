@@ -14,9 +14,19 @@ set.seed(my.seed)
 matdat <- read.csv('./rtMRI-velum/velum_data.csv', header=T)
 matdat$word <- paste0(matdat$prev,matdat$vowel)
 
+# get rid of items that gesture onsets that begin *after* the vowel offset (only 5/7152 total items)
+matdat <- matdat[(matdat$velumopening_gesture_on - matdat$Vokal_off)<0,]
+
+# Center the speech rate
+matdat <- matdat %>% mutate(speech_rate_c = sp_rate - mean(sp_rate))
+
 # separate coda contexts by alveolar voiced stop vs. alveolar voiceless stop
 voiceless <- c('nt__','nt_@','nt_6','nt_a')
 voiced    <- c('nd_@','nd_6','nd_a')
+
+matdat$voicing <- c()
+matdat$voicing[matdat$post %in% voiceless]  <- "voiceless"
+matdat$voicing[matdat$post %in% voiced]     <- "voiced"
 
 # only include alveolar nasal items preceding a voiced or voiceless stop consonant
 coda <- c(voiceless,voiced)
@@ -26,12 +36,6 @@ stresses <- c("N")
 
 # subset the data
 subdat <- matdat[matdat$post %in% coda & matdat$stress %in% stresses, ]
-subdat$voicing <- c()
-subdat$voicing[subdat$post %in% voiceless] <- "voiceless"
-subdat$voicing[subdat$post %in% voiced] <- "voiced"
-
-# Center the speech rate
-subdat <- subdat %>% mutate(speech_rate_c = sp_rate - mean(sp_rate))
 
 
 
@@ -145,18 +149,21 @@ priors_null <- c(
 # # # # # # # # # # # # # #
 
 # create the dependent variable
-subdat$DV <- subdat$velumopening_maxvel_dur*1000
+subdat$DV <- subdat$velumopening_gesture_dur*1000
 
 # full model
 m1 <- brms::brm(
   DV ~ voicing +
     speech_rate_c +
-    (1 + voicing + speech_rate_c|speaker) +
-    (1 + voicing + speech_rate_c|word),
+    (1 + voicing + speech_rate_c | speaker) +
+    (1 + voicing + speech_rate_c | word),
   data = subdat,
   family = lognormal,
   prior = priors,
   seed = my.seed,
+  iter = 4000,
+  warmup = 2000,
+  chains = 4,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/dur",
@@ -166,16 +173,22 @@ m1 <- brms::brm(
 # model summary
 summary(m1)
 
+# posterior predictive check
+pp_check(m1, nsamples = 100)
+
 # reduced/null model
 m1_null <- brms::brm(
-  DV ~ 
+  DV ~
     speech_rate_c +
-    (1 + voicing + speech_rate_c|speaker) +
-    (1 + voicing + speech_rate_c|word),
+    (1 + voicing + speech_rate_c | speaker) +
+    (1 + voicing + speech_rate_c | word),
   data = subdat,
-  family = lognormal,
+  family = lognormal(),
   prior = priors_null,
   seed = my.seed,
+  iter = 4000,
+  warmup = 2000,
+  chains = 4,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/dur_null",
@@ -183,7 +196,7 @@ m1_null <- brms::brm(
 )
 
 # calculate the Bayes factor of the difference between the full and null models
-brms::bayes_factor(m1, m1_null)
+#brms::bayes_factor(m1, m1_null)
 
 # calculate the marginal posteriors of the full model
 m1_post <- brms::posterior_samples(m1, pars="b_") %>%
@@ -196,9 +209,9 @@ m1_post <- brms::posterior_samples(m1, pars="b_") %>%
 
 # calculate the 95% credible intervals
 # 95% CI of /nd/ items
-nd.ci <- quantile(m1_post$DV[m1_post$context=="nd"], probs=c(0.025,0.975))
+nd.ci <- quantile(exp(m1_post$DV[m1_post$context=="nd"]), probs=c(0.025,0.975))
 # 95% CI of /nt/ items
-nt.ci <- quantile(m1_post$DV[m1_post$context=="nt"], probs=c(0.025,0.975))
+nt.ci <- quantile(exp(m1_post$DV[m1_post$context=="nt"]), probs=c(0.025,0.975))
 
 ## create Figure 5
 pdf(file="./rtMRI-velum/plots/duration.pdf",width=7,height=3,onefile=T,pointsize=16)
@@ -206,7 +219,7 @@ pdf(file="./rtMRI-velum/plots/duration.pdf",width=7,height=3,onefile=T,pointsize
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
 m1_plot <- m1_post %>%
-  ggplot(aes(DV, fill = context)) +
+  ggplot(aes(exp(DV), fill = context)) +
   geom_density(alpha = 0.7) +
   scale_fill_manual(values=my.cols) +
   ggtitle("Velum gesture duration") + 
@@ -224,7 +237,7 @@ m1_plot +
   geom_segment(aes(x=nt.ci[1], xend=nt.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[2]) +
   geom_segment(aes(x=nt.ci[1], xend=nt.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
   geom_segment(aes(x=nt.ci[2], xend=nt.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  scale_x_continuous(breaks=seq(100,200,5)) + theme_bw()
+  scale_x_continuous(breaks=seq(0,1000,5)) + theme_bw()
 dev.off()
 
 
@@ -235,18 +248,21 @@ dev.off()
 # # # # # # # # # # # # #
 
 # create the dependent variable
-subdat$DV <- (subdat$velumopening_maxvel_off - subdat$Vokal_off)*1000
+subdat$DV <- (subdat$velumopening_gesture_off - subdat$Vokal_off)*1000
 
 # full model
 m2 <- brms::brm(
   DV ~ voicing +
     speech_rate_c +
-    (1 + voicing + speech_rate_c|speaker) +
-    (1 + voicing + speech_rate_c|word),
+    (1 + voicing + speech_rate_c | speaker) +
+    (1 + voicing + speech_rate_c | word),
   data = subdat,
-  family = lognormal,
+  family = lognormal(),
   prior = priors,
   seed = my.seed,
+  iter = 4000,
+  warmup = 2000,
+  chains = 4,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/offset",
@@ -258,22 +274,25 @@ summary(m2)
 
 # reduced/null model
 m2_null <- brms::brm(
-  DV ~ 
+  DV ~
     speech_rate_c +
-    (1 + voicing + speech_rate_c|speaker) +
-    (1 + voicing + speech_rate_c|word),
+    (1 + voicing + speech_rate_c | speaker) +
+    (1 + voicing + speech_rate_c | word),
   data = subdat,
-  family = lognormal,
+  family = lognormal(),
   prior = priors_null,
   seed = my.seed,
+  iter = 4000,
+  warmup = 2000,
+  chains = 4,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
-  file = "./rtMRI-velum/models/off_null",
+  file = "./rtMRI-velum/models/offset_null",
   save_all_pars = TRUE
 )
 
 # calculate the Bayes factor of the difference between the full and null models
-brms::bayes_factor(m2, m2_null)
+#brms::bayes_factor(m2, m2_null)
 
 # calculate the marginal posteriors of the full model
 m2_post <- brms::posterior_samples(m2, pars="b_") %>%
@@ -285,10 +304,10 @@ m2_post <- brms::posterior_samples(m2, pars="b_") %>%
   tidyr::gather(context, DV)
 
 # calculate the 90% credible intervals
-# 90% CI of /nd/ items
-nd.ci <- quantile(m2_post$DV[m2_post$context=="nd"], probs=c(0.05,0.95))
-# 90% CI of /nt/ items
-nt.ci <- quantile(m2_post$DV[m2_post$context=="nt"], probs=c(0.05,0.95))
+# 95% CI of /nd/ items
+nd.ci <- quantile(exp(m2_post$DV[m2_post$context=="nd"]), probs=c(0.025,0.975))
+# 95% CI of /nt/ items
+nt.ci <- quantile(exp(m2_post$DV[m2_post$context=="nt"]), probs=c(0.025,0.975))
 
 ## create Figure 6
 pdf(file="./rtMRI-velum/plots/offset.pdf",width=7,height=3,onefile=T,pointsize=16)
@@ -296,7 +315,7 @@ pdf(file="./rtMRI-velum/plots/offset.pdf",width=7,height=3,onefile=T,pointsize=1
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
 m2_plot <- m2_post %>%
-  ggplot(aes(DV, fill = context)) +
+  ggplot(aes(exp(DV), fill = context)) +
   geom_density(alpha = 0.7) +
   scale_fill_manual(values=my.cols) +
   ggtitle("Velum gesture offset") + 
@@ -314,29 +333,32 @@ m2_plot +
   geom_segment(aes(x=nt.ci[1], xend=nt.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[2]) +
   geom_segment(aes(x=nt.ci[1], xend=nt.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
   geom_segment(aes(x=nt.ci[2], xend=nt.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  scale_x_continuous(breaks=seq(50,150,5)) + theme_bw()
+  scale_x_continuous(breaks=seq(0,1000,5)) + theme_bw()
 dev.off()
 
 
 
-# # # # # # # # # # # # #
-# Figure 7              #
-# Velum gesture offset  #
-# # # # # # # # # # # # #
+# # # # # # # # # # # #
+# Figure 7            #
+# Velum gesture onset #
+# # # # # # # # # # # #
 
 # create the dependent variable
-subdat$DV <- (subdat$velumopening_maxvel_on - subdat$Vokal_off)*1000
+subdat$DV <- -(subdat$velumopening_gesture_on - subdat$Vokal_off)*1000
 
 # full model
 m3 <- brms::brm(
   DV ~ voicing +
     speech_rate_c +
-    (1 + voicing + speech_rate_c|speaker) +
-    (1 + voicing + speech_rate_c|word),
+    (1 + voicing + speech_rate_c | speaker) +
+    (1 + voicing + speech_rate_c | word),
   data = subdat,
-  family = lognormal,
+  family = lognormal(),
   prior = priors,
   seed = my.seed,
+  iter = 4000,
+  warmup = 2000,
+  chains = 4,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/onset",
@@ -348,14 +370,17 @@ summary(m3)
 
 # reduced/null model
 m3_null <- brms::brm(
-  DV ~ 
+  DV ~
     speech_rate_c +
-    (1 + voicing + speech_rate_c|speaker) +
-    (1 + voicing + speech_rate_c|word),
+    (1 + voicing + speech_rate_c | speaker) +
+    (1 + voicing + speech_rate_c | word),
   data = subdat,
-  family = lognormal,
+  family = lognormal(),
   prior = priors_null,
   seed = my.seed,
+  iter = 4000,
+  warmup = 2000,
+  chains = 4,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/onset_null",
@@ -363,7 +388,7 @@ m3_null <- brms::brm(
 )
 
 # calculate the Bayes factor of the difference between the full and null models
-brms::bayes_factor(m3, m3_null)
+#brms::bayes_factor(m3, m3_null)
 
 # calculate the marginal posteriors of the full model
 m3_post <- brms::posterior_samples(m3, pars="b_") %>%
@@ -375,10 +400,10 @@ m3_post <- brms::posterior_samples(m3, pars="b_") %>%
   tidyr::gather(context, DV)
 
 # calculate the 90% credible intervals
-# 90% CI of /nd/ items
-nd.ci <- quantile(m3_post$DV[m3_post$context=="nd"], probs=c(0.05,0.95))
-# 90% CI of /nt/ items
-nt.ci <- quantile(m3_post$DV[m3_post$context=="nt"], probs=c(0.05,0.95))
+# 95% CI of /nd/ items
+nd.ci <- quantile(-exp(m3_post$DV[m3_post$context=="nd"]), probs=c(0.025,0.975))
+# 95% CI of /nt/ items
+nt.ci <- quantile(-exp(m3_post$DV[m3_post$context=="nt"]), probs=c(0.025,0.975))
 
 ## create Figure 7
 pdf(file="./rtMRI-velum/plots/onset.pdf",width=7,height=3,onefile=T,pointsize=16)
@@ -386,7 +411,7 @@ pdf(file="./rtMRI-velum/plots/onset.pdf",width=7,height=3,onefile=T,pointsize=16
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
 m3_plot <- m3_post %>%
-  ggplot(aes(DV, fill = context)) +
+  ggplot(aes(-exp(DV), fill = context)) +
   geom_density(alpha = 0.7) +
   scale_fill_manual(values=my.cols) +
   ggtitle("Velum gesture onset") + 
@@ -404,7 +429,7 @@ m3_plot +
   geom_segment(aes(x=nt.ci[1], xend=nt.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[2]) +
   geom_segment(aes(x=nt.ci[1], xend=nt.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
   geom_segment(aes(x=nt.ci[2], xend=nt.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  scale_x_continuous(breaks=seq(-100,0,5)) + theme_bw()
+  scale_x_continuous(breaks=seq(-1000,1000,5)) + theme_bw()
 dev.off()
 
 
@@ -414,6 +439,25 @@ dev.off()
 # Velum gesture peak (timing) #
 # # # # # # # # # # # # # # # #
 
+# full model priors:
+priors <- c(
+  prior(normal(0, 200), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicingvoiceless),
+  prior(normal(0, 100), class = b, coef = speech_rate_c),
+  prior(cauchy(0, 5), class = sd),
+  prior(cauchy(0, 5), class = sigma),
+  prior(lkj(2), class = cor)
+)
+
+# null model priors:
+priors_null <- c(
+  prior(normal(0, 200), class = Intercept),
+  prior(normal(0, 100), class = b, coef = speech_rate_c),
+  prior(cauchy(0, 5), class = sd),
+  prior(cauchy(0, 5), class = sigma),
+  prior(lkj(2), class = cor)
+)
+
 # create the dependent variable
 subdat$DV <- (subdat$velumopening_maxcon_on - subdat$Vokal_off)*1000
 
@@ -421,12 +465,15 @@ subdat$DV <- (subdat$velumopening_maxcon_on - subdat$Vokal_off)*1000
 m4 <- brms::brm(
   DV ~ voicing +
     speech_rate_c +
-    (1 + voicing + speech_rate_c|speaker) +
-    (1 + voicing + speech_rate_c|word),
+    (1 + voicing + speech_rate_c | speaker) +
+    (1 + voicing + speech_rate_c | word),
   data = subdat,
-  family = lognormal,
+  family = gaussian(),
   prior = priors,
   seed = my.seed,
+  iter = 4000,
+  warmup = 2000,
+  chains = 4, 
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/gest_max",
@@ -438,14 +485,17 @@ summary(m4)
 
 # reduced/null model
 m4_null <- brms::brm(
-  DV ~ 
+  DV ~
     speech_rate_c +
-    (1 + voicing + speech_rate_c|speaker) +
-    (1 + voicing + speech_rate_c|word),
+    (1 + voicing + speech_rate_c | speaker) +
+    (1 + voicing + speech_rate_c | word),
   data = subdat,
-  family = lognormal,
+  family = gaussian(),
   prior = priors_null,
   seed = my.seed,
+  iter = 4000,
+  warmup = 2000,
+  chains = 4,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/gest_max_null",
@@ -453,22 +503,22 @@ m4_null <- brms::brm(
 )
 
 # calculate the Bayes factor of the difference between the full and null models
-brms::bayes_factor(m4, m4_null)
+#brms::bayes_factor(m4, m4_null)
 
 # calculate the marginal posteriors of the full model
 m4_post <- brms::posterior_samples(m4, pars="b_") %>%
   dplyr::mutate(
     nd = b_Intercept,
     nt = b_Intercept + b_voicingvoiceless
-  ) %>%
+  ) %>%    
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
 
 # calculate the 90% credible intervals
-# 90% CI of /nd/ items
-nd.ci <- quantile(m4_post$DV[m4_post$context=="nd"], probs=c(0.05,0.95))
-# 90% CI of /nt/ items
-nt.ci <- quantile(m4_post$DV[m4_post$context=="nt"], probs=c(0.05,0.95))
+# 95% CI of /nd/ items
+nd.ci <- quantile(m4_post$DV[m4_post$context=="nd"], probs=c(0.025,0.975))
+# 95% CI of /nt/ items
+nt.ci <- quantile(m4_post$DV[m4_post$context=="nt"], probs=c(0.025,0.975))
 
 ## create Figure 8
 pdf(file="./rtMRI-velum/plots/gest_max.pdf",width=7,height=3,onefile=T,pointsize=16)
@@ -494,7 +544,7 @@ m4_plot +
   geom_segment(aes(x=nt.ci[1], xend=nt.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[2]) +
   geom_segment(aes(x=nt.ci[1], xend=nt.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
   geom_segment(aes(x=nt.ci[2], xend=nt.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  scale_x_continuous(breaks=seq(0,100,5)) + theme_bw()
+  scale_x_continuous(breaks=seq(-1000,1000,5)) + theme_bw()
 dev.off()
 
 
@@ -504,6 +554,25 @@ dev.off()
 # Velum gesture peak (magnitude)#
 # # # # # # # # # # # # # # # # #
 
+# full model priors:
+priors <- c(
+  prior(normal(0, 0.5), class = Intercept),
+  prior(normal(0, 0.5), class = b, coef = voicingvoiceless),
+  prior(normal(0, 0.1), class = b, coef = speech_rate_c),
+  prior(cauchy(0, 0.1), class = sd),
+  prior(cauchy(0, 0.1), class = sigma),
+  prior(lkj(2), class = cor)
+)
+
+# null model priors:
+priors_null <- c(
+  prior(normal(0, 0.5), class = Intercept),
+  prior(normal(0, 0.5), class = b, coef = speech_rate_c),
+  prior(cauchy(0, 0.1), class = sd),
+  prior(cauchy(0, 0.1), class = sigma),
+  prior(lkj(2), class = cor)
+)
+
 # create the dependent variable
 subdat$DV <- subdat$velum2US_velumopening_maxcon_onset
 
@@ -511,12 +580,15 @@ subdat$DV <- subdat$velum2US_velumopening_maxcon_onset
 m5 <- brms::brm(
   DV ~ voicing +
     speech_rate_c +
-    (1 + voicing + speech_rate_c|speaker) +
-    (1 + voicing + speech_rate_c|word),
+    (1 + voicing + speech_rate_c | speaker) +
+    (1 + voicing + speech_rate_c | word),
   data = subdat,
-  family = lognormal,
+  family = gaussian,
   prior = priors,
   seed = my.seed,
+  iter = 4000,
+  warmup = 2000,
+  chains = 4, 
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/gest_max_mag",
@@ -528,14 +600,17 @@ summary(m5)
 
 # reduced/null model
 m5_null <- brms::brm(
-  DV ~ 
+  DV ~
     speech_rate_c +
-    (1 + voicing + speech_rate_c|speaker) +
-    (1 + voicing + speech_rate_c|word),
+    (1 + voicing + speech_rate_c | speaker) +
+    (1 + voicing + speech_rate_c | word),
   data = subdat,
-  family = lognormal,
+  family = gaussian,
   prior = priors_null,
   seed = my.seed,
+  iter = 4000,
+  warmup = 2000,
+  chains = 4,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/gest_max_mag_null",
@@ -544,7 +619,7 @@ m5_null <- brms::brm(
 
 
 # calculate the Bayes factor of the difference between the full and null models
-brms::bayes_factor(m5, m5_null)
+#brms::bayes_factor(m5, m5_null)
 
 # calculate the marginal posteriors of the full model
 m5_post <- brms::posterior_samples(m5, pars="b_") %>%
@@ -556,10 +631,10 @@ m5_post <- brms::posterior_samples(m5, pars="b_") %>%
   tidyr::gather(context, DV)
 
 # calculate the 90% credible intervals
-# 90% CI of /nd/ items
-nd.ci <- quantile(m5_post$DV[m5_post$context=="nd"], probs=c(0.05,0.95))
-# 90% CI of /nt/ items
-nt.ci <- quantile(m5_post$DV[m5_post$context=="nt"], probs=c(0.05,0.95))
+# 95% CI of /nd/ items
+nd.ci <- quantile(m5_post$DV[m5_post$context=="nd"], probs=c(0.025,0.975))
+# 95% CI of /nt/ items
+nt.ci <- quantile(m5_post$DV[m5_post$context=="nt"], probs=c(0.025,0.975))
 
 ## create Figure 9
 pdf(file="./rtMRI-velum/plots/gest_max_mag.pdf",width=7,height=3,onefile=T,pointsize=16)
@@ -600,7 +675,16 @@ dev.off()
 # full model priors:
 priors <- c(
   prior(normal(0, 3), class = Intercept),
-  prior(normal(0, 1), class = b, coef = stressF),
+  prior(normal(0, 1), class = b, coef = stressN),
+  prior(normal(0, 1), class = b, coef = speech_rate_c),
+  prior(cauchy(0, 0.1), class = sd),
+  prior(cauchy(0, 0.1), class = sigma),
+  prior(lkj(2), class = cor)
+)
+
+# null model priors:
+priors_null <- c(
+  prior(normal(0, 3), class = Intercept),
   prior(normal(0, 1), class = b, coef = speech_rate_c),
   prior(cauchy(0, 0.1), class = sd),
   prior(cauchy(0, 0.1), class = sigma),
@@ -620,13 +704,10 @@ subdat$voicing[subdat$post %in% voiced] <- "voiced"
 # only include /nt/ items
 subdat <- subdat[subdat$voicing=="voiceless",]
 
-# reorder the speech rate factor order, so that the normal speech rate is the baseline
-subdat$stress <- factor(subdat$stress, levels=c("N","F"))
-
 # duration of nasal consonant: interval between vowel offset and velum gesture offset
-subdat$dur.NN <- 1000*(subdat$velumopening_maxvel_off - subdat$Vokal_off)
+subdat$dur.NN <- 1000*(subdat$velumopening_gesture_off - subdat$Vokal_off)
 # duration of vowel nasalization: interval between velum gesture onset and vowel offset
-subdat$dur.VN <- 1000*(subdat$Vokal_off - subdat$velumopening_maxvel_on)
+subdat$dur.VN <- 1000*(subdat$Vokal_off - subdat$velumopening_gesture_on)
 
 
 # first, we look at the duration of the vowel nasalization
@@ -636,12 +717,15 @@ subdat$DV <- subdat$dur.VN
 m6 <- brms::brm(
   DV ~ stress +
     speech_rate_c +
-    (1 + stress + speech_rate_c|speaker) +
-    (1 + stress + speech_rate_c|word),
+    (1 + stress + speech_rate_c | speaker) +
+    (1 + stress + speech_rate_c | word),
   data = subdat,
-  family = lognormal,
+  family = lognormal(),
   prior = priors,
   seed = my.seed,
+  iter = 10000,
+  warmup = 5000,
+  chains = 4,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/rate_v_nasal",
@@ -654,14 +738,17 @@ summary(m6)
 
 # reduced/null model
 m6_null <- brms::brm(
-  DV ~ 
+  DV ~
     speech_rate_c +
-    (1 + stress + speech_rate_c|speaker) +
-    (1 + stress + speech_rate_c|word),
+    (1 + stress + speech_rate_c | speaker) +
+    (1 + stress + speech_rate_c | word),
   data = subdat,
-  family = lognormal,
+  family = lognormal(),
   prior = priors_null,
   seed = my.seed,
+  iter = 10000,
+  warmup = 5000,
+  chains = 4,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/rate_v_nasal_null",
@@ -669,7 +756,7 @@ m6_null <- brms::brm(
 )
 
 # calculate the Bayes factor of the difference between the full and null models
-brms::bayes_factor(m6, m6_null)
+#brms::bayes_factor(m6, m6_null)
 
 # calculate the marginal posteriors of the full model
 m6_post <- brms::posterior_samples(m6, pars="b_") %>%
@@ -681,10 +768,10 @@ m6_post <- brms::posterior_samples(m6, pars="b_") %>%
   tidyr::gather(context, DV)
 
 # calculate the 90% credible intervals
-# 90% CI of normal rate items
-norm.ci <- quantile(m6_post$DV[m6_post$context=="normal"], probs=c(0.05,0.95))
-# 90% CI of fast rate items
-fast.ci <- quantile(m6_post$DV[m6_post$context=="fast"], probs=c(0.05,0.95))
+# 95% CI of normal rate items
+norm.ci <- quantile(exp(m6_post$DV[m6_post$context=="normal"]), probs=c(0.025,0.975))
+# 95% CI of fast rate items
+fast.ci <- quantile(exp(m6_post$DV[m6_post$context=="fast"]), probs=c(0.025,0.975))
 
 ## create Figure 10
 pdf(file="./rtMRI-velum/plots/speech_rate_v_nasal.pdf",width=7,height=3,onefile=T,pointsize=16)
@@ -692,7 +779,7 @@ pdf(file="./rtMRI-velum/plots/speech_rate_v_nasal.pdf",width=7,height=3,onefile=
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
 m6_plot <- m6_post %>%
-  ggplot(aes(DV, fill = context)) +
+  ggplot(aes(exp(DV), fill = context)) +
   geom_density(alpha = 0.7) +
   scale_fill_manual(values=my.cols) +
   ggtitle("Effect of speech rate on duration of vowel nasalization") + 
@@ -703,14 +790,14 @@ yrange <- yrange[2] - yrange[1]
 # add CI whiskers to base plot
 m6_plot + 
   # whisker for context 1
-  geom_segment(aes(x=norm.ci[1], xend=norm.ci[2], y=-yrange/10, yend=-yrange/10), col=my.cols[1]) +
-  geom_segment(aes(x=norm.ci[1], xend=norm.ci[1], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  geom_segment(aes(x=norm.ci[2], xend=norm.ci[2], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
+  geom_segment(aes(x=norm.ci[1], xend=norm.ci[2], y=-yrange/10, yend=-yrange/10), col=my.cols[2]) +
+  geom_segment(aes(x=norm.ci[1], xend=norm.ci[1], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[2]) +
+  geom_segment(aes(x=norm.ci[2], xend=norm.ci[2], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[2]) +
   # whisker for context 2
-  geom_segment(aes(x=fast.ci[1], xend=fast.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[2]) +
-  geom_segment(aes(x=fast.ci[1], xend=fast.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  geom_segment(aes(x=fast.ci[2], xend=fast.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  scale_x_continuous(breaks=seq(0,100,5)) + theme_bw()
+  geom_segment(aes(x=fast.ci[1], xend=fast.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[1]) +
+  geom_segment(aes(x=fast.ci[1], xend=fast.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[1]) +
+  geom_segment(aes(x=fast.ci[2], xend=fast.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[1]) +
+  scale_x_continuous(breaks=seq(-1000,1000,5)) + theme_bw()
 dev.off()
 
 
@@ -721,12 +808,15 @@ subdat$DV <- subdat$dur.NN
 m7 <- brms::brm(
   DV ~ stress +
     speech_rate_c +
-    (1 + stress + speech_rate_c|speaker) +
-    (1 + stress + speech_rate_c|word),
+    (1 + stress + speech_rate_c | speaker) +
+    (1 + stress + speech_rate_c | word),
   data = subdat,
-  family = lognormal,
+  family = lognormal(),
   prior = priors,
   seed = my.seed,
+  iter = 4000,
+  warmup = 2000,
+  chains = 4,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/rate_n_nasal",
@@ -738,14 +828,17 @@ summary(m7)
 
 # reduced/null model
 m7_null <- brms::brm(
-  DV ~ 
+  DV ~
     speech_rate_c +
-    (1 + stress + speech_rate_c|speaker) +
-    (1 + stress + speech_rate_c|word),
+    (1 + stress + speech_rate_c | speaker) +
+    (1 + stress + speech_rate_c | word),
   data = subdat,
-  family = lognormal,
+  family = lognormal(),
   prior = priors_null,
   seed = my.seed,
+  iter = 4000,
+  warmup = 2000,
+  chains = 4,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/rate_n_nasal_null",
@@ -753,7 +846,7 @@ m7_null <- brms::brm(
 )
 
 # calculate the Bayes factor of the difference between the full and null models
-brms::bayes_factor(m7, m7_null)
+#brms::bayes_factor(m7, m7_null)
 
 # calculate the marginal posteriors of the full model
 m7_post <- brms::posterior_samples(m7, pars="b_") %>%
@@ -765,10 +858,10 @@ m7_post <- brms::posterior_samples(m7, pars="b_") %>%
   tidyr::gather(context, DV)
 
 # calculate the 90% credible intervals
-# 90% CI of normal rate items
-norm.ci <- quantile(m7_post$DV[m7_post$context=="normal"], probs=c(0.05,0.95))
-# 90% CI of fast rate items
-fast.ci <- quantile(m7_post$DV[m7_post$context=="fast"], probs=c(0.05,0.95))
+# 95% CI of normal rate items
+norm.ci <- quantile(exp(m7_post$DV[m7_post$context=="normal"]), probs=c(0.025,0.975))
+# 95% CI of fast rate items
+fast.ci <- quantile(exp(m7_post$DV[m7_post$context=="fast"]), probs=c(0.025,0.975))
 
 
 ## create Figure 11
@@ -777,7 +870,7 @@ pdf(file="./rtMRI-velum/plots/speech_rate_n_nasal.pdf",width=7,height=3,onefile=
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
 m7_plot <- m7_post %>%
-  ggplot(aes(DV, fill = context)) +
+  ggplot(aes(exp(DV), fill = context)) +
   geom_density(alpha = 0.7) +
   scale_fill_manual(values=my.cols) +
   ggtitle("Effect of speech rate on duration of consonant nasalization") + 
@@ -788,12 +881,12 @@ yrange <- yrange[2] - yrange[1]
 # add CI whiskers to base plot
 m7_plot + 
   # whisker for context 1
-  geom_segment(aes(x=norm.ci[1], xend=norm.ci[2], y=-yrange/10, yend=-yrange/10), col=my.cols[1]) +
-  geom_segment(aes(x=norm.ci[1], xend=norm.ci[1], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  geom_segment(aes(x=norm.ci[2], xend=norm.ci[2], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
+  geom_segment(aes(x=norm.ci[1], xend=norm.ci[2], y=-yrange/10, yend=-yrange/10), col=my.cols[2]) +
+  geom_segment(aes(x=norm.ci[1], xend=norm.ci[1], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[2]) +
+  geom_segment(aes(x=norm.ci[2], xend=norm.ci[2], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[2]) +
   # whisker for context 2
-  geom_segment(aes(x=fast.ci[1], xend=fast.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[2]) +
-  geom_segment(aes(x=fast.ci[1], xend=fast.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  geom_segment(aes(x=fast.ci[2], xend=fast.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  scale_x_continuous(breaks=seq(0,100,5)) + theme_bw()
+  geom_segment(aes(x=fast.ci[1], xend=fast.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[1]) +
+  geom_segment(aes(x=fast.ci[1], xend=fast.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[1]) +
+  geom_segment(aes(x=fast.ci[2], xend=fast.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[1]) +
+  scale_x_continuous(breaks=seq(-1000,1000,5)) + theme_bw()
 dev.off()
