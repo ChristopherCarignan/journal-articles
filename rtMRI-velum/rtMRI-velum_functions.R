@@ -797,8 +797,8 @@ m7_null <- brms::brm(
 # calculate the marginal posteriors of the full model
 m7_post <- brms::posterior_samples(m7, pars="b_") %>%
   dplyr::mutate(
-    normal = b_Intercept,
-    fast = b_Intercept + b_stressF
+    fast = b_Intercept,
+    normal = b_Intercept + b_stressN
   ) %>%
   dplyr::select(normal, fast) %>%
   tidyr::gather(context, DV)
@@ -887,8 +887,8 @@ m8_null <- brms::brm(
 # calculate the marginal posteriors of the full model
 m8_post <- brms::posterior_samples(m8, pars="b_") %>%
   dplyr::mutate(
-    normal = b_Intercept,
-    fast = b_Intercept + b_stressF
+    fast = b_Intercept,
+    normal = b_Intercept + b_stressN
   ) %>%
   dplyr::select(normal, fast) %>%
   tidyr::gather(context, DV)
