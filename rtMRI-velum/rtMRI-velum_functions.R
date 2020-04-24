@@ -122,7 +122,7 @@ m1_null <- brms::brm(
 m1_post <- brms::posterior_samples(m1, pars="b_") %>%
   dplyr::mutate(
     nd = exp(b_Intercept),
-    nt = exp(b_Intercep) * exp(b_voicingvoiceless)
+    nt = exp(b_Intercept) * exp(b_voicingvoiceless)
   ) %>%
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
@@ -139,7 +139,7 @@ pdf(file="./rtMRI-velum/plots/duration.pdf",width=7,height=3,onefile=T,pointsize
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
 m1_plot <- m1_post %>%
-  ggplot(aes(exp(DV), fill = context)) +
+  ggplot(aes(DV, fill = context)) +
   geom_density(alpha = 0.7) +
   scale_fill_manual(values=my.cols) +
   ggtitle("Velum gesture duration") + 
@@ -235,7 +235,7 @@ pdf(file="./rtMRI-velum/plots/offset.pdf",width=7,height=3,onefile=T,pointsize=1
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
 m2_plot <- m2_post %>%
-  ggplot(aes(exp(DV), fill = context)) +
+  ggplot(aes(DV, fill = context)) +
   geom_density(alpha = 0.7) +
   scale_fill_manual(values=my.cols) +
   ggtitle("Velum gesture offset") + 
@@ -331,7 +331,7 @@ pdf(file="./rtMRI-velum/plots/onset.pdf",width=7,height=3,onefile=T,pointsize=16
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
 m3_plot <- m3_post %>%
-  ggplot(aes(-exp(DV), fill = context)) +
+  ggplot(aes(-DV, fill = context)) +
   geom_density(alpha = 0.7) +
   scale_fill_manual(values=my.cols) +
   ggtitle("Velum gesture onset") + 
@@ -815,7 +815,7 @@ pdf(file="./rtMRI-velum/plots/speech_rate_v_nasal.pdf",width=7,height=3,onefile=
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
 m7_plot <- m7_post %>%
-  ggplot(aes(exp(DV), fill = context)) +
+  ggplot(aes(DV, fill = context)) +
   geom_density(alpha = 0.7) +
   scale_fill_manual(values=my.cols) +
   ggtitle("Effect of speech rate on duration of vowel nasalization") + 
@@ -906,7 +906,7 @@ pdf(file="./rtMRI-velum/plots/speech_rate_n_nasal.pdf",width=7,height=3,onefile=
 my.cols <- c("#2c7fb8","#7fcdbb")
 # base plot
 m8_plot <- m8_post %>%
-  ggplot(aes(exp(DV), fill = context)) +
+  ggplot(aes(DV, fill = context)) +
   geom_density(alpha = 0.7) +
   scale_fill_manual(values=my.cols) +
   ggtitle("Effect of speech rate on duration of consonant nasalization") + 
