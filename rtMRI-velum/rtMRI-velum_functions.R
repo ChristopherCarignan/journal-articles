@@ -121,17 +121,17 @@ m1_null <- brms::brm(
 # calculate the marginal posteriors of the full model
 m1_post <- brms::posterior_samples(m1, pars="b_") %>%
   dplyr::mutate(
-    nd = b_Intercept,
-    nt = b_Intercept + b_voicingvoiceless
+    nd = exp(b_Intercept),
+    nt = exp(b_Intercep) * exp(b_voicingvoiceless)
   ) %>%
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
 
 # calculate the 95% credible intervals
 # 95% CI of /nd/ items
-nd.ci <- quantile(exp(m1_post$DV[m1_post$context=="nd"]), probs=c(0.025,0.975))
+nd.ci <- quantile(m1_post$DV[m1_post$context=="nd"], probs=c(0.025,0.975))
 # 95% CI of /nt/ items
-nt.ci <- quantile(exp(m1_post$DV[m1_post$context=="nt"]), probs=c(0.025,0.975))
+nt.ci <- quantile(m1_post$DV[m1_post$context=="nt"], probs=c(0.025,0.975))
 
 ## create Figure 5
 pdf(file="./rtMRI-velum/plots/duration.pdf",width=7,height=3,onefile=T,pointsize=16)
@@ -217,17 +217,17 @@ m2_null <- brms::brm(
 # calculate the marginal posteriors of the full model
 m2_post <- brms::posterior_samples(m2, pars="b_") %>%
   dplyr::mutate(
-    nd = b_Intercept,
-    nt = b_Intercept + b_voicingvoiceless
+    nd = exp(b_Intercept),
+    nt = exp(b_Intercept) * exp(b_voicingvoiceless)
   ) %>%
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
 
 # calculate the 90% credible intervals
 # 95% CI of /nd/ items
-nd.ci <- quantile(exp(m2_post$DV[m2_post$context=="nd"]), probs=c(0.025,0.975))
+nd.ci <- quantile(m2_post$DV[m2_post$context=="nd"], probs=c(0.025,0.975))
 # 95% CI of /nt/ items
-nt.ci <- quantile(exp(m2_post$DV[m2_post$context=="nt"]), probs=c(0.025,0.975))
+nt.ci <- quantile(m2_post$DV[m2_post$context=="nt"], probs=c(0.025,0.975))
 
 ## create Figure 6
 pdf(file="./rtMRI-velum/plots/offset.pdf",width=7,height=3,onefile=T,pointsize=16)
@@ -313,17 +313,17 @@ m3_null <- brms::brm(
 # calculate the marginal posteriors of the full model
 m3_post <- brms::posterior_samples(m3, pars="b_") %>%
   dplyr::mutate(
-    nd = b_Intercept,
-    nt = b_Intercept + b_voicingvoiceless
+    nd = exp(b_Intercept),
+    nt = exp(b_Intercept) * exp(b_voicingvoiceless)
   ) %>%
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
 
 # calculate the 90% credible intervals
 # 95% CI of /nd/ items
-nd.ci <- quantile(-exp(m3_post$DV[m3_post$context=="nd"]), probs=c(0.025,0.975))
+nd.ci <- quantile(-m3_post$DV[m3_post$context=="nd"], probs=c(0.025,0.975))
 # 95% CI of /nt/ items
-nt.ci <- quantile(-exp(m3_post$DV[m3_post$context=="nt"]), probs=c(0.025,0.975))
+nt.ci <- quantile(-m3_post$DV[m3_post$context=="nt"], probs=c(0.025,0.975))
 
 ## create Figure 7
 pdf(file="./rtMRI-velum/plots/onset.pdf",width=7,height=3,onefile=T,pointsize=16)
@@ -797,17 +797,17 @@ m7_null <- brms::brm(
 # calculate the marginal posteriors of the full model
 m7_post <- brms::posterior_samples(m7, pars="b_") %>%
   dplyr::mutate(
-    fast = b_Intercept,
-    normal = b_Intercept + b_stressN
+    fast = exp(b_Intercept),
+    normal = exp(b_Intercept) * exp(b_stressN)
   ) %>%
   dplyr::select(normal, fast) %>%
   tidyr::gather(context, DV)
 
 # calculate the 90% credible intervals
 # 95% CI of normal rate items
-norm.ci <- quantile(exp(m7_post$DV[m7_post$context=="normal"]), probs=c(0.025,0.975))
+norm.ci <- quantile(m7_post$DV[m7_post$context=="normal"], probs=c(0.025,0.975))
 # 95% CI of fast rate items
-fast.ci <- quantile(exp(m7_post$DV[m7_post$context=="fast"]), probs=c(0.025,0.975))
+fast.ci <- quantile(m7_post$DV[m7_post$context=="fast"], probs=c(0.025,0.975))
 
 ## create Figure 10
 pdf(file="./rtMRI-velum/plots/speech_rate_v_nasal.pdf",width=7,height=3,onefile=T,pointsize=16)
@@ -887,17 +887,17 @@ m8_null <- brms::brm(
 # calculate the marginal posteriors of the full model
 m8_post <- brms::posterior_samples(m8, pars="b_") %>%
   dplyr::mutate(
-    fast = b_Intercept,
-    normal = b_Intercept + b_stressN
+    fast = exp(b_Intercept),
+    normal = exp(b_Intercept) * exp(b_stressN)
   ) %>%
   dplyr::select(normal, fast) %>%
   tidyr::gather(context, DV)
 
 # calculate the 90% credible intervals
 # 95% CI of normal rate items
-norm.ci <- quantile(exp(m8_post$DV[m8_post$context=="normal"]), probs=c(0.025,0.975))
+norm.ci <- quantile(m8_post$DV[m8_post$context=="normal"], probs=c(0.025,0.975))
 # 95% CI of fast rate items
-fast.ci <- quantile(exp(m8_post$DV[m8_post$context=="fast"]), probs=c(0.025,0.975))
+fast.ci <- quantile(m8_post$DV[m8_post$context=="fast"], probs=c(0.025,0.975))
 
 
 ## create Figure 11
