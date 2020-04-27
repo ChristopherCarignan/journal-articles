@@ -6,6 +6,7 @@
 .~lock*
 Rplots.pdf
 *.directory
+*models/
 
 ########
 # R
