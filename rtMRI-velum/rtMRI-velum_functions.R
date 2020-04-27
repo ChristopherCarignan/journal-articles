@@ -5,7 +5,8 @@ require(lme4)
 require(parallel)
 
 #### Prepare data ####
-options(mc.cores=parallel::detectCores())
+core.num <- parallel::detectCores()
+options(mc.cores=core.num)
 
 my.seed <- 123
 set.seed(my.seed)
@@ -81,9 +82,10 @@ m1 <- brms::brm(
   family = lognormal(),
   prior = priors,
   seed = my.seed,
-  iter = 4000,
-  warmup = 2000,
+  iter = 6000,
+  warmup = 3000,
   chains = 4,
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/dur",
@@ -106,9 +108,10 @@ m1_null <- brms::brm(
   family = lognormal(),
   prior = priors_null,
   seed = my.seed,
-  iter = 4000,
-  warmup = 2000,
+  iter = 6000,
+  warmup = 3000,
   chains = 4,
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/dur_null",
@@ -180,9 +183,10 @@ m2 <- brms::brm(
   family = lognormal(),
   prior = priors,
   seed = my.seed,
-  iter = 4000,
-  warmup = 2000,
+  iter = 6000,
+  warmup = 3000,
   chains = 4,
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/offset",
@@ -202,9 +206,10 @@ m2_null <- brms::brm(
   family = lognormal(),
   prior = priors_null,
   seed = my.seed,
-  iter = 4000,
-  warmup = 2000,
+  iter = 6000,
+  warmup = 3000,
   chains = 4,
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/offset_null",
@@ -279,6 +284,7 @@ m3 <- brms::brm(
   iter = 4000,
   warmup = 2000,
   chains = 4,
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/onset",
@@ -301,6 +307,7 @@ m3_null <- brms::brm(
   iter = 4000,
   warmup = 2000,
   chains = 4,
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/onset_null",
@@ -361,9 +368,9 @@ dev.off()
 
 # full model priors:
 priors <- c(
-  prior(normal(0, 20), class = Intercept),
-  prior(normal(0, 10), class = b, coef = voicingvoiceless),
-  prior(normal(0, 5), class = b, coef = speech_rate_c),
+  prior(normal(0, 50), class = Intercept),
+  prior(normal(0, 25), class = b, coef = voicingvoiceless),
+  prior(normal(0, 25), class = b, coef = speech_rate_c),
   prior(cauchy(0, 1), class = sd),
   prior(cauchy(0, 1), class = sigma),
   prior(lkj(2), class = cor)
@@ -371,8 +378,8 @@ priors <- c(
 
 # null model priors:
 priors_null <- c(
-  prior(normal(0, 20), class = Intercept),
-  prior(normal(0, 5), class = b, coef = speech_rate_c),
+  prior(normal(0, 50), class = Intercept),
+  prior(normal(0, 25), class = b, coef = speech_rate_c),
   prior(cauchy(0, 1), class = sd),
   prior(cauchy(0, 1), class = sigma),
   prior(lkj(2), class = cor)
@@ -394,6 +401,7 @@ m4 <- brms::brm(
   iter = 6000,
   warmup = 3000,
   chains = 4, 
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/vowel_integ",
@@ -416,6 +424,7 @@ m4_null <- brms::brm(
   iter = 6000,
   warmup = 3000,
   chains = 4,
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/vowel_integ_null",
@@ -507,9 +516,10 @@ m5 <- brms::brm(
   family = gaussian(),
   prior = priors,
   seed = my.seed,
-  iter = 4000,
-  warmup = 2000,
+  iter = 6000,
+  warmup = 3000,
   chains = 4, 
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/gest_max",
@@ -529,9 +539,10 @@ m5_null <- brms::brm(
   family = gaussian(),
   prior = priors_null,
   seed = my.seed,
-  iter = 4000,
-  warmup = 2000,
+  iter = 6000,
+  warmup = 3000,
   chains = 4,
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/gest_max_null",
@@ -592,20 +603,20 @@ dev.off()
 
 # full model priors:
 priors <- c(
-  prior(normal(0, 0.5), class = Intercept),
-  prior(normal(0, 0.5), class = b, coef = voicingvoiceless),
-  prior(normal(0, 0.1), class = b, coef = speech_rate_c),
-  prior(cauchy(0, 0.1), class = sd),
-  prior(cauchy(0, 0.1), class = sigma),
+  prior(normal(0, 10), class = Intercept),
+  prior(normal(0, 5), class = b, coef = voicingvoiceless),
+  prior(normal(0, 5), class = b, coef = speech_rate_c),
+  prior(cauchy(0, 5), class = sd),
+  prior(gamma(0.01, 0.01), class = phi),
   prior(lkj(2), class = cor)
 )
 
 # null model priors:
 priors_null <- c(
-  prior(normal(0, 0.5), class = Intercept),
-  prior(normal(0, 0.5), class = b, coef = speech_rate_c),
-  prior(cauchy(0, 0.1), class = sd),
-  prior(cauchy(0, 0.1), class = sigma),
+  prior(normal(0, 10), class = Intercept),
+  prior(normal(0, 5), class = b, coef = speech_rate_c),
+  prior(cauchy(0, 5), class = sd),
+  prior(gamma(0.01, 0.01), class = phi),
   prior(lkj(2), class = cor)
 )
 
@@ -619,12 +630,13 @@ m6 <- brms::brm(
     (1 + voicing + speech_rate_c | speaker) +
     (1 + voicing + speech_rate_c | word),
   data = subdat,
-  family = gaussian,
+  family = Beta(),
   prior = priors,
   seed = my.seed,
   iter = 4000,
   warmup = 2000,
   chains = 4, 
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/gest_max_mag",
@@ -641,12 +653,13 @@ m6_null <- brms::brm(
     (1 + voicing + speech_rate_c | speaker) +
     (1 + voicing + speech_rate_c | word),
   data = subdat,
-  family = gaussian,
+  family = Beta(),
   prior = priors_null,
   seed = my.seed,
   iter = 4000,
   warmup = 2000,
   chains = 4,
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/gest_max_mag_null",
@@ -660,8 +673,8 @@ m6_null <- brms::brm(
 # calculate the marginal posteriors of the full model
 m6_post <- brms::posterior_samples(m6, pars="b_") %>%
   dplyr::mutate(
-    nd = b_Intercept,
-    nt = b_Intercept + b_voicingvoiceless
+    nd = plogis(b_Intercept),
+    nt = plogis(b_Intercept + b_voicingvoiceless)
   ) %>%
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
@@ -762,6 +775,7 @@ m7 <- brms::brm(
   iter = 10000,
   warmup = 5000,
   chains = 4,
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/rate_v_nasal",
@@ -785,6 +799,7 @@ m7_null <- brms::brm(
   iter = 10000,
   warmup = 5000,
   chains = 4,
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/rate_v_nasal_null",
@@ -850,9 +865,10 @@ m8 <- brms::brm(
   family = lognormal(),
   prior = priors,
   seed = my.seed,
-  iter = 4000,
-  warmup = 2000,
+  iter = 6000,
+  warmup = 3000,
   chains = 4,
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/rate_n_nasal",
@@ -872,9 +888,10 @@ m8_null <- brms::brm(
   family = lognormal(),
   prior = priors_null,
   seed = my.seed,
-  iter = 4000,
-  warmup = 2000,
+  iter = 6000,
+  warmup = 3000,
   chains = 4,
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/rate_n_nasal_null",
@@ -940,20 +957,20 @@ subdat$DV <- scale(subdat$accel.peak)
 
 # full model priors:
 priors <- c(
-  prior(normal(0, 1), class = Intercept),
-  prior(normal(0, 0.5), class = b, coef = voicingvoiceless),
-  prior(normal(0, 0.5), class = b, coef = speech_rate_c),
-  prior(cauchy(0, 0.5), class = sd),
-  prior(cauchy(0, 0.5), class = sigma),
+  prior(normal(0, 3), class = Intercept),
+  prior(normal(0, 3), class = b, coef = voicingvoiceless),
+  prior(normal(0, 3), class = b, coef = speech_rate_c),
+  prior(cauchy(0, 1), class = sd),
+  prior(cauchy(0, 1), class = sigma),
   prior(lkj(2), class = cor)
 )
 
 # null model priors:
 priors_null <- c(
-  prior(normal(0, 1), class = Intercept),
-  prior(normal(0, 0.5), class = b, coef = speech_rate_c),
-  prior(cauchy(0, 0.5), class = sd),
-  prior(cauchy(0, 0.5), class = sigma),
+  prior(normal(0, 3), class = Intercept),
+  prior(normal(0, 3), class = b, coef = speech_rate_c),
+  prior(cauchy(0, 1), class = sd),
+  prior(cauchy(0, 1), class = sigma),
   prior(lkj(2), class = cor)
 )
 
@@ -968,9 +985,10 @@ m10 <- brms::brm(
   family = gaussian,
   prior = priors,
   seed = my.seed,
-  iter = 1000,
-  warmup = 500,
-  chains = 2, 
+  iter = 6000,
+  warmup = 3000,
+  chains = 4,
+  cores = core.num, 
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/accel_peak",
@@ -990,9 +1008,10 @@ m10_null <- brms::brm(
   family = gaussian,
   prior = priors_null,
   seed = my.seed,
-  iter = 4000,
-  warmup = 2000,
+  iter = 6000,
+  warmup = 3000,
   chains = 4,
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/accel_peak_null",
@@ -1068,6 +1087,7 @@ m11 <- brms::brm(
   iter = 6000,
   warmup = 3000,
   chains = 4, 
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/quad_coef",
@@ -1090,6 +1110,7 @@ m11_null <- brms::brm(
   iter = 6000,
   warmup = 3000,
   chains = 4,
+  cores = core.num,
   control = list(adapt_delta = 0.99,
                  max_treedepth = 20),
   file = "./rtMRI-velum/models/quad_coef_null",
