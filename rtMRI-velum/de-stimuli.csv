@@ -1,327 +1,327 @@
-word,sampa_fixed,prosody,group,n_syl,pre,vowel,post,height,labiality,backness,v_length,nasality,nasal_poa,item,sentence,block,sentence_syl
-ahnde,?__a:nd_@___,neuter,1,di,ʔ,aː,nd,low,non-labial,central,long,nasal,alveolar,1,Wieder ahnde gesagt,3,6
-ahnde,?__a:nd_@___,accented,1,di,ʔ,aː,nd,low,non-labial,central,long,nasal,alveolar,2,Bis er ahnde schreibt,1,5
-ahnde,?__a:nd_@___,deaccented,1,di,ʔ,aː,nd,low,non-labial,central,long,nasal,alveolar,3,Bis er ahnde schreibt,5,5
-Ahne,?__a:n__@___,neuter,4,di,ʔ,aː,n,low,non-labial,central,long,nasal,alveolar,4,Wieder Ahne gedacht,11,6
-ahnte,?__a:nt_@___,neuter,1_4,di,ʔ,aː,nt,low,non-labial,central,long,nasal,alveolar,5,Wieder ahnte gesehen,9,6
-ahnte,?__a:nt_@___,accented,1_4,di,ʔ,aː,nt,low,non-labial,central,long,nasal,alveolar,6,Bis er ahnte schreibt,3,5
-ahnte,?__a:nt_@___,deaccented,1_4,di,ʔ,aː,nt,low,non-labial,central,long,nasal,alveolar,7,Bis er ahnte schreibt,3,5
-bahne,b__a:n__@___,neuter,3_5_6,di,b,aː,n,low,non-labial,central,long,nasal,alveolar,8,Wieder bahne gesagt,9,6
-bahne,b__a:n__@___,fast,3_5_6,di,b,aː,n,low,non-labial,central,long,nasal,alveolar,9,Wieder bahne gesagt,2,6
-Bande,b__a_nd_@___,neuter,1,di,b,a,nd,low,non-labial,central,short,nasal,alveolar,10,Wieder Bande gesagt,6,6
-Bande,b__a_nd_@___,accented,1,di,b,a,nd,low,non-labial,central,short,nasal,alveolar,11,Bis er Bande sagt,4,5
-Bande,b__a_nd_@___,deaccented,1,di,b,a,nd,low,non-labial,central,short,nasal,alveolar,12,Bis er Bande schreibt,4,5
-bangst,b__a_Nst____,neuter,7,di,b,a,ŋst,low,non-labial,central,short,nasal,velar,13,Wieder bangst erzählt,4,5
-Banner,b__a_n__6___,neuter,4_6,di,b,a,n,low,non-labial,central,short,nasal,alveolar,14,Wieder Banner gedacht,1,6
-Banner,b__a_n__6___,fast,4_6,di,b,a,n,low,non-labial,central,short,nasal,alveolar,15,Wieder Banner gedacht,1,6
-bannst,b__a_nst____,neuter,7_10,di,b,a,nst,low,non-labial,central,short,nasal,alveolar,16,Wieder bannst erklärt,7,5
-bannst,b__a_nst____,accented,7_10,di,b,a,nst,low,non-labial,central,short,nasal,alveolar,17,Bis er bannst erklärt,4,5
-bannst,b__a_nst____,deaccented,7_10,di,b,a,nst,low,non-labial,central,short,nasal,alveolar,18,Bis er bannst erklärt,3,5
-bannte,b__a_nt_@___,neuter,1_4_10,di,b,a,nt,low,non-labial,central,short,nasal,alveolar,19,Wieder bannte gesehen,5,6
-bannte,b__a_nt_@___,accented,1_4_10,di,b,a,nt,low,non-labial,central,short,nasal,alveolar,20,Bis er bannte sagt,4,5
-bannte,b__a_nt_@___,deaccented,1_4_10,di,b,a,nt,low,non-labial,central,short,nasal,alveolar,21,Bis er bannte sagt,1,5
-Bast,b__a_st_____,neuter,7,di,b,a,st,low,non-labial,central,short,oral,NA,22,Wieder Bast erzählt,8,5
-Bast,b__a_st_____,accented,7,di,b,a,st,low,non-labial,central,short,oral,NA,23,Bis er Bast erkennt,1,5
-Bast,b__a_st_____,deaccented,7,di,b,a,st,low,non-labial,central,short,oral,NA,24,Bis er Bast erklärt,5,5
-bat,b__a:t______,neuter,3_5,mono,b,aː,t,low,non-labial,central,long,oral,NA,25,Wieder bat erkannt,2,5
-bat,b__a:t______,fast,3_5,mono,b,aː,t,low,non-labial,central,long,oral,NA,26,Wieder bat erkannt,2,5
-bestens,b__E_st_@ns_,neuter,8,di,b,ɛ,st,mid-low,non-labial,front,short,oral,NA,27,Wieder bestens erklärt,1,6
-bestens,b__E_st_@ns_,accented,8,di,b,ɛ,st,mid-low,non-labial,front,short,oral,NA,28,Bis er bestens erkennt,2,6
-bestens,b__E_st_@ns_,deaccented,8,di,b,ɛ,st,mid-low,non-labial,front,short,oral,NA,29,Bis er bestens erkennt,3,6
-bestes,b__E_st_@s__,neuter,8,di,b,ɛ,st,mid-low,non-labial,front,short,oral,NA,30,Wieder bestes erklärt,6,6
-bestes,b__E_st_@s__,accented,8,di,b,ɛ,st,mid-low,non-labial,front,short,oral,NA,31,Bis er bestes erklärt,4,6
-bestes,b__E_st_@s__,deaccented,8,di,b,ɛ,st,mid-low,non-labial,front,short,oral,NA,32,Bis er bestes erklärt,3,6
-Biene,b__i:n__@___,neuter,3_5,di,b,iː,n,high,non-labial,front,long,nasal,alveolar,33,Wieder Biene gehört,3,6
-Biene,b__i:n__@___,fast,3_5,di,b,iː,n,high,non-labial,front,long,nasal,alveolar,34,Wieder Biene gesagt,2,6
-biete,b__i:t__@___,neuter,3_5_6,di,b,iː,t,high,non-labial,front,long,oral,NA,35,Wieder biete gesehen,4,6
-biete,b__i:t__@___,fast,3_5_6,di,b,iː,t,high,non-labial,front,long,oral,NA,36,Wieder biete gesagt,1,6
-Bitte,b__I_t__@___,neuter,6,di,b,ɪ,t,high,non-labial,front,short,oral,NA,37,Wieder Bitte gedacht,6,6
-Bitte,b__I_t__@___,fast,6,di,b,ɪ,t,high,non-labial,front,short,oral,NA,38,Wieder Bitte gesehen,1,6
-Bohne,b__o:n__@___,neuter,3_5,di,b,oː,n,mid-high,labial,back,long,nasal,alveolar,39,Wieder Bohne gesehen,9,6
-Bote,b__o:t__@___,neuter,3_5,di,b,oː,t,mid-high,labial,back,long,oral,NA,40,Wieder Bote gesagt,7,6
-Brunst,br_U_nst____,neuter,7,di,br,ʊ,nst,high,labial,back,short,nasal,alveolar,41,Wieder Brunst erklärt,7,5
-Brunst,br_U_nst____,accented,7,di,br,ʊ,nst,high,labial,back,short,nasal,alveolar,42,Bis er Brunst erklärt,1,5
-Brunst,br_U_nst____,deaccented,7,di,br,ʊ,nst,high,labial,back,short,nasal,alveolar,43,Bis er Brunst erklärt,3,5
-Brust,br_U_st_____,neuter,7,di,br,ʊ,st,high,labial,back,short,oral,NA,44,Wieder Brust erklärt,5,5
-Brust,br_U_st_____,accented,7,di,br,ʊ,st,high,labial,back,short,oral,NA,45,Bis er Brust erkennt,2,5
-Brust,br_U_st_____,deaccented,7,di,br,ʊ,st,high,labial,back,short,oral,NA,46,Bis er Brust erkennt,4,5
-buhte,b__u:t__@___,neuter,5_6,di,b,uː,t,high,labial,back,long,oral,NA,47,Wieder buhte gesehen,4,6
-buhte,b__u:t__@___,fast,5_6,di,b,uː,t,high,labial,back,long,oral,NA,48,Wieder buhte gesagt,3,6
-Bunde,b__U_nd_@___,neuter,1,di,b,ʊ,nd,high,labial,back,short,nasal,alveolar,49,Wieder Bunde gesagt,3,6
-Bunde,b__U_nd_@___,accented,1,di,b,ʊ,nd,high,labial,back,short,nasal,alveolar,50,Bis er Bunde schreibt,1,5
-Bunde,b__U_nd_@___,deaccented,1,di,b,ʊ,nd,high,labial,back,short,nasal,alveolar,51,Bis er Bunde sagt,3,5
-bunte,b__U_nt_@___,neuter,1_2,di,b,ʊ,nt,high,labial,back,short,nasal,alveolar,52,Wieder bunte gehört,4,6
-bunte,b__U_nt_@___,accented,1_2,di,b,ʊ,nt,high,labial,back,short,nasal,alveolar,53,Bis er bunte sagt,5,5
-bunte,b__U_nt_@___,deaccented,1_2,di,b,ʊ,nt,high,labial,back,short,nasal,alveolar,54,Bis er bunte schreibt,1,5
-bunte,b__U_nt_@___,fast,1_2,di,b,ʊ,nt,high,labial,back,short,nasal,alveolar,55,Wieder bunte gehört,1,6
-Butte,b__U_t__@___,neuter,2_6,di,b,ʊ,t,high,labial,back,short,oral,NA,56,Wieder Butte gedacht,5,6
-Butte,b__U_t__@___,fast,2_6,di,b,ʊ,t,high,labial,back,short,oral,NA,57,Wieder Butte gesehen,3,6
-Diener,d__i:n__6___,neuter,3_4,di,d,iː,n,high,non-labial,front,long,nasal,alveolar,58,Wieder Diener gedacht,1,6
-Diener,d__i:n__6___,fast,3_4,di,d,iː,n,high,non-labial,front,long,nasal,alveolar,59,Wieder Diener gesehen,2,6
-diente,d__i:nt_@___,neuter,2_4,di,d,iː,nt,high,non-labial,front,long,nasal,alveolar,60,Wieder diente gedacht,2,6
-diente,d__i:nt_@___,fast,2_4,di,d,iː,nt,high,non-labial,front,long,nasal,alveolar,61,Wieder diente gesehen,3,6
-Dieter,d__i:t__6___,neuter,2_3,di,d,iː,t,high,non-labial,front,long,oral,NA,62,Wieder Dieter gesehen,8,6
-Dieter,d__i:t__6___,fast,2_3,di,d,iː,t,high,non-labial,front,long,oral,NA,63,Wieder Dieter gehört,3,6
-Düne,d__y:n__@___,neuter,6,di,d,yː,n,high,labial,front,long,nasal,alveolar,64,Wieder Düne gedacht,12,6
-Düne,d__y:n__@___,fast,6,di,d,yː,n,high,labial,front,long,nasal,alveolar,65,Wieder Düne gesehen,3,6
-dünne,d__y_n__@___,neuter,6,di,d,ʏ,n,high,labial,front,short,nasal,alveolar,66,Wieder dünne gesagt,5,6
-dünne,d__y_n__@___,fast,6,di,d,ʏ,n,high,labial,front,short,nasal,alveolar,67,Wieder dünne gehört,1,6
-Ende,?__E_nd_@___,neuter,1,di,ʔ,ɛ,nd,mid-low,non-labial,front,short,nasal,alveolar,68,Wieder Ende gesehen,2,6
-Ende,?__E_nd_@___,accented,1,di,ʔ,ɛ,nd,mid-low,non-labial,front,short,nasal,alveolar,69,Bis er Ende sagt,3,5
-Ende,?__E_nd_@___,deaccented,1,di,ʔ,ɛ,nd,mid-low,non-labial,front,short,nasal,alveolar,70,Bis er Ende sagt,5,5
-Ente,?__E_nt_@___,neuter,1,di,ʔ,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,71,Wieder Ente gehört,1,6
-Ente,?__E_nt_@___,accented,1,di,ʔ,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,72,Bis er Ente sagt,5,5
-Ente,?__E_nt_@___,deaccented,1,di,ʔ,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,73,Bis er Ente schreibt,5,5
-finde,f__I_nd_@___,neuter,1,di,f,ɪ,nd,high,non-labial,front,short,nasal,alveolar,74,Wieder finde gehört,9,6
-finde,f__I_nd_@___,accented,1,di,f,ɪ,nd,high,non-labial,front,short,nasal,alveolar,75,Bis er finde schreibt,1,5
-finde,f__I_nd_@___,deaccented,1,di,f,ɪ,nd,high,non-labial,front,short,nasal,alveolar,76,Bis er finde sagt,3,5
-Finne,f__I_n__@___,neuter,3_4,di,f,ɪ,n,high,non-labial,front,short,nasal,alveolar,77,Wieder Finne gesagt,11,6
-Finne,f__I_n__@___,fast,3_4,di,f,ɪ,n,high,non-labial,front,short,nasal,alveolar,78,Wieder Finne gesehen,1,6
-Finte,f__I_nt_@___,neuter,1_2_4,di,f,ɪ,nt,high,non-labial,front,short,nasal,alveolar,79,Wieder Finte gesehen,3,6
-Finte,f__I_nt_@___,accented,1_2_4,di,f,ɪ,nt,high,non-labial,front,short,nasal,alveolar,80,Bis er Finte schreibt,2,5
-Finte,f__I_nt_@___,deaccented,1_2_4,di,f,ɪ,nt,high,non-labial,front,short,nasal,alveolar,81,Bis er Finte sagt,1,5
-Finte,f__I_nt_@___,fast,1_2_4,di,f,ɪ,nt,high,non-labial,front,short,nasal,alveolar,82,Wieder Finte gesehen,1,6
-fitter,f__I_t__6___,neuter,2_3,di,f,ɪ,t,high,non-labial,front,short,oral,NA,83,Wieder fitter gesehen,3,6
-fitter,f__I_t__6___,fast,2_3,di,f,ɪ,t,high,non-labial,front,short,oral,NA,84,Wieder fitter gehört,1,6
-gehst,g__e:st_____,neuter,7,mono,g,eː,st,mid-high,non-labial,front,long,oral,NA,85,Wieder gehst erzählt,8,5
-gehst,g__e:st_____,accented,7,mono,g,eː,st,mid-high,non-labial,front,long,oral,NA,86,Bis er gehst erkennt,1,5
-gehst,g__e:st_____,deaccented,7,mono,g,eː,st,mid-high,non-labial,front,long,oral,NA,87,Bis er gehst erklärt,3,5
-gähnst,g__E:nst____,neuter,7,mono,g,ɛː,nst,mid-low,non-labial,front,long,nasal,alveolar,88,Wieder gähnst erklärt,5,5
-gähnst,g__E:nst____,accented,7,mono,g,ɛː,nst,mid-low,non-labial,front,long,nasal,alveolar,89,Bis er gähnst erklärt,5,5
-gähnst,g__E:nst____,deaccented,7,mono,g,ɛː,nst,mid-low,non-labial,front,long,nasal,alveolar,90,Bis er gähnst erklärt,1,5
-Gönner,g__9_n__6___,neuter,3,di,g,œ,n,mid-high,labial,front,short,nasal,alveolar,91,Wieder Gönner gedacht,1,6
-Gönner,g__9_n__6___,fast,3,di,g,œ,n,mid-high,labial,front,short,nasal,alveolar,92,Wieder Gönner gesehen,2,6
-gönnte,g__9_nt_@___,neuter,2,di,g,œ,nt,mid-high,labial,front,short,nasal,alveolar,93,Wieder gönnte gedacht,5,6
-gönnte,g__9_nt_@___,fast,2,di,g,œ,nt,mid-high,labial,front,short,nasal,alveolar,94,Wieder gönnte gesehen,2,6
-Götter,g__9_t__6___,neuter,2_3,di,g,œ,t,mid-high,labial,front,short,oral,NA,95,Wieder Götter gesehen,10,6
-Götter,g__9_t__6___,fast,2_3,di,g,œ,t,mid-high,labial,front,short,oral,NA,96,Wieder Götter gedacht,3,6
-Kieme,k__i:m__@___,neuter,6,di,k,iː,m,high,non-labial,front,long,nasal,labial,97,Wieder Kieme gehört,2,6
-Kieme,k__i:m__@___,fast,6,di,k,iː,m,high,non-labial,front,long,nasal,labial,98,Wieder Kieme gedacht,2,6
-Kimme,k__I_m__@___,neuter,6,di,k,ɪ,m,high,non-labial,front,short,nasal,labial,99,Wieder Kimme gesagt,11,6
-Kimme,k__I_m__@___,fast,6,di,k,ɪ,m,high,non-labial,front,short,nasal,labial,100,Wieder Kimme gesagt,3,6
-kommst,k__O_mst____,neuter,7,mono,k,ɔ,mst,mid-low,labial,back,short,nasal,labial,101,Wieder kommst erklärt,3,5
-Kost,k__O_st_____,neuter,7,mono,k,ɔ,st,mid-low,labial,back,short,oral,NA,102,Wieder Kost erzählt,2,5
-Künste,k__Y_nst@___,neuter,7,di,k,ʏ,nst,high,labial,front,short,nasal,alveolar,103,Wieder Künste gehört,4,6
-Künste,k__Y_nst@___,accented,7,di,k,ʏ,nst,high,labial,front,short,nasal,alveolar,104,Bis er Künste schreibt,4,5
-Künste,k__Y_nst@___,deaccented,7,di,k,ʏ,nst,high,labial,front,short,nasal,alveolar,105,Bis er Künste sagt,1,5
-küsste,k__Y_st_@___,neuter,7,di,k,ʏ,st,high,labial,front,short,oral,NA,106,Wieder küsste gehört,3,6
-küsste,k__Y_st_@___,accented,7,di,k,ʏ,st,high,labial,front,short,oral,NA,107,Bis er küsste sagt,3,5
-küsste,k__Y_st_@___,deaccented,7,di,k,ʏ,st,high,labial,front,short,oral,NA,108,Bis er küsste sagt,4,5
-lahm,l__a:m______,neuter,4_6,mono,l,aː,m,low,non-labial,central,long,nasal,labial,109,Wieder lahm erklärt,8,5
-lahm,l__a:m______,fast,4_6,mono,l,aː,m,low,non-labial,central,long,nasal,labial,110,Wieder lahm erkannt,3,5
-lahmst,l__a:mst____,neuter,10,mono,l,aː,mst,low,non-labial,central,long,nasal,labial,111,Wieder lahmst erklärt,4,5
-lahmt,l__a:mt_____,neuter,4_10,mono,l,aː,mt,low,non-labial,central,long,nasal,labial,112,Wieder lahmt erkannt,7,5
-Lamm,l__a_m______,neuter,6,mono,l,a,m,low,non-labial,central,short,nasal,labial,113,Wieder Lamm erklärt,7,5
-Lamm,l__a_m______,fast,6,mono,l,a,m,low,non-labial,central,short,nasal,labial,114,Wieder Lamm erzählt,2,5
-lehnst,l__e:nst____,neuter,10,mono,l,eː,nst,mid-high,non-labial,front,long,nasal,alveolar,115,Wieder lehnst erzählt,12,5
-lehnst,l__e:nst____,accented,10,mono,l,eː,nst,mid-high,non-labial,front,long,nasal,alveolar,116,Bis er lehnst erkennt,3,5
-lehnst,l__e:nst____,deaccented,10,mono,l,eː,nst,mid-high,non-labial,front,long,nasal,alveolar,117,Bis er lehnst erklärt,1,5
-lehnt,l__e:nt_____,neuter,10,mono,l,eː,nt,mid-high,non-labial,front,long,nasal,alveolar,118,Wieder lehnt erklärt,9,5
-lehnt,l__e:nt_____,accented,10,mono,l,eː,nt,mid-high,non-labial,front,long,nasal,alveolar,119,Bis er lehnt erkennt,5,5
-lehnt,l__e:nt_____,deaccented,10,mono,l,eː,nt,mid-high,non-labial,front,long,nasal,alveolar,120,Bis er lehnt erkennt,2,5
-Linde,l__I_nd_@___,neuter,9,di,l,ɪ,nd,high,non-labial,front,short,nasal,alveolar,121,Wieder Linde gedacht,7,6
-Linse,l__I_nz_@___,neuter,9,di,l,ɪ,nz,high,non-labial,front,short,nasal,alveolar,122,Wieder Linse gehört,8,6
-lohne,l__o:n__@___,neuter,3_4,di,l,oː,n,mid-high,labial,back,long,nasal,alveolar,123,Wieder lohne gedacht,8,6
-lohnst,l__o:nst____,neuter,7_10,mono,l,oː,nst,mid-high,labial,back,long,nasal,alveolar,124,Wieder lohnst erklärt,12,5
-lohnst,l__o:nst____,accented,7_10,mono,l,oː,nst,mid-high,labial,back,long,nasal,alveolar,125,Bis er lohnst erkennt,4,5
-lohnst,l__o:nst____,deaccented,7_10,mono,l,oː,nst,mid-high,labial,back,long,nasal,alveolar,126,Bis er lohnst erkennt,3,5
-lohnt,l__o:nt_____,neuter,10,mono,l,oː,nt,mid-high,labial,back,long,nasal,alveolar,127,Wieder lohnt erzählt,9,5
-lohnt,l__o:nt_____,accented,10,mono,l,oː,nt,mid-high,labial,back,long,nasal,alveolar,128,Bis er lohnt erklärt,5,5
-lohnt,l__o:nt_____,deaccented,10,mono,l,oː,nt,mid-high,labial,back,long,nasal,alveolar,129,Bis er lohnt erklärt,2,5
-lohnte,l__o:nt_@___,neuter,2_4,di,l,oː,nt,mid-high,labial,back,long,nasal,alveolar,130,Wieder lohnte gedacht,7,6
-lost,l__o:st_____,neuter,7,mono,l,oː,st,mid-high,labial,back,long,oral,NA,131,Wieder lost erzählt,12,5
-lost,l__o:st_____,accented,7,mono,l,oː,st,mid-high,labial,back,long,oral,NA,132,Bis er lost erkennt,1,5
-lost,l__o:st_____,deaccented,7,mono,l,oː,st,mid-high,labial,back,long,oral,NA,133,Bis er lost erkennt,3,5
-Lote,l__o:t__@___,neuter,2_3,di,l,oː,t,mid-high,labial,back,long,oral,NA,134,Wieder Lote gedacht,8,6
-Panda,p__a_nd_a___,neuter,1,di,p,a,nd,low,non-labial,central,short,nasal,alveolar,135,Wieder Panda gehört,5,6
-Panda,p__a_nd_a___,accented,1,di,p,a,nd,low,non-labial,central,short,nasal,alveolar,136,Bis er Panda sagt,4,5
-Panda,p__a_nd_a___,deaccented,1,di,p,a,nd,low,non-labial,central,short,nasal,alveolar,137,Bis er Panda schreibt,2,5
-Panne,p__a_n__@___,neuter,3_4,di,p,a,n,low,non-labial,central,short,nasal,alveolar,138,Wieder Panne gesehen,2,6
-Panne,p__a_n__@___,fast,3_4,di,p,a,n,low,non-labial,central,short,nasal,alveolar,139,Wieder Panne gesehen,2,6
-Panther,p__a_nt_6___,neuter,1_2_4,di,p,a,nt,low,non-labial,central,short,nasal,alveolar,140,Wieder Panther gedacht,9,6
-Panther,p__a_nt_6___,accented,1_2_4,di,p,a,nt,low,non-labial,central,short,nasal,alveolar,141,Bis er Panther sagt,4,5
-Panther,p__a_nt_6___,deaccented,1_2_4,di,p,a,nt,low,non-labial,central,short,nasal,alveolar,142,Bis er Panther sagt,4,5
-Panther,p__a_nt_6___,fast,1_2_4,di,p,a,nt,low,non-labial,central,short,nasal,alveolar,143,Wieder Panther gedacht,2,6
-Pate,p__a:t__@___,neuter,5_6,di,p,aː,t,low,non-labial,central,long,oral,NA,144,Wieder Pate gesehen,3,6
-Pate,p__a:t__@___,fast,5_6,di,p,aː,t,low,non-labial,central,long,oral,NA,145,Wieder Pate gesehen,1,6
-Patte,p__a_t__@___,neuter,2_3_6,di,p,a,t,low,non-labial,central,short,oral,NA,146,Wieder Patte gedacht,8,6
-Patte,p__a_t__@___,fast,2_3_6,di,p,a,t,low,non-labial,central,short,oral,NA,147,Wieder Patte gesagt,3,6
-pennst,p__E_nst____,neuter,7_10,mono,p,ɛ,nst,mid-low,non-labial,front,short,nasal,alveolar,148,Wieder pennst erklärt,1,5
-pennst,p__E_nst____,accented,7_10,mono,p,ɛ,nst,mid-low,non-labial,front,short,nasal,alveolar,149,Bis er pennst erkennt,1,5
-pennst,p__E_nst____,deaccented,7_10,mono,p,ɛ,nst,mid-low,non-labial,front,short,nasal,alveolar,150,Bis er pennst erklärt,2,5
-pennt,p__E_nt_____,neuter,10,mono,p,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,151,Wieder pennt erzählt,3,5
-pennt,p__E_nt_____,accented,10,mono,p,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,152,Bis er pennt erklärt,2,5
-pennt,p__E_nt_____,deaccented,10,mono,p,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,153,Bis er pennt erkennt,1,5
-Pest,p__E_st_____,neuter,7,mono,p,ɛ,st,mid-low,non-labial,front,short,oral,NA,154,Wieder Pest erkannt,11,5
-Pest,p__E_st_____,accented,7,mono,p,ɛ,st,mid-low,non-labial,front,short,oral,NA,155,Bis er Pest erkennt,2,5
-Pest,p__E_st_____,deaccented,7,mono,p,ɛ,st,mid-low,non-labial,front,short,oral,NA,156,Bis er Pest erkennt,2,5
-Peter,p__e:t__6___,neuter,5,di,p,eː,t,mid-high,non-labial,front,long,oral,NA,157,Wieder Peter gesehen,2,6
-Piep,p__i:p______,neuter,5,mono,p,iː,p,high,non-labial,front,long,oral,NA,158,Wieder Piep erklärt,12,5
-Pute,p__u:t__@___,neuter,5,di,p,uː,t,high,labial,back,long,oral,NA,159,Wieder Pute gesehen,1,6
-Rahm,r__a:m______,neuter,4_5,mono,r,aː,m,low,non-labial,central,long,nasal,labial,160,Wieder Rahm erklärt,10,5
-rahmst,r__a:mst____,neuter,7_10,mono,r,aː,mst,low,non-labial,central,long,nasal,labial,161,Wieder rahmst erkannt,12,5
-rahmt,r__a:mt_____,neuter,4_10,mono,r,aː,mt,low,non-labial,central,long,nasal,labial,162,Wieder rahmt erkannt,9,5
-rahmte,r__a:mt_@___,neuter,2,di,r,aː,mt,low,non-labial,central,long,nasal,labial,163,Wieder rahmte gehört,6,6
-rannte,r__a_nt_@___,neuter,2,di,r,a,nt,low,non-labial,central,short,nasal,alveolar,164,Wieder rannte gehört,9,6
-rast,r__a:st_____,neuter,7,mono,r,aː,st,low,non-labial,central,long,oral,NA,165,Wieder rast erkannt,5,5
-Rate,r__a:t__@___,neuter,2_5_6,di,r,aː,t,low,non-labial,central,long,oral,NA,166,Wieder Rate gesagt,10,6
-Ratte,r__a_t__@___,neuter,2_6,di,r,a,t,low,non-labial,central,short,oral,NA,167,Wieder Ratte gedacht,1,6
-Renner,r__E_n__6___,neuter,3_4,di,r,ɛ,n,mid-low,non-labial,front,short,nasal,alveolar,168,Wieder Renner gehört,7,6
-Rente,r__E_nt_@___,neuter,1_2_4,di,r,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,169,Wieder Rente gesehen,11,6
-Retter,r__E_t__6___,neuter,2_3,di,r,ɛ,t,mid-low,non-labial,front,short,oral,NA,170,Wieder Retter gesagt,4,6
-Riem,r__i:m______,neuter,5,mono,r,iː,m,high,non-labial,front,long,nasal,labial,171,Wieder Riem erzählt,10,5
-rinnst,r__I_nst____,neuter,7_10,mono,r,ɪ,nst,high,non-labial,front,short,nasal,alveolar,172,Wieder rinnst erkannt,5,5
-rinnst,r__I_nst____,accented,7_10,mono,r,ɪ,nst,high,non-labial,front,short,nasal,alveolar,173,Bis er rinnst erkennt,3,5
-rinnst,r__I_nst____,deaccented,7_10,mono,r,ɪ,nst,high,non-labial,front,short,nasal,alveolar,174,Bis er rinnst erklärt,5,5
-rinnt,r__I_nt_____,neuter,10,mono,r,ɪ,nt,high,non-labial,front,short,nasal,alveolar,175,Wieder rinnt erklärt,3,5
-rinnt,r__I_nt_____,accented,10,mono,r,ɪ,nt,high,non-labial,front,short,nasal,alveolar,176,Bis er rinnt erklärt,3,5
-rinnt,r__I_nt_____,deaccented,10,mono,r,ɪ,nt,high,non-labial,front,short,nasal,alveolar,177,Bis er rinnt erklärt,4,5
-Rist,r__I_st_____,neuter,7,mono,r,ɪ,st,high,non-labial,front,short,oral,NA,178,Wieder Rist erzählt,7,5
-Rist,r__I_st_____,accented,7,mono,r,ɪ,st,high,non-labial,front,short,oral,NA,179,Bis er Rist erkennt,5,5
-Rist,r__I_st_____,deaccented,7,mono,r,ɪ,st,high,non-labial,front,short,oral,NA,180,Bis er Rist erkennt,5,5
-Rita,r__i:t__a___,neuter,5,di,r,iː,t,high,non-labial,front,long,oral,NA,181,Wieder Rita gesagt,10,6
-Ruhm,r__u:m______,neuter,5_6,mono,r,uː,m,high,labial,back,long,nasal,labial,182,Wieder Ruhm erklärt,10,5
-Ruhm,r__u:m______,fast,5_6,mono,r,uː,m,high,labial,back,long,nasal,labial,183,Wieder Ruhm erzählt,1,5
-ruhte,r__u:t__@___,neuter,5,di,r,uː,t,high,labial,back,long,oral,NA,184,Wieder ruhte gesagt,5,6
-Rum,r__U_m______,neuter,6,mono,r,ʊ,m,high,labial,back,short,nasal,labial,185,Wieder Rum erzählt,1,5
-Rum,r__U_m______,fast,6,mono,r,ʊ,m,high,labial,back,short,nasal,labial,186,Wieder Rum erkannt,3,5
-Ränder,r__E_nd_6___,neuter,1,di,r,ɛ,nd,mid-low,non-labial,front,short,nasal,alveolar,187,Wieder Ränder gesagt,4,6
-Saate,z__a:t__@___,neuter,2_3_6,di,z,aː,t,low,non-labial,central,long,oral,NA,188,Wieder Saate gedacht,8,6
-Saate,z__a:t__@___,fast,2_3_6,di,z,aː,t,low,non-labial,central,long,oral,NA,189,Wieder Saate gesagt,1,6
-Saft,z__a_ft_____,neuter,7,mono,z,a,ft,low,non-labial,central,short,oral,NA,190,Wieder Saft erkannt,6,5
-Sahne,z__a:n__@___,neuter,3_5,di,z,aː,n,low,non-labial,central,long,nasal,alveolar,191,Wieder Sahne gedacht,12,6
-Sahne,z__a:n__@___,fast,3_5,di,z,aː,n,low,non-labial,central,long,nasal,alveolar,192,Wieder Sahne gehört,2,6
-sahnst,z__a:nst____,neuter,7_10,mono,z,aː,nst,low,non-labial,central,long,nasal,alveolar,193,Wieder sahnst erkannt,1,5
-sahnst,z__a:nst____,accented,7_10,mono,z,aː,nst,low,non-labial,central,long,nasal,alveolar,194,Bis er sahnst erkennt,5,5
-sahnst,z__a:nst____,deaccented,7_10,mono,z,aː,nst,low,non-labial,central,long,nasal,alveolar,195,Bis er sahnst erkennt,4,5
-sahnt,z__a:nt_____,neuter,10,mono,z,aː,nt,low,non-labial,central,long,nasal,alveolar,196,Wieder sahnt erzählt,6,5
-sahnt,z__a:nt_____,accented,10,mono,z,aː,nt,low,non-labial,central,long,nasal,alveolar,197,Bis er sahnt erklärt,3,5
-sahnt,z__a:nt_____,deaccented,10,mono,z,aː,nt,low,non-labial,central,long,nasal,alveolar,198,Bis er sahnt erklärt,4,5
-sahnte,z__a:nt_@___,neuter,2_6,di,z,aː,nt,low,non-labial,central,long,nasal,alveolar,199,Wieder sahnte gesagt,4,6
-sahnte,z__a:nt_@___,fast,2_6,di,z,aː,nt,low,non-labial,central,long,nasal,alveolar,200,Wieder sahnte gesagt,3,6
-sahst,z__a:st_____,neuter,7,mono,z,aː,st,low,non-labial,central,long,oral,NA,201,Wieder sahst erzählt,12,5
-sahst,z__a:st_____,accented,7,mono,z,aː,st,low,non-labial,central,long,oral,NA,202,Bis er sahst erklärt,2,5
-sahst,z__a:st_____,deaccented,7,mono,z,aː,st,low,non-labial,central,long,oral,NA,203,Bis er sahst erkennt,4,5
-Sande,z__a_nd_@___,neuter,1,di,z,a,nd,low,non-labial,central,short,nasal,alveolar,204,Wieder Sande gesagt,9,6
-sandte,z__a_nt_@___,neuter,1_2_6,di,z,a,nt,low,non-labial,central,short,nasal,alveolar,205,Wieder sandte gesagt,7,6
-sanft,z__a_nft____,neuter,7,mono,z,a,nft,low,non-labial,central,short,nasal,alveolar,206,Wieder sanft erkannt,11,5
-satte,z__a_t__@___,neuter,2_6,di,z,a,t,low,non-labial,central,short,oral,NA,207,Wieder satte gedacht,5,6
-satte,z__a_t__@___,fast,2_6,di,z,a,t,low,non-labial,central,short,oral,NA,208,Wieder satte gesehen,1,6
-schienst,S__i:nst____,neuter,7_10,mono,ʃ,iː,nst,high,non-labial,front,long,nasal,alveolar,209,Wieder schienst erzählt,6,5
-schienst,S__i:nst____,accented,7_10,mono,ʃ,iː,nst,high,non-labial,front,long,nasal,alveolar,210,Bis er schienst erklärt,5,5
-schienst,S__i:nst____,deaccented,7_10,mono,ʃ,iː,nst,high,non-labial,front,long,nasal,alveolar,211,Bis er schienst erkennt,5,5
-schient,S__i:nt_____,neuter,10,mono,ʃ,iː,nt,high,non-labial,front,long,nasal,alveolar,212,Wieder schient erklärt,10,5
-schient,S__i:nt_____,accented,10,mono,ʃ,iː,nt,high,non-labial,front,long,nasal,alveolar,213,Bis er schient erkennt,2,5
-schient,S__i:nt_____,deaccented,10,mono,ʃ,iː,nt,high,non-labial,front,long,nasal,alveolar,214,Bis er schient erkennt,3,5
-schießt,S__i:st_____,neuter,7,mono,ʃ,iː,st,high,non-labial,front,long,oral,NA,215,Wieder schießt erklärt,12,5
-schießt,S__i:st_____,accented,7,mono,ʃ,iː,st,high,non-labial,front,long,oral,NA,216,Bis er schießt erkennt,4,5
-schießt,S__i:st_____,deaccented,7,mono,ʃ,iː,st,high,non-labial,front,long,oral,NA,217,Bis er schießt erkennt,1,5
-schone,S__o:n__@___,neuter,3_4,di,ʃ,oː,n,mid-high,labial,back,long,nasal,alveolar,218,Wieder schone gehört,6,6
-schone,S__o:n__@___,fast,3_4,di,ʃ,oː,n,mid-high,labial,back,long,nasal,alveolar,219,Wieder schone gesehen,3,6
-schonte,S__o:nt_@___,neuter,4,di,ʃ,oː,nt,mid-high,labial,back,long,nasal,alveolar,220,Wieder schonte gedacht,11,6
-Schote,S__o:t__@___,neuter,3_6,di,ʃ,oː,t,mid-high,labial,back,long,oral,NA,221,Wieder Schote gesagt,7,6
-Schote,S__o:t__@___,fast,3_6,di,ʃ,oː,t,mid-high,labial,back,long,oral,NA,222,Wieder Schote gedacht,1,6
-Schotte,S__O_t__@___,neuter,6,di,ʃ,ɔ,t,mid-low,labial,back,short,oral,NA,223,Wieder Schotte gehört,4,6
-Schotte,S__O_t__@___,fast,6,di,ʃ,ɔ,t,mid-low,labial,back,short,oral,NA,224,Wieder Schotte gesehen,1,6
-Sehne,z__e:n__@___,neuter,4_5_6,di,z,eː,n,mid-high,non-labial,front,long,nasal,alveolar,225,Wieder Sehne gesehen,3,6
-Sehne,z__e:n__@___,fast,4_5_6,di,z,eː,n,mid-high,non-labial,front,long,nasal,alveolar,226,Wieder Sehne gesagt,2,6
-sehnte,z__e:nt_@___,neuter,4_6,di,z,eː,nt,mid-high,non-labial,front,long,nasal,alveolar,227,Wieder sehnte gehört,9,6
-sehnte,z__e:nt_@___,fast,4_6,di,z,eː,nt,mid-high,non-labial,front,long,nasal,alveolar,228,Wieder sehnte gedacht,2,6
-sende,z__E_nd_@___,neuter,1_9,di,z,ɛ,nd,mid-low,non-labial,front,short,nasal,alveolar,229,Wieder sende gehört,7,6
-sende,z__E_nd_@___,accented,1_9,di,z,ɛ,nd,mid-low,non-labial,front,short,nasal,alveolar,230,Bis er sende sagt,5,5
-sende,z__E_nd_@___,deaccented,1_9,di,z,ɛ,nd,mid-low,non-labial,front,short,nasal,alveolar,231,Bis er sende sagt,2,5
-Senne,z__E_n__@___,neuter,4_6,di,z,ɛ,n,mid-low,non-labial,front,short,nasal,alveolar,232,Wieder Senne gehört,11,6
-Senne,z__E_n__@___,fast,4_6,di,z,ɛ,n,mid-low,non-labial,front,short,nasal,alveolar,233,Wieder Senne gesagt,2,6
-Sense,z__E_nz_@___,neuter,9,di,z,ɛ,nz,mid-low,non-labial,front,short,nasal,alveolar,234,Wieder Sense gehört,6,6
-Senta,z__E_nt_a___,neuter,1_4_6_10,di,z,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,235,Wieder Senta gedacht,10,6
-Senta,z__E_nt_a___,accented,1_4_6_10,di,z,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,236,Bis er Senta schreibt,5,5
-Senta,z__E_nt_a___,deaccented,1_4_6_10,di,z,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,237,Bis er Senta schreibt,4,5
-Senta,z__E_nt_a___,fast,1_4_6_10,di,z,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,238,Wieder Senta gehört,2,6
-Sonde,z__O_nd_@___,neuter,1,di,z,ɔ,nd,mid-low,labial,back,short,nasal,alveolar,239,Wieder Sonde gesagt,2,6
-Sonde,z__O_nd_@___,accented,1,di,z,ɔ,nd,mid-low,labial,back,short,nasal,alveolar,240,Bis er Sonde sagt,4,5
-Sonde,z__O_nd_@___,deaccented,1,di,z,ɔ,nd,mid-low,labial,back,short,nasal,alveolar,241,Bis er Sonde sagt,1,5
-Sonne,z__O_n__@___,neuter,4,di,z,ɔ,n,mid-low,labial,back,short,nasal,alveolar,242,Wieder Sonne gesehen,11,6
-sonnte,z__O_nt_@___,neuter,1_4,di,z,ɔ,nt,mid-low,labial,back,short,nasal,alveolar,243,Wieder sonnte gedacht,12,6
-sonnte,z__O_nt_@___,accented,1_4,di,z,ɔ,nt,mid-low,labial,back,short,nasal,alveolar,244,Bis er sonnte schreibt,4,5
-sonnte,z__O_nt_@___,deaccented,1_4,di,z,ɔ,nt,mid-low,labial,back,short,nasal,alveolar,245,Bis er sonnte sagt,4,5
-staunst,St_aUnst____,neuter,7_10,mono,st,aʊ,nst,diphthong,labial,back,long,nasal,alveolar,246,Wieder staunst erzählt,10,5
-staunst,St_aUnst____,accented,7_10,mono,st,aʊ,nst,diphthong,labial,back,long,nasal,alveolar,247,Bis er staunst erkennt,2,5
-staunst,St_aUnst____,deaccented,7_10,mono,st,aʊ,nst,diphthong,labial,back,long,nasal,alveolar,248,Bis er staunst erkennt,1,5
-staunt,St_aUnt_____,neuter,10,mono,st,aʊ,nt,diphthong,labial,back,long,nasal,alveolar,249,Wieder staunt erkannt,12,5
-staunt,St_aUnt_____,accented,10,mono,st,aʊ,nt,diphthong,labial,back,long,nasal,alveolar,250,Bis er staunt erkennt,3,5
-staunt,St_aUnt_____,deaccented,10,mono,st,aʊ,nt,diphthong,labial,back,long,nasal,alveolar,251,Bis er staunt erkennt,2,5
-staust,St_aUst_____,neuter,7,mono,st,aʊ,st,diphthong,labial,back,long,oral,NA,252,Wieder staust erklärt,8,5
-staust,St_aUst_____,accented,7,mono,st,aʊ,st,diphthong,labial,back,long,oral,NA,253,Bis er staust erklärt,1,5
-staust,St_aUst_____,deaccented,7,mono,st,aʊ,st,diphthong,labial,back,long,oral,NA,254,Bis er staust erklärt,5,5
-stöhnst,St_2:nst____,neuter,7_10,mono,st,øː,nst,mid-high,labial,front,long,nasal,alveolar,255,Wieder stöhnst erzählt,5,5
-stöhnst,St_2:nst____,accented,7_10,mono,st,øː,nst,mid-high,labial,front,long,nasal,alveolar,256,Bis er stöhnst erklärt,5,5
-stöhnst,St_2:nst____,deaccented,7_10,mono,st,øː,nst,mid-high,labial,front,long,nasal,alveolar,257,Bis er stöhnst erkennt,4,5
-stöhnt,St_2:nt_____,neuter,10,mono,st,øː,nt,mid-high,labial,front,long,nasal,alveolar,258,Wieder stöhnt erzählt,6,5
-stöhnt,St_2:nt_____,accented,10,mono,st,øː,nt,mid-high,labial,front,long,nasal,alveolar,259,Bis er stöhnt erklärt,2,5
-stöhnt,St_2:nt_____,deaccented,10,mono,st,øː,nt,mid-high,labial,front,long,nasal,alveolar,260,Bis er stöhnt erklärt,2,5
-stößt,St_2:st_____,neuter,7,mono,st,øː,st,mid-high,labial,front,long,oral,NA,261,Wieder stößt erkannt,11,5
-stößt,St_2:st_____,accented,7,mono,st,øː,st,mid-high,labial,front,long,oral,NA,262,Bis er stößt erklärt,2,5
-stößt,St_2:st_____,deaccented,7,mono,st,øː,st,mid-high,labial,front,long,oral,NA,263,Bis er stößt erklärt,5,5
-Säfte,z__E_ft_@___,neuter,7,di,z,ɛ,ft,mid-low,non-labial,front,short,oral,NA,264,Wieder Säfte gehört,1,6
-Sänfte,z__E_nft@___,neuter,7_10,di,z,ɛ,nft,mid-low,non-labial,front,short,nasal,alveolar,265,Wieder Sänfte gedacht,11,6
-Sühne,z__y:n__@___,neuter,5,di,z,yː,n,high,labial,front,long,nasal,alveolar,266,Wieder Sühne gesehen,11,6
-sühnst,z__y:nst____,neuter,7_10,mono,z,yː,nst,high,labial,front,long,nasal,alveolar,267,Wieder sühnst erzählt,1,5
-sühnst,z__y:nst____,accented,7_10,mono,z,yː,nst,high,labial,front,long,nasal,alveolar,268,Bis er sühnst erklärt,5,5
-sühnst,z__y:nst____,deaccented,7_10,mono,z,yː,nst,high,labial,front,long,nasal,alveolar,269,Bis er sühnst erklärt,1,5
-sühnt,z__y:nt_____,neuter,10,mono,z,yː,nt,high,labial,front,long,nasal,alveolar,270,Wieder sühnt erzählt,2,5
-sühnt,z__y:nt_____,accented,10,mono,z,yː,nt,high,labial,front,long,nasal,alveolar,271,Bis er sühnt erklärt,3,5
-sühnt,z__y:nt_____,deaccented,10,mono,z,yː,nt,high,labial,front,long,nasal,alveolar,272,Bis er sühnt erklärt,2,5
-süßt,z__y:st_____,neuter,7,mono,z,yː,st,high,labial,front,long,oral,NA,273,Wieder süßt erklärt,6,5
-süßt,z__y:st_____,accented,7,mono,z,yː,st,high,labial,front,long,oral,NA,274,Bis er süßt erkennt,2,5
-süßt,z__y:st_____,deaccented,7,mono,z,yː,st,high,labial,front,long,oral,NA,275,Bis er süßt erklärt,2,5
-Tat,t__a:t______,neuter,5,mono,t,aː,t,low,non-labial,central,long,oral,NA,276,Wieder Tat erzählt,6,5
-thronst,tr_o:nst____,neuter,7_10,mono,tr,oː,nst,mid-high,labial,back,long,nasal,alveolar,277,Wieder thronst erzählt,6,5
-thronst,tr_o:nst____,accented,7_10,mono,tr,oː,nst,mid-high,labial,back,long,nasal,alveolar,278,Bis er thronst erkennt,1,5
-thronst,tr_o:nst____,deaccented,7_10,mono,tr,oː,nst,mid-high,labial,back,long,nasal,alveolar,279,Bis er thronst erkennt,2,5
-thront,tr_o:nt_____,neuter,10,mono,tr,oː,nt,mid-high,labial,back,long,nasal,alveolar,280,Wieder thront erkannt,2,5
-thront,tr_o:nt_____,accented,10,mono,tr,oː,nt,mid-high,labial,back,long,nasal,alveolar,281,Bis er thront erklärt,3,5
-thront,tr_o:nt_____,deaccented,10,mono,tr,oː,nt,mid-high,labial,back,long,nasal,alveolar,282,Bis er thront erkennt,1,5
-Tina,t__i:n__a___,neuter,5,di,t,iː,n,high,non-labial,front,long,nasal,alveolar,283,Wieder Tina gedacht,2,6
-Toner,t__o:n__6___,neuter,3_5_6,di,t,oː,n,mid-high,labial,back,long,nasal,alveolar,284,Wieder Toner gehört,3,6
-Toner,t__o:n__6___,fast,3_5_6,di,t,oː,n,mid-high,labial,back,long,nasal,alveolar,285,Wieder Toner gesehen,2,6
-Tonne,t__O_n__@___,neuter,6,di,t,ɔ,n,mid-low,labial,back,short,nasal,alveolar,286,Wieder Tonne gesagt,9,6
-Tonne,t__O_n__@___,fast,6,di,t,ɔ,n,mid-low,labial,back,short,nasal,alveolar,287,Wieder Tonne gesagt,3,6
-toter,t__o:t__6___,neuter,3_5,di,t,oː,t,mid-high,labial,back,long,oral,NA,288,Wieder toter erklärt,8,6
-toter,t__o:t__6___,fast,3_5,di,t,oː,t,mid-high,labial,back,long,oral,NA,289,Wieder toter erkannt,1,6
-Trost,tr_o:st_____,neuter,7,mono,tr,oː,st,mid-high,labial,back,long,oral,NA,290,Wieder Trost erzählt,10,5
-Trost,tr_o:st_____,accented,7,mono,tr,oː,st,mid-high,labial,back,long,oral,NA,291,Bis er Trost erklärt,2,5
-Trost,tr_o:st_____,deaccented,7,mono,tr,oː,st,mid-high,labial,back,long,oral,NA,292,Bis er Trost erkennt,5,5
-tun,t__u:n______,neuter,3_5,mono,t,uː,n,high,labial,back,long,nasal,alveolar,293,Wieder tun erklärt,11,5
-tun,t__u:n______,fast,3_5,mono,t,uː,n,high,labial,back,long,nasal,alveolar,294,Wieder tun erkannt,3,5
-tut,t__u:t______,neuter,3_5,mono,t,uː,t,high,labial,back,long,oral,NA,295,Wieder tut erzählt,2,5
-tut,t__u:t______,fast,3_5,mono,t,uː,t,high,labial,back,long,oral,NA,296,Wieder tut erkannt,3,5
-Töne,t__2:n__@___,neuter,3_4_5,di,t,øː,n,mid-high,labial,front,long,nasal,alveolar,297,Wieder Töne gedacht,1,6
-Töne,t__2:n__@___,fast,3_4_5,di,t,øː,n,mid-high,labial,front,long,nasal,alveolar,298,Wieder Töne gedacht,2,6
-tönte,t__2:nt_@___,neuter,2_4,di,t,øː,nt,mid-high,labial,front,long,nasal,alveolar,299,Wieder tönte gedacht,5,6
-tönte,t__2:nt_@___,fast,2_4,di,t,øː,nt,mid-high,labial,front,long,nasal,alveolar,300,Wieder tönte gesehen,1,6
-töte,t__2:t__@___,neuter,2_3_5,di,t,øː,t,mid-high,labial,front,long,oral,NA,301,Wieder töte gesehen,4,6
-töte,t__2:t__@___,fast,2_3_5,di,t,øː,t,mid-high,labial,front,long,oral,NA,302,Wieder töte gesehen,2,6
-wandte,v__a_nt_@___,neuter,2_4,di,v,a,nt,low,non-labial,central,short,nasal,alveolar,303,Wieder wandte gedacht,12,6
-Wanne,v__a_n__@___,neuter,3_4,di,v,a,n,low,non-labial,central,short,nasal,alveolar,304,Wieder Wanne gesagt,9,6
-Wanne,v__a_n__@___,fast,3_4,di,v,a,n,low,non-labial,central,short,nasal,alveolar,305,Wieder Wanne gedacht,3,6
-wate,v__a:t__@___,neuter,6,di,v,aː,t,low,non-labial,central,long,oral,NA,306,Wieder wate gehört,8,6
-wate,v__a:t__@___,fast,6,di,v,aː,t,low,non-labial,central,long,oral,NA,307,Wieder wate gehört,1,6
-Watte,v__a_t__@___,neuter,2_3_6,di,v,a,t,low,non-labial,central,short,oral,NA,308,Wieder Watte gedacht,12,6
-Watte,v__a_t__@___,fast,2_3_6,di,v,a,t,low,non-labial,central,short,oral,NA,309,Wieder Watte gedacht,3,6
-weihte,v__aIt__@___,neuter,2_3,di,v,aɪ,t,diphthong,non-labial,front,long,oral,NA,310,Wieder weihte gedacht,3,6
-weine,v__aIn__@___,neuter,3_4,di,v,aɪ,n,diphthong,non-labial,front,long,nasal,alveolar,311,Wieder weine gehört,2,6
-weinte,v__aInt_@___,neuter,2_4,di,v,aɪ,nt,diphthong,non-labial,front,long,nasal,alveolar,312,Wieder weinte gehört,7,6
-winde,v__I_nd_@___,neuter,1,di,v,ɪ,nd,high,non-labial,front,short,nasal,alveolar,313,Wieder winde gedacht,10,6
-winde,v__I_nd_@___,accented,1,di,v,ɪ,nd,high,non-labial,front,short,nasal,alveolar,314,Bis er winde sagt,1,5
-winde,v__I_nd_@___,deaccented,1,di,v,ɪ,nd,high,non-labial,front,short,nasal,alveolar,315,Bis er winde sagt,2,5
-Windeln,v__I_nd_@ln_,neuter,9,di,v,ɪ,nd,high,non-labial,front,short,nasal,alveolar,316,Wieder Windeln gesehen,4,6
-Winseln,v__I_nz_@ln_,neuter,9,di,v,ɪ,nz,high,non-labial,front,short,nasal,alveolar,317,Wieder Winseln gedacht,8,6
-Winter,v__I_nt_6___,neuter,1,di,v,ɪ,nt,high,non-labial,front,short,nasal,alveolar,318,Wieder Winter gesehen,4,6
-Winter,v__I_nt_6___,accented,1,di,v,ɪ,nt,high,non-labial,front,short,nasal,alveolar,319,Bis er Winter schreibt,4,5
-Winter,v__I_nt_6___,deaccented,1,di,v,ɪ,nt,high,non-labial,front,short,nasal,alveolar,320,Bis er Winter schreibt,5,5
-zweitens,tsvaIt__@ns_,neuter,8,di,tsv,aɪ,t,diphthong,non-labial,front,long,oral,NA,321,Wieder zweitens erklärt,10,6
-zweitens,tsvaIt__@ns_,accented,8,di,tsv,aɪ,t,diphthong,non-labial,front,long,oral,NA,322,Bis er zweitens erklärt,1,6
-zweitens,tsvaIt__@ns_,deaccented,8,di,tsv,aɪ,t,diphthong,non-labial,front,long,oral,NA,323,Bis er zweitens erkennt,4,6
-zweites,tsvaIt__@s__,neuter,8,di,tsv,aɪ,t,diphthong,non-labial,front,long,oral,NA,324,Wieder zweites erklärt,10,6
-zweites,tsvaIt__@s__,accented,8,di,tsv,aɪ,t,diphthong,non-labial,front,long,oral,NA,325,Bis er zweites erkennt,3,6
-zweites,tsvaIt__@s__,deaccented,8,di,tsv,aɪ,t,diphthong,non-labial,front,long,oral,NA,326,Bis er zweites erkennt,5,6
+word,sampa_fixed,prosody,group,n_syl,pre,vowel,post,height,labiality,backness,v_length,nasality,nasal_poa,voicing,coda_type,item,sentence,block,sentence_syl
+ahnde,?__a:nd_@___,neuter,1,di,ʔ,aː,nd,low,non-labial,central,long,nasal,alveolar,voiced,CC,1,Wieder ahnde gesagt,3,6
+ahnde,?__a:nd_@___,accented,1,di,ʔ,aː,nd,low,non-labial,central,long,nasal,alveolar,voiced,CC,2,Bis er ahnde schreibt,1,5
+ahnde,?__a:nd_@___,deaccented,1,di,ʔ,aː,nd,low,non-labial,central,long,nasal,alveolar,voiced,CC,3,Bis er ahnde schreibt,5,5
+Ahne,?__a:n__@___,neuter,4,di,ʔ,aː,n,low,non-labial,central,long,nasal,alveolar,NA,C,4,Wieder Ahne gedacht,11,6
+ahnte,?__a:nt_@___,neuter,1_4,di,ʔ,aː,nt,low,non-labial,central,long,nasal,alveolar,voiceless,CC,5,Wieder ahnte gesehen,9,6
+ahnte,?__a:nt_@___,accented,1_4,di,ʔ,aː,nt,low,non-labial,central,long,nasal,alveolar,voiceless,CC,6,Bis er ahnte schreibt,3,5
+ahnte,?__a:nt_@___,deaccented,1_4,di,ʔ,aː,nt,low,non-labial,central,long,nasal,alveolar,voiceless,CC,7,Bis er ahnte schreibt,3,5
+bahne,b__a:n__@___,neuter,3_5_6,di,b,aː,n,low,non-labial,central,long,nasal,alveolar,NA,C,8,Wieder bahne gesagt,9,6
+bahne,b__a:n__@___,fast,3_5_6,di,b,aː,n,low,non-labial,central,long,nasal,alveolar,NA,C,9,Wieder bahne gesagt,2,6
+Bande,b__a_nd_@___,neuter,1,di,b,a,nd,low,non-labial,central,short,nasal,alveolar,voiced,CC,10,Wieder Bande gesagt,6,6
+Bande,b__a_nd_@___,accented,1,di,b,a,nd,low,non-labial,central,short,nasal,alveolar,voiced,CC,11,Bis er Bande sagt,4,5
+Bande,b__a_nd_@___,deaccented,1,di,b,a,nd,low,non-labial,central,short,nasal,alveolar,voiced,CC,12,Bis er Bande schreibt,4,5
+bangst,b__a_Nst____,neuter,7,di,b,a,ŋst,low,non-labial,central,short,nasal,velar,voiceless,CCC,13,Wieder bangst erzählt,4,5
+Banner,b__a_n__6___,neuter,4_6,di,b,a,n,low,non-labial,central,short,nasal,alveolar,NA,C,14,Wieder Banner gedacht,1,6
+Banner,b__a_n__6___,fast,4_6,di,b,a,n,low,non-labial,central,short,nasal,alveolar,NA,C,15,Wieder Banner gedacht,1,6
+bannst,b__a_nst____,neuter,7_10,di,b,a,nst,low,non-labial,central,short,nasal,alveolar,voiceless,CCC,16,Wieder bannst erklärt,7,5
+bannst,b__a_nst____,accented,7_10,di,b,a,nst,low,non-labial,central,short,nasal,alveolar,voiceless,CCC,17,Bis er bannst erklärt,4,5
+bannst,b__a_nst____,deaccented,7_10,di,b,a,nst,low,non-labial,central,short,nasal,alveolar,voiceless,CCC,18,Bis er bannst erklärt,3,5
+bannte,b__a_nt_@___,neuter,1_4_10,di,b,a,nt,low,non-labial,central,short,nasal,alveolar,voiceless,CC,19,Wieder bannte gesehen,5,6
+bannte,b__a_nt_@___,accented,1_4_10,di,b,a,nt,low,non-labial,central,short,nasal,alveolar,voiceless,CC,20,Bis er bannte sagt,4,5
+bannte,b__a_nt_@___,deaccented,1_4_10,di,b,a,nt,low,non-labial,central,short,nasal,alveolar,voiceless,CC,21,Bis er bannte sagt,1,5
+Bast,b__a_st_____,neuter,7,di,b,a,st,low,non-labial,central,short,oral,NA,voiceless,CC,22,Wieder Bast erzählt,8,5
+Bast,b__a_st_____,accented,7,di,b,a,st,low,non-labial,central,short,oral,NA,voiceless,CC,23,Bis er Bast erkennt,1,5
+Bast,b__a_st_____,deaccented,7,di,b,a,st,low,non-labial,central,short,oral,NA,voiceless,CC,24,Bis er Bast erklärt,5,5
+bat,b__a:t______,neuter,3_5,mono,b,aː,t,low,non-labial,central,long,oral,NA,voiceless,C,25,Wieder bat erkannt,2,5
+bat,b__a:t______,fast,3_5,mono,b,aː,t,low,non-labial,central,long,oral,NA,voiceless,C,26,Wieder bat erkannt,2,5
+bestens,b__E_st_@ns_,neuter,8,di,b,ɛ,st,mid-low,non-labial,front,short,oral,NA,voiceless,CC,27,Wieder bestens erklärt,1,6
+bestens,b__E_st_@ns_,accented,8,di,b,ɛ,st,mid-low,non-labial,front,short,oral,NA,voiceless,CC,28,Bis er bestens erkennt,2,6
+bestens,b__E_st_@ns_,deaccented,8,di,b,ɛ,st,mid-low,non-labial,front,short,oral,NA,voiceless,CC,29,Bis er bestens erkennt,3,6
+bestes,b__E_st_@s__,neuter,8,di,b,ɛ,st,mid-low,non-labial,front,short,oral,NA,voiceless,CC,30,Wieder bestes erklärt,6,6
+bestes,b__E_st_@s__,accented,8,di,b,ɛ,st,mid-low,non-labial,front,short,oral,NA,voiceless,CC,31,Bis er bestes erklärt,4,6
+bestes,b__E_st_@s__,deaccented,8,di,b,ɛ,st,mid-low,non-labial,front,short,oral,NA,voiceless,CC,32,Bis er bestes erklärt,3,6
+Biene,b__i:n__@___,neuter,3_5,di,b,iː,n,high,non-labial,front,long,nasal,alveolar,NA,C,33,Wieder Biene gehört,3,6
+Biene,b__i:n__@___,fast,3_5,di,b,iː,n,high,non-labial,front,long,nasal,alveolar,NA,C,34,Wieder Biene gesagt,2,6
+biete,b__i:t__@___,neuter,3_5_6,di,b,iː,t,high,non-labial,front,long,oral,NA,voiceless,C,35,Wieder biete gesehen,4,6
+biete,b__i:t__@___,fast,3_5_6,di,b,iː,t,high,non-labial,front,long,oral,NA,voiceless,C,36,Wieder biete gesagt,1,6
+Bitte,b__I_t__@___,neuter,6,di,b,ɪ,t,high,non-labial,front,short,oral,NA,voiceless,C,37,Wieder Bitte gedacht,6,6
+Bitte,b__I_t__@___,fast,6,di,b,ɪ,t,high,non-labial,front,short,oral,NA,voiceless,C,38,Wieder Bitte gesehen,1,6
+Bohne,b__o:n__@___,neuter,3_5,di,b,oː,n,mid-high,labial,back,long,nasal,alveolar,NA,C,39,Wieder Bohne gesehen,9,6
+Bote,b__o:t__@___,neuter,3_5,di,b,oː,t,mid-high,labial,back,long,oral,NA,voiceless,C,40,Wieder Bote gesagt,7,6
+Brunst,br_U_nst____,neuter,7,di,br,ʊ,nst,high,labial,back,short,nasal,alveolar,voiceless,CCC,41,Wieder Brunst erklärt,7,5
+Brunst,br_U_nst____,accented,7,di,br,ʊ,nst,high,labial,back,short,nasal,alveolar,voiceless,CCC,42,Bis er Brunst erklärt,1,5
+Brunst,br_U_nst____,deaccented,7,di,br,ʊ,nst,high,labial,back,short,nasal,alveolar,voiceless,CCC,43,Bis er Brunst erklärt,3,5
+Brust,br_U_st_____,neuter,7,di,br,ʊ,st,high,labial,back,short,oral,NA,voiceless,CC,44,Wieder Brust erklärt,5,5
+Brust,br_U_st_____,accented,7,di,br,ʊ,st,high,labial,back,short,oral,NA,voiceless,CC,45,Bis er Brust erkennt,2,5
+Brust,br_U_st_____,deaccented,7,di,br,ʊ,st,high,labial,back,short,oral,NA,voiceless,CC,46,Bis er Brust erkennt,4,5
+buhte,b__u:t__@___,neuter,5_6,di,b,uː,t,high,labial,back,long,oral,NA,voiceless,C,47,Wieder buhte gesehen,4,6
+buhte,b__u:t__@___,fast,5_6,di,b,uː,t,high,labial,back,long,oral,NA,voiceless,C,48,Wieder buhte gesagt,3,6
+Bunde,b__U_nd_@___,neuter,1,di,b,ʊ,nd,high,labial,back,short,nasal,alveolar,voiced,CC,49,Wieder Bunde gesagt,3,6
+Bunde,b__U_nd_@___,accented,1,di,b,ʊ,nd,high,labial,back,short,nasal,alveolar,voiced,CC,50,Bis er Bunde schreibt,1,5
+Bunde,b__U_nd_@___,deaccented,1,di,b,ʊ,nd,high,labial,back,short,nasal,alveolar,voiced,CC,51,Bis er Bunde sagt,3,5
+bunte,b__U_nt_@___,neuter,1_2,di,b,ʊ,nt,high,labial,back,short,nasal,alveolar,voiceless,CC,52,Wieder bunte gehört,4,6
+bunte,b__U_nt_@___,accented,1_2,di,b,ʊ,nt,high,labial,back,short,nasal,alveolar,voiceless,CC,53,Bis er bunte sagt,5,5
+bunte,b__U_nt_@___,deaccented,1_2,di,b,ʊ,nt,high,labial,back,short,nasal,alveolar,voiceless,CC,54,Bis er bunte schreibt,1,5
+bunte,b__U_nt_@___,fast,1_2,di,b,ʊ,nt,high,labial,back,short,nasal,alveolar,voiceless,CC,55,Wieder bunte gehört,1,6
+Butte,b__U_t__@___,neuter,2_6,di,b,ʊ,t,high,labial,back,short,oral,NA,voiceless,C,56,Wieder Butte gedacht,5,6
+Butte,b__U_t__@___,fast,2_6,di,b,ʊ,t,high,labial,back,short,oral,NA,voiceless,C,57,Wieder Butte gesehen,3,6
+Diener,d__i:n__6___,neuter,3_4,di,d,iː,n,high,non-labial,front,long,nasal,alveolar,NA,C,58,Wieder Diener gedacht,1,6
+Diener,d__i:n__6___,fast,3_4,di,d,iː,n,high,non-labial,front,long,nasal,alveolar,NA,C,59,Wieder Diener gesehen,2,6
+diente,d__i:nt_@___,neuter,2_4,di,d,iː,nt,high,non-labial,front,long,nasal,alveolar,voiceless,CC,60,Wieder diente gedacht,2,6
+diente,d__i:nt_@___,fast,2_4,di,d,iː,nt,high,non-labial,front,long,nasal,alveolar,voiceless,CC,61,Wieder diente gesehen,3,6
+Dieter,d__i:t__6___,neuter,2_3,di,d,iː,t,high,non-labial,front,long,oral,NA,voiceless,C,62,Wieder Dieter gesehen,8,6
+Dieter,d__i:t__6___,fast,2_3,di,d,iː,t,high,non-labial,front,long,oral,NA,voiceless,C,63,Wieder Dieter gehört,3,6
+Düne,d__y:n__@___,neuter,6,di,d,yː,n,high,labial,front,long,nasal,alveolar,NA,C,64,Wieder Düne gedacht,12,6
+Düne,d__y:n__@___,fast,6,di,d,yː,n,high,labial,front,long,nasal,alveolar,NA,C,65,Wieder Düne gesehen,3,6
+dünne,d__y_n__@___,neuter,6,di,d,ʏ,n,high,labial,front,short,nasal,alveolar,NA,C,66,Wieder dünne gesagt,5,6
+dünne,d__y_n__@___,fast,6,di,d,ʏ,n,high,labial,front,short,nasal,alveolar,NA,C,67,Wieder dünne gehört,1,6
+Ende,?__E_nd_@___,neuter,1,di,ʔ,ɛ,nd,mid-low,non-labial,front,short,nasal,alveolar,voiced,CC,68,Wieder Ende gesehen,2,6
+Ende,?__E_nd_@___,accented,1,di,ʔ,ɛ,nd,mid-low,non-labial,front,short,nasal,alveolar,voiced,CC,69,Bis er Ende sagt,3,5
+Ende,?__E_nd_@___,deaccented,1,di,ʔ,ɛ,nd,mid-low,non-labial,front,short,nasal,alveolar,voiced,CC,70,Bis er Ende sagt,5,5
+Ente,?__E_nt_@___,neuter,1,di,ʔ,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,voiceless,CC,71,Wieder Ente gehört,1,6
+Ente,?__E_nt_@___,accented,1,di,ʔ,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,voiceless,CC,72,Bis er Ente sagt,5,5
+Ente,?__E_nt_@___,deaccented,1,di,ʔ,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,voiceless,CC,73,Bis er Ente schreibt,5,5
+finde,f__I_nd_@___,neuter,1,di,f,ɪ,nd,high,non-labial,front,short,nasal,alveolar,voiced,CC,74,Wieder finde gehört,9,6
+finde,f__I_nd_@___,accented,1,di,f,ɪ,nd,high,non-labial,front,short,nasal,alveolar,voiced,CC,75,Bis er finde schreibt,1,5
+finde,f__I_nd_@___,deaccented,1,di,f,ɪ,nd,high,non-labial,front,short,nasal,alveolar,voiced,CC,76,Bis er finde sagt,3,5
+Finne,f__I_n__@___,neuter,3_4,di,f,ɪ,n,high,non-labial,front,short,nasal,alveolar,NA,C,77,Wieder Finne gesagt,11,6
+Finne,f__I_n__@___,fast,3_4,di,f,ɪ,n,high,non-labial,front,short,nasal,alveolar,NA,C,78,Wieder Finne gesehen,1,6
+Finte,f__I_nt_@___,neuter,1_2_4,di,f,ɪ,nt,high,non-labial,front,short,nasal,alveolar,voiceless,CC,79,Wieder Finte gesehen,3,6
+Finte,f__I_nt_@___,accented,1_2_4,di,f,ɪ,nt,high,non-labial,front,short,nasal,alveolar,voiceless,CC,80,Bis er Finte schreibt,2,5
+Finte,f__I_nt_@___,deaccented,1_2_4,di,f,ɪ,nt,high,non-labial,front,short,nasal,alveolar,voiceless,CC,81,Bis er Finte sagt,1,5
+Finte,f__I_nt_@___,fast,1_2_4,di,f,ɪ,nt,high,non-labial,front,short,nasal,alveolar,voiceless,CC,82,Wieder Finte gesehen,1,6
+fitter,f__I_t__6___,neuter,2_3,di,f,ɪ,t,high,non-labial,front,short,oral,NA,voiceless,C,83,Wieder fitter gesehen,3,6
+fitter,f__I_t__6___,fast,2_3,di,f,ɪ,t,high,non-labial,front,short,oral,NA,voiceless,C,84,Wieder fitter gehört,1,6
+gehst,g__e:st_____,neuter,7,mono,g,eː,st,mid-high,non-labial,front,long,oral,NA,voiceless,CC,85,Wieder gehst erzählt,8,5
+gehst,g__e:st_____,accented,7,mono,g,eː,st,mid-high,non-labial,front,long,oral,NA,voiceless,CC,86,Bis er gehst erkennt,1,5
+gehst,g__e:st_____,deaccented,7,mono,g,eː,st,mid-high,non-labial,front,long,oral,NA,voiceless,CC,87,Bis er gehst erklärt,3,5
+gähnst,g__E:nst____,neuter,7,mono,g,ɛː,nst,mid-low,non-labial,front,long,nasal,alveolar,voiceless,CCC,88,Wieder gähnst erklärt,5,5
+gähnst,g__E:nst____,accented,7,mono,g,ɛː,nst,mid-low,non-labial,front,long,nasal,alveolar,voiceless,CCC,89,Bis er gähnst erklärt,5,5
+gähnst,g__E:nst____,deaccented,7,mono,g,ɛː,nst,mid-low,non-labial,front,long,nasal,alveolar,voiceless,CCC,90,Bis er gähnst erklärt,1,5
+Gönner,g__9_n__6___,neuter,3,di,g,œ,n,mid-high,labial,front,short,nasal,alveolar,NA,C,91,Wieder Gönner gedacht,1,6
+Gönner,g__9_n__6___,fast,3,di,g,œ,n,mid-high,labial,front,short,nasal,alveolar,NA,C,92,Wieder Gönner gesehen,2,6
+gönnte,g__9_nt_@___,neuter,2,di,g,œ,nt,mid-high,labial,front,short,nasal,alveolar,voiceless,CC,93,Wieder gönnte gedacht,5,6
+gönnte,g__9_nt_@___,fast,2,di,g,œ,nt,mid-high,labial,front,short,nasal,alveolar,voiceless,CC,94,Wieder gönnte gesehen,2,6
+Götter,g__9_t__6___,neuter,2_3,di,g,œ,t,mid-high,labial,front,short,oral,NA,voiceless,C,95,Wieder Götter gesehen,10,6
+Götter,g__9_t__6___,fast,2_3,di,g,œ,t,mid-high,labial,front,short,oral,NA,voiceless,C,96,Wieder Götter gedacht,3,6
+Kieme,k__i:m__@___,neuter,6,di,k,iː,m,high,non-labial,front,long,nasal,labial,NA,C,97,Wieder Kieme gehört,2,6
+Kieme,k__i:m__@___,fast,6,di,k,iː,m,high,non-labial,front,long,nasal,labial,NA,C,98,Wieder Kieme gedacht,2,6
+Kimme,k__I_m__@___,neuter,6,di,k,ɪ,m,high,non-labial,front,short,nasal,labial,NA,C,99,Wieder Kimme gesagt,11,6
+Kimme,k__I_m__@___,fast,6,di,k,ɪ,m,high,non-labial,front,short,nasal,labial,NA,C,100,Wieder Kimme gesagt,3,6
+kommst,k__O_mst____,neuter,7,mono,k,ɔ,mst,mid-low,labial,back,short,nasal,labial,voiceless,CCC,101,Wieder kommst erklärt,3,5
+Kost,k__O_st_____,neuter,7,mono,k,ɔ,st,mid-low,labial,back,short,oral,NA,voiceless,CC,102,Wieder Kost erzählt,2,5
+Künste,k__Y_nst@___,neuter,7,di,k,ʏ,nst,high,labial,front,short,nasal,alveolar,voiceless,CCC,103,Wieder Künste gehört,4,6
+Künste,k__Y_nst@___,accented,7,di,k,ʏ,nst,high,labial,front,short,nasal,alveolar,voiceless,CCC,104,Bis er Künste schreibt,4,5
+Künste,k__Y_nst@___,deaccented,7,di,k,ʏ,nst,high,labial,front,short,nasal,alveolar,voiceless,CCC,105,Bis er Künste sagt,1,5
+küsste,k__Y_st_@___,neuter,7,di,k,ʏ,st,high,labial,front,short,oral,NA,voiceless,CC,106,Wieder küsste gehört,3,6
+küsste,k__Y_st_@___,accented,7,di,k,ʏ,st,high,labial,front,short,oral,NA,voiceless,CC,107,Bis er küsste sagt,3,5
+küsste,k__Y_st_@___,deaccented,7,di,k,ʏ,st,high,labial,front,short,oral,NA,voiceless,CC,108,Bis er küsste sagt,4,5
+lahm,l__a:m______,neuter,4_6,mono,l,aː,m,low,non-labial,central,long,nasal,labial,NA,C,109,Wieder lahm erklärt,8,5
+lahm,l__a:m______,fast,4_6,mono,l,aː,m,low,non-labial,central,long,nasal,labial,NA,C,110,Wieder lahm erkannt,3,5
+lahmst,l__a:mst____,neuter,10,mono,l,aː,mst,low,non-labial,central,long,nasal,labial,voiceless,CCC,111,Wieder lahmst erklärt,4,5
+lahmt,l__a:mt_____,neuter,4_10,mono,l,aː,mt,low,non-labial,central,long,nasal,labial,voiceless,CC,112,Wieder lahmt erkannt,7,5
+Lamm,l__a_m______,neuter,6,mono,l,a,m,low,non-labial,central,short,nasal,labial,NA,C,113,Wieder Lamm erklärt,7,5
+Lamm,l__a_m______,fast,6,mono,l,a,m,low,non-labial,central,short,nasal,labial,NA,C,114,Wieder Lamm erzählt,2,5
+lehnst,l__e:nst____,neuter,10,mono,l,eː,nst,mid-high,non-labial,front,long,nasal,alveolar,voiceless,CCC,115,Wieder lehnst erzählt,12,5
+lehnst,l__e:nst____,accented,10,mono,l,eː,nst,mid-high,non-labial,front,long,nasal,alveolar,voiceless,CCC,116,Bis er lehnst erkennt,3,5
+lehnst,l__e:nst____,deaccented,10,mono,l,eː,nst,mid-high,non-labial,front,long,nasal,alveolar,voiceless,CCC,117,Bis er lehnst erklärt,1,5
+lehnt,l__e:nt_____,neuter,10,mono,l,eː,nt,mid-high,non-labial,front,long,nasal,alveolar,voiceless,CC,118,Wieder lehnt erklärt,9,5
+lehnt,l__e:nt_____,accented,10,mono,l,eː,nt,mid-high,non-labial,front,long,nasal,alveolar,voiceless,CC,119,Bis er lehnt erkennt,5,5
+lehnt,l__e:nt_____,deaccented,10,mono,l,eː,nt,mid-high,non-labial,front,long,nasal,alveolar,voiceless,CC,120,Bis er lehnt erkennt,2,5
+Linde,l__I_nd_@___,neuter,9,di,l,ɪ,nd,high,non-labial,front,short,nasal,alveolar,voiced,CC,121,Wieder Linde gedacht,7,6
+Linse,l__I_nz_@___,neuter,9,di,l,ɪ,nz,high,non-labial,front,short,nasal,alveolar,NA,CC,122,Wieder Linse gehört,8,6
+lohne,l__o:n__@___,neuter,3_4,di,l,oː,n,mid-high,labial,back,long,nasal,alveolar,NA,C,123,Wieder lohne gedacht,8,6
+lohnst,l__o:nst____,neuter,7_10,mono,l,oː,nst,mid-high,labial,back,long,nasal,alveolar,voiceless,CCC,124,Wieder lohnst erklärt,12,5
+lohnst,l__o:nst____,accented,7_10,mono,l,oː,nst,mid-high,labial,back,long,nasal,alveolar,voiceless,CCC,125,Bis er lohnst erkennt,4,5
+lohnst,l__o:nst____,deaccented,7_10,mono,l,oː,nst,mid-high,labial,back,long,nasal,alveolar,voiceless,CCC,126,Bis er lohnst erkennt,3,5
+lohnt,l__o:nt_____,neuter,10,mono,l,oː,nt,mid-high,labial,back,long,nasal,alveolar,voiceless,CC,127,Wieder lohnt erzählt,9,5
+lohnt,l__o:nt_____,accented,10,mono,l,oː,nt,mid-high,labial,back,long,nasal,alveolar,voiceless,CC,128,Bis er lohnt erklärt,5,5
+lohnt,l__o:nt_____,deaccented,10,mono,l,oː,nt,mid-high,labial,back,long,nasal,alveolar,voiceless,CC,129,Bis er lohnt erklärt,2,5
+lohnte,l__o:nt_@___,neuter,2_4,di,l,oː,nt,mid-high,labial,back,long,nasal,alveolar,voiceless,CC,130,Wieder lohnte gedacht,7,6
+lost,l__o:st_____,neuter,7,mono,l,oː,st,mid-high,labial,back,long,oral,NA,voiceless,CC,131,Wieder lost erzählt,12,5
+lost,l__o:st_____,accented,7,mono,l,oː,st,mid-high,labial,back,long,oral,NA,voiceless,CC,132,Bis er lost erkennt,1,5
+lost,l__o:st_____,deaccented,7,mono,l,oː,st,mid-high,labial,back,long,oral,NA,voiceless,CC,133,Bis er lost erkennt,3,5
+Lote,l__o:t__@___,neuter,2_3,di,l,oː,t,mid-high,labial,back,long,oral,NA,voiceless,C,134,Wieder Lote gedacht,8,6
+Panda,p__a_nd_a___,neuter,1,di,p,a,nd,low,non-labial,central,short,nasal,alveolar,voiced,CC,135,Wieder Panda gehört,5,6
+Panda,p__a_nd_a___,accented,1,di,p,a,nd,low,non-labial,central,short,nasal,alveolar,voiced,CC,136,Bis er Panda sagt,4,5
+Panda,p__a_nd_a___,deaccented,1,di,p,a,nd,low,non-labial,central,short,nasal,alveolar,voiced,CC,137,Bis er Panda schreibt,2,5
+Panne,p__a_n__@___,neuter,3_4,di,p,a,n,low,non-labial,central,short,nasal,alveolar,NA,C,138,Wieder Panne gesehen,2,6
+Panne,p__a_n__@___,fast,3_4,di,p,a,n,low,non-labial,central,short,nasal,alveolar,NA,C,139,Wieder Panne gesehen,2,6
+Panther,p__a_nt_6___,neuter,1_2_4,di,p,a,nt,low,non-labial,central,short,nasal,alveolar,voiceless,CC,140,Wieder Panther gedacht,9,6
+Panther,p__a_nt_6___,accented,1_2_4,di,p,a,nt,low,non-labial,central,short,nasal,alveolar,voiceless,CC,141,Bis er Panther sagt,4,5
+Panther,p__a_nt_6___,deaccented,1_2_4,di,p,a,nt,low,non-labial,central,short,nasal,alveolar,voiceless,CC,142,Bis er Panther sagt,4,5
+Panther,p__a_nt_6___,fast,1_2_4,di,p,a,nt,low,non-labial,central,short,nasal,alveolar,voiceless,CC,143,Wieder Panther gedacht,2,6
+Pate,p__a:t__@___,neuter,5_6,di,p,aː,t,low,non-labial,central,long,oral,NA,voiceless,C,144,Wieder Pate gesehen,3,6
+Pate,p__a:t__@___,fast,5_6,di,p,aː,t,low,non-labial,central,long,oral,NA,voiceless,C,145,Wieder Pate gesehen,1,6
+Patte,p__a_t__@___,neuter,2_3_6,di,p,a,t,low,non-labial,central,short,oral,NA,voiceless,C,146,Wieder Patte gedacht,8,6
+Patte,p__a_t__@___,fast,2_3_6,di,p,a,t,low,non-labial,central,short,oral,NA,voiceless,C,147,Wieder Patte gesagt,3,6
+pennst,p__E_nst____,neuter,7_10,mono,p,ɛ,nst,mid-low,non-labial,front,short,nasal,alveolar,voiceless,CCC,148,Wieder pennst erklärt,1,5
+pennst,p__E_nst____,accented,7_10,mono,p,ɛ,nst,mid-low,non-labial,front,short,nasal,alveolar,voiceless,CCC,149,Bis er pennst erkennt,1,5
+pennst,p__E_nst____,deaccented,7_10,mono,p,ɛ,nst,mid-low,non-labial,front,short,nasal,alveolar,voiceless,CCC,150,Bis er pennst erklärt,2,5
+pennt,p__E_nt_____,neuter,10,mono,p,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,voiceless,CC,151,Wieder pennt erzählt,3,5
+pennt,p__E_nt_____,accented,10,mono,p,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,voiceless,CC,152,Bis er pennt erklärt,2,5
+pennt,p__E_nt_____,deaccented,10,mono,p,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,voiceless,CC,153,Bis er pennt erkennt,1,5
+Pest,p__E_st_____,neuter,7,mono,p,ɛ,st,mid-low,non-labial,front,short,oral,NA,voiceless,CC,154,Wieder Pest erkannt,11,5
+Pest,p__E_st_____,accented,7,mono,p,ɛ,st,mid-low,non-labial,front,short,oral,NA,voiceless,CC,155,Bis er Pest erkennt,2,5
+Pest,p__E_st_____,deaccented,7,mono,p,ɛ,st,mid-low,non-labial,front,short,oral,NA,voiceless,CC,156,Bis er Pest erkennt,2,5
+Peter,p__e:t__6___,neuter,5,di,p,eː,t,mid-high,non-labial,front,long,oral,NA,voiceless,C,157,Wieder Peter gesehen,2,6
+Piep,p__i:p______,neuter,5,mono,p,iː,p,high,non-labial,front,long,oral,NA,NA,C,158,Wieder Piep erklärt,12,5
+Pute,p__u:t__@___,neuter,5,di,p,uː,t,high,labial,back,long,oral,NA,voiceless,C,159,Wieder Pute gesehen,1,6
+Rahm,r__a:m______,neuter,4_5,mono,r,aː,m,low,non-labial,central,long,nasal,labial,NA,C,160,Wieder Rahm erklärt,10,5
+rahmst,r__a:mst____,neuter,7_10,mono,r,aː,mst,low,non-labial,central,long,nasal,labial,voiceless,CCC,161,Wieder rahmst erkannt,12,5
+rahmt,r__a:mt_____,neuter,4_10,mono,r,aː,mt,low,non-labial,central,long,nasal,labial,voiceless,CC,162,Wieder rahmt erkannt,9,5
+rahmte,r__a:mt_@___,neuter,2,di,r,aː,mt,low,non-labial,central,long,nasal,labial,voiceless,CC,163,Wieder rahmte gehört,6,6
+rannte,r__a_nt_@___,neuter,2,di,r,a,nt,low,non-labial,central,short,nasal,alveolar,voiceless,CC,164,Wieder rannte gehört,9,6
+rast,r__a:st_____,neuter,7,mono,r,aː,st,low,non-labial,central,long,oral,NA,voiceless,CC,165,Wieder rast erkannt,5,5
+Rate,r__a:t__@___,neuter,2_5_6,di,r,aː,t,low,non-labial,central,long,oral,NA,voiceless,C,166,Wieder Rate gesagt,10,6
+Ratte,r__a_t__@___,neuter,2_6,di,r,a,t,low,non-labial,central,short,oral,NA,voiceless,C,167,Wieder Ratte gedacht,1,6
+Renner,r__E_n__6___,neuter,3_4,di,r,ɛ,n,mid-low,non-labial,front,short,nasal,alveolar,NA,C,168,Wieder Renner gehört,7,6
+Rente,r__E_nt_@___,neuter,1_2_4,di,r,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,voiceless,CC,169,Wieder Rente gesehen,11,6
+Retter,r__E_t__6___,neuter,2_3,di,r,ɛ,t,mid-low,non-labial,front,short,oral,NA,voiceless,C,170,Wieder Retter gesagt,4,6
+Riem,r__i:m______,neuter,5,mono,r,iː,m,high,non-labial,front,long,nasal,labial,NA,C,171,Wieder Riem erzählt,10,5
+rinnst,r__I_nst____,neuter,7_10,mono,r,ɪ,nst,high,non-labial,front,short,nasal,alveolar,voiceless,CCC,172,Wieder rinnst erkannt,5,5
+rinnst,r__I_nst____,accented,7_10,mono,r,ɪ,nst,high,non-labial,front,short,nasal,alveolar,voiceless,CCC,173,Bis er rinnst erkennt,3,5
+rinnst,r__I_nst____,deaccented,7_10,mono,r,ɪ,nst,high,non-labial,front,short,nasal,alveolar,voiceless,CCC,174,Bis er rinnst erklärt,5,5
+rinnt,r__I_nt_____,neuter,10,mono,r,ɪ,nt,high,non-labial,front,short,nasal,alveolar,voiceless,CC,175,Wieder rinnt erklärt,3,5
+rinnt,r__I_nt_____,accented,10,mono,r,ɪ,nt,high,non-labial,front,short,nasal,alveolar,voiceless,CC,176,Bis er rinnt erklärt,3,5
+rinnt,r__I_nt_____,deaccented,10,mono,r,ɪ,nt,high,non-labial,front,short,nasal,alveolar,voiceless,CC,177,Bis er rinnt erklärt,4,5
+Rist,r__I_st_____,neuter,7,mono,r,ɪ,st,high,non-labial,front,short,oral,NA,voiceless,CC,178,Wieder Rist erzählt,7,5
+Rist,r__I_st_____,accented,7,mono,r,ɪ,st,high,non-labial,front,short,oral,NA,voiceless,CC,179,Bis er Rist erkennt,5,5
+Rist,r__I_st_____,deaccented,7,mono,r,ɪ,st,high,non-labial,front,short,oral,NA,voiceless,CC,180,Bis er Rist erkennt,5,5
+Rita,r__i:t__a___,neuter,5,di,r,iː,t,high,non-labial,front,long,oral,NA,voiceless,C,181,Wieder Rita gesagt,10,6
+Ruhm,r__u:m______,neuter,5_6,mono,r,uː,m,high,labial,back,long,nasal,labial,NA,C,182,Wieder Ruhm erklärt,10,5
+Ruhm,r__u:m______,fast,5_6,mono,r,uː,m,high,labial,back,long,nasal,labial,NA,C,183,Wieder Ruhm erzählt,1,5
+ruhte,r__u:t__@___,neuter,5,di,r,uː,t,high,labial,back,long,oral,NA,voiceless,C,184,Wieder ruhte gesagt,5,6
+Rum,r__U_m______,neuter,6,mono,r,ʊ,m,high,labial,back,short,nasal,labial,NA,C,185,Wieder Rum erzählt,1,5
+Rum,r__U_m______,fast,6,mono,r,ʊ,m,high,labial,back,short,nasal,labial,NA,C,186,Wieder Rum erkannt,3,5
+Ränder,r__E_nd_6___,neuter,1,di,r,ɛ,nd,mid-low,non-labial,front,short,nasal,alveolar,voiced,CC,187,Wieder Ränder gesagt,4,6
+Saate,z__a:t__@___,neuter,2_3_6,di,z,aː,t,low,non-labial,central,long,oral,NA,voiceless,C,188,Wieder Saate gedacht,8,6
+Saate,z__a:t__@___,fast,2_3_6,di,z,aː,t,low,non-labial,central,long,oral,NA,voiceless,C,189,Wieder Saate gesagt,1,6
+Saft,z__a_ft_____,neuter,7,mono,z,a,ft,low,non-labial,central,short,oral,NA,voiceless,CC,190,Wieder Saft erkannt,6,5
+Sahne,z__a:n__@___,neuter,3_5,di,z,aː,n,low,non-labial,central,long,nasal,alveolar,NA,C,191,Wieder Sahne gedacht,12,6
+Sahne,z__a:n__@___,fast,3_5,di,z,aː,n,low,non-labial,central,long,nasal,alveolar,NA,C,192,Wieder Sahne gehört,2,6
+sahnst,z__a:nst____,neuter,7_10,mono,z,aː,nst,low,non-labial,central,long,nasal,alveolar,voiceless,CCC,193,Wieder sahnst erkannt,1,5
+sahnst,z__a:nst____,accented,7_10,mono,z,aː,nst,low,non-labial,central,long,nasal,alveolar,voiceless,CCC,194,Bis er sahnst erkennt,5,5
+sahnst,z__a:nst____,deaccented,7_10,mono,z,aː,nst,low,non-labial,central,long,nasal,alveolar,voiceless,CCC,195,Bis er sahnst erkennt,4,5
+sahnt,z__a:nt_____,neuter,10,mono,z,aː,nt,low,non-labial,central,long,nasal,alveolar,voiceless,CC,196,Wieder sahnt erzählt,6,5
+sahnt,z__a:nt_____,accented,10,mono,z,aː,nt,low,non-labial,central,long,nasal,alveolar,voiceless,CC,197,Bis er sahnt erklärt,3,5
+sahnt,z__a:nt_____,deaccented,10,mono,z,aː,nt,low,non-labial,central,long,nasal,alveolar,voiceless,CC,198,Bis er sahnt erklärt,4,5
+sahnte,z__a:nt_@___,neuter,2_6,di,z,aː,nt,low,non-labial,central,long,nasal,alveolar,voiceless,CC,199,Wieder sahnte gesagt,4,6
+sahnte,z__a:nt_@___,fast,2_6,di,z,aː,nt,low,non-labial,central,long,nasal,alveolar,voiceless,CC,200,Wieder sahnte gesagt,3,6
+sahst,z__a:st_____,neuter,7,mono,z,aː,st,low,non-labial,central,long,oral,NA,voiceless,CC,201,Wieder sahst erzählt,12,5
+sahst,z__a:st_____,accented,7,mono,z,aː,st,low,non-labial,central,long,oral,NA,voiceless,CC,202,Bis er sahst erklärt,2,5
+sahst,z__a:st_____,deaccented,7,mono,z,aː,st,low,non-labial,central,long,oral,NA,voiceless,CC,203,Bis er sahst erkennt,4,5
+Sande,z__a_nd_@___,neuter,1,di,z,a,nd,low,non-labial,central,short,nasal,alveolar,voiced,CC,204,Wieder Sande gesagt,9,6
+sandte,z__a_nt_@___,neuter,1_2_6,di,z,a,nt,low,non-labial,central,short,nasal,alveolar,voiceless,CC,205,Wieder sandte gesagt,7,6
+sanft,z__a_nft____,neuter,7,mono,z,a,nft,low,non-labial,central,short,nasal,alveolar,voiceless,CCC,206,Wieder sanft erkannt,11,5
+satte,z__a_t__@___,neuter,2_6,di,z,a,t,low,non-labial,central,short,oral,NA,voiceless,C,207,Wieder satte gedacht,5,6
+satte,z__a_t__@___,fast,2_6,di,z,a,t,low,non-labial,central,short,oral,NA,voiceless,C,208,Wieder satte gesehen,1,6
+schienst,S__i:nst____,neuter,7_10,mono,ʃ,iː,nst,high,non-labial,front,long,nasal,alveolar,voiceless,CCC,209,Wieder schienst erzählt,6,5
+schienst,S__i:nst____,accented,7_10,mono,ʃ,iː,nst,high,non-labial,front,long,nasal,alveolar,voiceless,CCC,210,Bis er schienst erklärt,5,5
+schienst,S__i:nst____,deaccented,7_10,mono,ʃ,iː,nst,high,non-labial,front,long,nasal,alveolar,voiceless,CCC,211,Bis er schienst erkennt,5,5
+schient,S__i:nt_____,neuter,10,mono,ʃ,iː,nt,high,non-labial,front,long,nasal,alveolar,voiceless,CC,212,Wieder schient erklärt,10,5
+schient,S__i:nt_____,accented,10,mono,ʃ,iː,nt,high,non-labial,front,long,nasal,alveolar,voiceless,CC,213,Bis er schient erkennt,2,5
+schient,S__i:nt_____,deaccented,10,mono,ʃ,iː,nt,high,non-labial,front,long,nasal,alveolar,voiceless,CC,214,Bis er schient erkennt,3,5
+schießt,S__i:st_____,neuter,7,mono,ʃ,iː,st,high,non-labial,front,long,oral,NA,voiceless,CC,215,Wieder schießt erklärt,12,5
+schießt,S__i:st_____,accented,7,mono,ʃ,iː,st,high,non-labial,front,long,oral,NA,voiceless,CC,216,Bis er schießt erkennt,4,5
+schießt,S__i:st_____,deaccented,7,mono,ʃ,iː,st,high,non-labial,front,long,oral,NA,voiceless,CC,217,Bis er schießt erkennt,1,5
+schone,S__o:n__@___,neuter,3_4,di,ʃ,oː,n,mid-high,labial,back,long,nasal,alveolar,NA,C,218,Wieder schone gehört,6,6
+schone,S__o:n__@___,fast,3_4,di,ʃ,oː,n,mid-high,labial,back,long,nasal,alveolar,NA,C,219,Wieder schone gesehen,3,6
+schonte,S__o:nt_@___,neuter,4,di,ʃ,oː,nt,mid-high,labial,back,long,nasal,alveolar,voiceless,CC,220,Wieder schonte gedacht,11,6
+Schote,S__o:t__@___,neuter,3_6,di,ʃ,oː,t,mid-high,labial,back,long,oral,NA,voiceless,C,221,Wieder Schote gesagt,7,6
+Schote,S__o:t__@___,fast,3_6,di,ʃ,oː,t,mid-high,labial,back,long,oral,NA,voiceless,C,222,Wieder Schote gedacht,1,6
+Schotte,S__O_t__@___,neuter,6,di,ʃ,ɔ,t,mid-low,labial,back,short,oral,NA,voiceless,C,223,Wieder Schotte gehört,4,6
+Schotte,S__O_t__@___,fast,6,di,ʃ,ɔ,t,mid-low,labial,back,short,oral,NA,voiceless,C,224,Wieder Schotte gesehen,1,6
+Sehne,z__e:n__@___,neuter,4_5_6,di,z,eː,n,mid-high,non-labial,front,long,nasal,alveolar,NA,C,225,Wieder Sehne gesehen,3,6
+Sehne,z__e:n__@___,fast,4_5_6,di,z,eː,n,mid-high,non-labial,front,long,nasal,alveolar,NA,C,226,Wieder Sehne gesagt,2,6
+sehnte,z__e:nt_@___,neuter,4_6,di,z,eː,nt,mid-high,non-labial,front,long,nasal,alveolar,voiceless,CC,227,Wieder sehnte gehört,9,6
+sehnte,z__e:nt_@___,fast,4_6,di,z,eː,nt,mid-high,non-labial,front,long,nasal,alveolar,voiceless,CC,228,Wieder sehnte gedacht,2,6
+sende,z__E_nd_@___,neuter,1_9,di,z,ɛ,nd,mid-low,non-labial,front,short,nasal,alveolar,voiced,CC,229,Wieder sende gehört,7,6
+sende,z__E_nd_@___,accented,1_9,di,z,ɛ,nd,mid-low,non-labial,front,short,nasal,alveolar,voiced,CC,230,Bis er sende sagt,5,5
+sende,z__E_nd_@___,deaccented,1_9,di,z,ɛ,nd,mid-low,non-labial,front,short,nasal,alveolar,voiced,CC,231,Bis er sende sagt,2,5
+Senne,z__E_n__@___,neuter,4_6,di,z,ɛ,n,mid-low,non-labial,front,short,nasal,alveolar,NA,C,232,Wieder Senne gehört,11,6
+Senne,z__E_n__@___,fast,4_6,di,z,ɛ,n,mid-low,non-labial,front,short,nasal,alveolar,NA,C,233,Wieder Senne gesagt,2,6
+Sense,z__E_nz_@___,neuter,9,di,z,ɛ,nz,mid-low,non-labial,front,short,nasal,alveolar,NA,CC,234,Wieder Sense gehört,6,6
+Senta,z__E_nt_a___,neuter,1_4_6_10,di,z,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,voiceless,CC,235,Wieder Senta gedacht,10,6
+Senta,z__E_nt_a___,accented,1_4_6_10,di,z,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,voiceless,CC,236,Bis er Senta schreibt,5,5
+Senta,z__E_nt_a___,deaccented,1_4_6_10,di,z,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,voiceless,CC,237,Bis er Senta schreibt,4,5
+Senta,z__E_nt_a___,fast,1_4_6_10,di,z,ɛ,nt,mid-low,non-labial,front,short,nasal,alveolar,voiceless,CC,238,Wieder Senta gehört,2,6
+Sonde,z__O_nd_@___,neuter,1,di,z,ɔ,nd,mid-low,labial,back,short,nasal,alveolar,voiced,CC,239,Wieder Sonde gesagt,2,6
+Sonde,z__O_nd_@___,accented,1,di,z,ɔ,nd,mid-low,labial,back,short,nasal,alveolar,voiced,CC,240,Bis er Sonde sagt,4,5
+Sonde,z__O_nd_@___,deaccented,1,di,z,ɔ,nd,mid-low,labial,back,short,nasal,alveolar,voiced,CC,241,Bis er Sonde sagt,1,5
+Sonne,z__O_n__@___,neuter,4,di,z,ɔ,n,mid-low,labial,back,short,nasal,alveolar,NA,C,242,Wieder Sonne gesehen,11,6
+sonnte,z__O_nt_@___,neuter,1_4,di,z,ɔ,nt,mid-low,labial,back,short,nasal,alveolar,voiceless,CC,243,Wieder sonnte gedacht,12,6
+sonnte,z__O_nt_@___,accented,1_4,di,z,ɔ,nt,mid-low,labial,back,short,nasal,alveolar,voiceless,CC,244,Bis er sonnte schreibt,4,5
+sonnte,z__O_nt_@___,deaccented,1_4,di,z,ɔ,nt,mid-low,labial,back,short,nasal,alveolar,voiceless,CC,245,Bis er sonnte sagt,4,5
+staunst,St_aUnst____,neuter,7_10,mono,st,aʊ,nst,diphthong,labial,back,long,nasal,alveolar,voiceless,CCC,246,Wieder staunst erzählt,10,5
+staunst,St_aUnst____,accented,7_10,mono,st,aʊ,nst,diphthong,labial,back,long,nasal,alveolar,voiceless,CCC,247,Bis er staunst erkennt,2,5
+staunst,St_aUnst____,deaccented,7_10,mono,st,aʊ,nst,diphthong,labial,back,long,nasal,alveolar,voiceless,CCC,248,Bis er staunst erkennt,1,5
+staunt,St_aUnt_____,neuter,10,mono,st,aʊ,nt,diphthong,labial,back,long,nasal,alveolar,voiceless,CC,249,Wieder staunt erkannt,12,5
+staunt,St_aUnt_____,accented,10,mono,st,aʊ,nt,diphthong,labial,back,long,nasal,alveolar,voiceless,CC,250,Bis er staunt erkennt,3,5
+staunt,St_aUnt_____,deaccented,10,mono,st,aʊ,nt,diphthong,labial,back,long,nasal,alveolar,voiceless,CC,251,Bis er staunt erkennt,2,5
+staust,St_aUst_____,neuter,7,mono,st,aʊ,st,diphthong,labial,back,long,oral,NA,voiceless,CC,252,Wieder staust erklärt,8,5
+staust,St_aUst_____,accented,7,mono,st,aʊ,st,diphthong,labial,back,long,oral,NA,voiceless,CC,253,Bis er staust erklärt,1,5
+staust,St_aUst_____,deaccented,7,mono,st,aʊ,st,diphthong,labial,back,long,oral,NA,voiceless,CC,254,Bis er staust erklärt,5,5
+stöhnst,St_2:nst____,neuter,7_10,mono,st,øː,nst,mid-high,labial,front,long,nasal,alveolar,voiceless,CCC,255,Wieder stöhnst erzählt,5,5
+stöhnst,St_2:nst____,accented,7_10,mono,st,øː,nst,mid-high,labial,front,long,nasal,alveolar,voiceless,CCC,256,Bis er stöhnst erklärt,5,5
+stöhnst,St_2:nst____,deaccented,7_10,mono,st,øː,nst,mid-high,labial,front,long,nasal,alveolar,voiceless,CCC,257,Bis er stöhnst erkennt,4,5
+stöhnt,St_2:nt_____,neuter,10,mono,st,øː,nt,mid-high,labial,front,long,nasal,alveolar,voiceless,CC,258,Wieder stöhnt erzählt,6,5
+stöhnt,St_2:nt_____,accented,10,mono,st,øː,nt,mid-high,labial,front,long,nasal,alveolar,voiceless,CC,259,Bis er stöhnt erklärt,2,5
+stöhnt,St_2:nt_____,deaccented,10,mono,st,øː,nt,mid-high,labial,front,long,nasal,alveolar,voiceless,CC,260,Bis er stöhnt erklärt,2,5
+stößt,St_2:st_____,neuter,7,mono,st,øː,st,mid-high,labial,front,long,oral,NA,voiceless,CC,261,Wieder stößt erkannt,11,5
+stößt,St_2:st_____,accented,7,mono,st,øː,st,mid-high,labial,front,long,oral,NA,voiceless,CC,262,Bis er stößt erklärt,2,5
+stößt,St_2:st_____,deaccented,7,mono,st,øː,st,mid-high,labial,front,long,oral,NA,voiceless,CC,263,Bis er stößt erklärt,5,5
+Säfte,z__E_ft_@___,neuter,7,di,z,ɛ,ft,mid-low,non-labial,front,short,oral,NA,voiceless,CC,264,Wieder Säfte gehört,1,6
+Sänfte,z__E_nft@___,neuter,7_10,di,z,ɛ,nft,mid-low,non-labial,front,short,nasal,alveolar,voiceless,CCC,265,Wieder Sänfte gedacht,11,6
+Sühne,z__y:n__@___,neuter,5,di,z,yː,n,high,labial,front,long,nasal,alveolar,NA,C,266,Wieder Sühne gesehen,11,6
+sühnst,z__y:nst____,neuter,7_10,mono,z,yː,nst,high,labial,front,long,nasal,alveolar,voiceless,CCC,267,Wieder sühnst erzählt,1,5
+sühnst,z__y:nst____,accented,7_10,mono,z,yː,nst,high,labial,front,long,nasal,alveolar,voiceless,CCC,268,Bis er sühnst erklärt,5,5
+sühnst,z__y:nst____,deaccented,7_10,mono,z,yː,nst,high,labial,front,long,nasal,alveolar,voiceless,CCC,269,Bis er sühnst erklärt,1,5
+sühnt,z__y:nt_____,neuter,10,mono,z,yː,nt,high,labial,front,long,nasal,alveolar,voiceless,CC,270,Wieder sühnt erzählt,2,5
+sühnt,z__y:nt_____,accented,10,mono,z,yː,nt,high,labial,front,long,nasal,alveolar,voiceless,CC,271,Bis er sühnt erklärt,3,5
+sühnt,z__y:nt_____,deaccented,10,mono,z,yː,nt,high,labial,front,long,nasal,alveolar,voiceless,CC,272,Bis er sühnt erklärt,2,5
+süßt,z__y:st_____,neuter,7,mono,z,yː,st,high,labial,front,long,oral,NA,voiceless,CC,273,Wieder süßt erklärt,6,5
+süßt,z__y:st_____,accented,7,mono,z,yː,st,high,labial,front,long,oral,NA,voiceless,CC,274,Bis er süßt erkennt,2,5
+süßt,z__y:st_____,deaccented,7,mono,z,yː,st,high,labial,front,long,oral,NA,voiceless,CC,275,Bis er süßt erklärt,2,5
+Tat,t__a:t______,neuter,5,mono,t,aː,t,low,non-labial,central,long,oral,NA,voiceless,C,276,Wieder Tat erzählt,6,5
+thronst,tr_o:nst____,neuter,7_10,mono,tr,oː,nst,mid-high,labial,back,long,nasal,alveolar,voiceless,CCC,277,Wieder thronst erzählt,6,5
+thronst,tr_o:nst____,accented,7_10,mono,tr,oː,nst,mid-high,labial,back,long,nasal,alveolar,voiceless,CCC,278,Bis er thronst erkennt,1,5
+thronst,tr_o:nst____,deaccented,7_10,mono,tr,oː,nst,mid-high,labial,back,long,nasal,alveolar,voiceless,CCC,279,Bis er thronst erkennt,2,5
+thront,tr_o:nt_____,neuter,10,mono,tr,oː,nt,mid-high,labial,back,long,nasal,alveolar,voiceless,CC,280,Wieder thront erkannt,2,5
+thront,tr_o:nt_____,accented,10,mono,tr,oː,nt,mid-high,labial,back,long,nasal,alveolar,voiceless,CC,281,Bis er thront erklärt,3,5
+thront,tr_o:nt_____,deaccented,10,mono,tr,oː,nt,mid-high,labial,back,long,nasal,alveolar,voiceless,CC,282,Bis er thront erkennt,1,5
+Tina,t__i:n__a___,neuter,5,di,t,iː,n,high,non-labial,front,long,nasal,alveolar,NA,C,283,Wieder Tina gedacht,2,6
+Toner,t__o:n__6___,neuter,3_5_6,di,t,oː,n,mid-high,labial,back,long,nasal,alveolar,NA,C,284,Wieder Toner gehört,3,6
+Toner,t__o:n__6___,fast,3_5_6,di,t,oː,n,mid-high,labial,back,long,nasal,alveolar,NA,C,285,Wieder Toner gesehen,2,6
+Tonne,t__O_n__@___,neuter,6,di,t,ɔ,n,mid-low,labial,back,short,nasal,alveolar,NA,C,286,Wieder Tonne gesagt,9,6
+Tonne,t__O_n__@___,fast,6,di,t,ɔ,n,mid-low,labial,back,short,nasal,alveolar,NA,C,287,Wieder Tonne gesagt,3,6
+toter,t__o:t__6___,neuter,3_5,di,t,oː,t,mid-high,labial,back,long,oral,NA,voiceless,C,288,Wieder toter erklärt,8,6
+toter,t__o:t__6___,fast,3_5,di,t,oː,t,mid-high,labial,back,long,oral,NA,voiceless,C,289,Wieder toter erkannt,1,6
+Trost,tr_o:st_____,neuter,7,mono,tr,oː,st,mid-high,labial,back,long,oral,NA,voiceless,CC,290,Wieder Trost erzählt,10,5
+Trost,tr_o:st_____,accented,7,mono,tr,oː,st,mid-high,labial,back,long,oral,NA,voiceless,CC,291,Bis er Trost erklärt,2,5
+Trost,tr_o:st_____,deaccented,7,mono,tr,oː,st,mid-high,labial,back,long,oral,NA,voiceless,CC,292,Bis er Trost erkennt,5,5
+tun,t__u:n______,neuter,3_5,mono,t,uː,n,high,labial,back,long,nasal,alveolar,NA,C,293,Wieder tun erklärt,11,5
+tun,t__u:n______,fast,3_5,mono,t,uː,n,high,labial,back,long,nasal,alveolar,NA,C,294,Wieder tun erkannt,3,5
+tut,t__u:t______,neuter,3_5,mono,t,uː,t,high,labial,back,long,oral,NA,voiceless,C,295,Wieder tut erzählt,2,5
+tut,t__u:t______,fast,3_5,mono,t,uː,t,high,labial,back,long,oral,NA,voiceless,C,296,Wieder tut erkannt,3,5
+Töne,t__2:n__@___,neuter,3_4_5,di,t,øː,n,mid-high,labial,front,long,nasal,alveolar,NA,C,297,Wieder Töne gedacht,1,6
+Töne,t__2:n__@___,fast,3_4_5,di,t,øː,n,mid-high,labial,front,long,nasal,alveolar,NA,C,298,Wieder Töne gedacht,2,6
+tönte,t__2:nt_@___,neuter,2_4,di,t,øː,nt,mid-high,labial,front,long,nasal,alveolar,voiceless,CC,299,Wieder tönte gedacht,5,6
+tönte,t__2:nt_@___,fast,2_4,di,t,øː,nt,mid-high,labial,front,long,nasal,alveolar,voiceless,CC,300,Wieder tönte gesehen,1,6
+töte,t__2:t__@___,neuter,2_3_5,di,t,øː,t,mid-high,labial,front,long,oral,NA,voiceless,C,301,Wieder töte gesehen,4,6
+töte,t__2:t__@___,fast,2_3_5,di,t,øː,t,mid-high,labial,front,long,oral,NA,voiceless,C,302,Wieder töte gesehen,2,6
+wandte,v__a_nt_@___,neuter,2_4,di,v,a,nt,low,non-labial,central,short,nasal,alveolar,voiceless,CC,303,Wieder wandte gedacht,12,6
+Wanne,v__a_n__@___,neuter,3_4,di,v,a,n,low,non-labial,central,short,nasal,alveolar,NA,C,304,Wieder Wanne gesagt,9,6
+Wanne,v__a_n__@___,fast,3_4,di,v,a,n,low,non-labial,central,short,nasal,alveolar,NA,C,305,Wieder Wanne gedacht,3,6
+wate,v__a:t__@___,neuter,6,di,v,aː,t,low,non-labial,central,long,oral,NA,voiceless,C,306,Wieder wate gehört,8,6
+wate,v__a:t__@___,fast,6,di,v,aː,t,low,non-labial,central,long,oral,NA,voiceless,C,307,Wieder wate gehört,1,6
+Watte,v__a_t__@___,neuter,2_3_6,di,v,a,t,low,non-labial,central,short,oral,NA,voiceless,C,308,Wieder Watte gedacht,12,6
+Watte,v__a_t__@___,fast,2_3_6,di,v,a,t,low,non-labial,central,short,oral,NA,voiceless,C,309,Wieder Watte gedacht,3,6
+weihte,v__aIt__@___,neuter,2_3,di,v,aɪ,t,diphthong,non-labial,front,long,oral,NA,voiceless,C,310,Wieder weihte gedacht,3,6
+weine,v__aIn__@___,neuter,3_4,di,v,aɪ,n,diphthong,non-labial,front,long,nasal,alveolar,NA,C,311,Wieder weine gehört,2,6
+weinte,v__aInt_@___,neuter,2_4,di,v,aɪ,nt,diphthong,non-labial,front,long,nasal,alveolar,voiceless,CC,312,Wieder weinte gehört,7,6
+winde,v__I_nd_@___,neuter,1,di,v,ɪ,nd,high,non-labial,front,short,nasal,alveolar,voiced,CC,313,Wieder winde gedacht,10,6
+winde,v__I_nd_@___,accented,1,di,v,ɪ,nd,high,non-labial,front,short,nasal,alveolar,voiced,CC,314,Bis er winde sagt,1,5
+winde,v__I_nd_@___,deaccented,1,di,v,ɪ,nd,high,non-labial,front,short,nasal,alveolar,voiced,CC,315,Bis er winde sagt,2,5
+Windeln,v__I_nd_@ln_,neuter,9,di,v,ɪ,nd,high,non-labial,front,short,nasal,alveolar,voiced,CC,316,Wieder Windeln gesehen,4,6
+Winseln,v__I_nz_@ln_,neuter,9,di,v,ɪ,nz,high,non-labial,front,short,nasal,alveolar,NA,CC,317,Wieder Winseln gedacht,8,6
+Winter,v__I_nt_6___,neuter,1,di,v,ɪ,nt,high,non-labial,front,short,nasal,alveolar,voiceless,CC,318,Wieder Winter gesehen,4,6
+Winter,v__I_nt_6___,accented,1,di,v,ɪ,nt,high,non-labial,front,short,nasal,alveolar,voiceless,CC,319,Bis er Winter schreibt,4,5
+Winter,v__I_nt_6___,deaccented,1,di,v,ɪ,nt,high,non-labial,front,short,nasal,alveolar,voiceless,CC,320,Bis er Winter schreibt,5,5
+zweitens,tsvaIt__@ns_,neuter,8,di,tsv,aɪ,t,diphthong,non-labial,front,long,oral,NA,voiceless,C,321,Wieder zweitens erklärt,10,6
+zweitens,tsvaIt__@ns_,accented,8,di,tsv,aɪ,t,diphthong,non-labial,front,long,oral,NA,voiceless,C,322,Bis er zweitens erklärt,1,6
+zweitens,tsvaIt__@ns_,deaccented,8,di,tsv,aɪ,t,diphthong,non-labial,front,long,oral,NA,voiceless,C,323,Bis er zweitens erkennt,4,6
+zweites,tsvaIt__@s__,neuter,8,di,tsv,aɪ,t,diphthong,non-labial,front,long,oral,NA,voiceless,C,324,Wieder zweites erklärt,10,6
+zweites,tsvaIt__@s__,accented,8,di,tsv,aɪ,t,diphthong,non-labial,front,long,oral,NA,voiceless,C,325,Bis er zweites erkennt,3,6
+zweites,tsvaIt__@s__,deaccented,8,di,tsv,aɪ,t,diphthong,non-labial,front,long,oral,NA,voiceless,C,326,Bis er zweites erkennt,5,6
