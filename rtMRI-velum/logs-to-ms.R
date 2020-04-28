@@ -61,3 +61,27 @@ quantile(m1_post$nt, probs = c(0.025, 0.975))
 # Somewhere in the paper we will have to be explicit about how we made the calculations above, to aid the reader.
 
 # What really matters is the effect of voicing, not the predicted probability of the mean duration of the gesture when C is voiceless.
+
+# Speech rate ----
+
+# To get effects in ms
+
+m1_post_sr <- brms::posterior_samples(m1, pars = "b_") %>%
+  dplyr::mutate(
+    nd = exp(b_Intercept),
+    sr = exp(b_Intercept + b_speech_rate_c),
+    diff = sr - nd
+  )
+
+# Posterior distribution of the effect of speech rate in ms
+m1_post_sr %>%
+  ggplot(aes(diff)) + geom_density()
+
+# 95% CI of effect of speech rate in ms.
+quantile(m1_post_sr$diff, probs = c(0.025, 0.975))
+
+# Report in ms.
+# For every added syllable per second, the duration changes by between -8 and +3 ms.
+# (Is "changes by between X and Y" grammatical?)
+
+conditional_effects(m1, effect = "speech_rate_c", spaghetti = T, nsamples = 100)
