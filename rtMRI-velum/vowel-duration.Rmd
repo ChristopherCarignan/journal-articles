@@ -1,0 +1,210 @@
+---
+title: "Vowel duration"
+author: "Stefano Coretta"
+date: "27/04/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = here::here())
+library(tidyverse)
+theme_set(theme_minimal())
+library(brms)
+library(bayesplot)
+library(tidybayes)
+library(broom.mixed)
+options(mc.cores = parallel::detectCores())
+my.seed <- 8788
+set.seed(my.seed)
+```
+
+# Read data
+
+```{r read-data}
+matdat <- read_csv("./rtMRI-velum/velum_data.csv") %>%
+  select(speaker, label, stress, Vokal_on, Vokal_off, n_syll, sent_dur) %>%
+  mutate(
+    prosody = case_when(
+      stress == "A" ~ "accented",
+      stress == "D" ~ "deaccented",
+      stress == "N" ~ "neuter",
+      stress == "F" ~ "fast",
+    ),
+    sampa_fixed = str_sub(label, 1, 12),
+    vowel_duration = (Vokal_off - Vokal_on) * 1000,
+    speech_rate = n_syll / sent_dur,
+    speech_rate_c = speech_rate - mean(speech_rate)
+  )
+
+stimuli <- read_csv("./rtMRI-velum/de-stimuli.csv")
+
+dur_data <- left_join(matdat, stimuli) %>%
+  drop_na() %>%
+  mutate(
+    speech_rate = sentence_syl / sent_dur,
+    speech_rate_c = speech_rate - mean(speech_rate)
+  )
+```
+
+# Data checks
+
+```{r nasal-counts}
+dur_data %>%
+  filter(nasality == "nasal") %>%
+  group_by(n_syl, vowel, voicing) %>%
+  ggplot(aes(vowel, fill = voicing)) +
+  geom_bar() +
+  facet_grid(. ~ n_syl)
+```
+
+```{r sub-nasal-counts}
+dur_data %>%
+  filter(
+    nasality == "nasal",
+    n_syl == "di",
+    v_length == "short",
+    !(labiality == "labial" & backness == "front"),
+    nasal_poa == "alveolar",
+    coda_type == "CC",
+    pre != "l",
+  ) %>%
+  group_by(vowel, voicing, nasal_poa) %>%
+  ggplot(aes(vowel, fill = voicing)) +
+  geom_bar() +
+  facet_wrap(~ pre)
+```
+
+```{r sub-nasal-rate-counts}
+dur_data %>%
+  filter(
+    nasality == "nasal",
+    n_syl == "di",
+    v_length == "short",
+    !(labiality == "labial" & backness == "front"),
+    nasal_poa == "alveolar",
+    coda_type == "CC",
+    pre != "l",
+    prosody != "fast"
+  ) %>%
+  group_by(vowel, voicing, nasal_poa) %>%
+  ggplot(aes(vowel, fill = voicing)) +
+  geom_bar() +
+  facet_grid(prosody ~ pre)
+```
+
+# Preapare subset
+
+```{r dur-sub}
+dur_sub <- dur_data %>%
+  filter(
+    nasality == "nasal",
+    n_syl == "di",
+    v_length == "short",
+    !(labiality == "labial" & backness == "front"),
+    nasal_poa == "alveolar",
+    coda_type == "CC",
+    pre != "l",
+    prosody != "fast"
+  ) %>%
+  mutate(
+    voicing = factor(voicing, levels = c("voiced", "voiceless")),
+    vowel = factor(vowel),
+    prosody = factor(prosody, levels = c("neuter", "accented", "deaccented"))
+  )
+
+contrasts(dur_sub$vowel) <- "contr.sum"
+```
+
+# Model vowel duration (m1)
+
+## Model specification
+
+Vowel duration is the outcome variable (ms).
+We use a lognormal distribution for vowel duration.
+
+Fixed effects:
+
+- vowel
+- voicing
+- prosody
+- vowel:voicing
+- prosody:voicing
+- centred speech rate
+
+Random effects:
+
+- (voicing + vowel + prosody | speaker)
+- (voicing + vowel + prosody | pre)
+- (1 | word) to account for potential differences in lexical frequency
+
+```{r m1-vow-bf}
+m1_vow_bf <- bf(
+  vowel_duration ~
+    vowel +
+    voicing +
+    prosody +
+    vowel:voicing +
+    prosody:voicing +
+    speech_rate_c +
+    (voicing + vowel + prosody | speaker) +
+    (voicing + vowel + prosody | pre) +
+    (1 | word)
+) +
+  lognormal()
+```
+
+
+## Priors
+
+```{r m1-vow-get-prior}
+m1_vow_prior_df <- get_prior(
+  m1_vow_bf,
+  data = dur_sub
+)
+```
+
+```{r m1-vow-priors}
+m1_vow_priors <- m1_vow_prior_df %>%
+  mutate(
+    prior = case_when(
+      class == "Intercept" ~ "normal(0, 3)",
+      class == "b" & coef != "" ~ "normal(0, 1)",
+      class == "sd" & coef != "" ~ "cauchy(0, 0.1)",
+      class == "sigma" ~ "cauchy(0, 0.1)",
+      class == "cor" ~ "lkj(2)",
+      TRUE ~ ""
+    )
+  )
+
+class(m1_vow_priors) <- c("brmsprior", "data.frame")
+```
+
+```{r m1-vow-prior-checks}
+m1_vow_prior_checks <- brm(
+  m1_vow_bf,
+  data = dur_sub,
+  prior = m1_vow_priors,
+  sample_prior = "only",
+  seed = my.seed,
+  file = "./rtMRI-velum/models/m1_vow_prior_checks"
+)
+```
+
+```{r m1-vow-prior-checks-plot}
+plot(conditional_effects(m1_vow_prior_checks), ask = FALSE)
+```
+
+## Fit model
+
+```{r m1-vow}
+m1_vow <- brm(
+  m1_vow_bf,
+  data = dur_sub,
+  prior = m1_vow_priors,
+  seed = my.seed,
+  file = "./rtMRI-velum/models/m1_vow",
+  control = list(adapt_delta = 0.999)
+)
+```
+
