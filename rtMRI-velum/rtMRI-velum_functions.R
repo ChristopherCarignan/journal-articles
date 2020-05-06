@@ -163,6 +163,22 @@ m1_plot +
   scale_x_continuous(breaks=seq(0,1000,5)) + theme_bw()
 dev.off()
 
+# sensitivity analysis (Betancourt 2018)
+
+m1_fixed <- fixef(m1) %>% as_tibble(rownames = "term")
+
+m1_fixed %>%
+  mutate(
+    theta = c(0, 0, 0),
+    sigma_prior = c(3, 1, 1),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 250)
 
 
 # # # # # # # # # # # # #
@@ -261,7 +277,22 @@ m2_plot +
   scale_x_continuous(breaks=seq(0,1000,5)) + theme_bw()
 dev.off()
 
+# sensitivity analysis (Betancourt 2018)
 
+m2_fixed <- fixef(m2) %>% as_tibble(rownames = "term")
+
+m2_fixed %>%
+  mutate(
+    theta = c(0, 0, 0),
+    sigma_prior = c(3, 1, 1),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 200)
 
 # # # # # # # # # # # #
 # Figure 7            #
@@ -358,6 +389,23 @@ m3_plot +
   geom_segment(aes(x=nt.ci[2], xend=nt.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
   scale_x_continuous(breaks=seq(-1000,1000,5)) + theme_bw()
 dev.off()
+
+# sensitivity analysis (Betancourt 2018)
+
+m3_fixed <- fixef(m3) %>% as_tibble(rownames = "term")
+
+m3_fixed %>%
+  mutate(
+    theta = c(0, 0, 0),
+    sigma_prior = c(3, 1, 1),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 100)
 
 
 
@@ -477,7 +525,22 @@ m4_plot +
   scale_x_continuous(breaks=seq(0,100,5)) + theme_bw()
 dev.off()
 
+# sensitivity analysis (Betancourt 2018)
 
+m4_fixed <- fixef(m4) %>% as_tibble(rownames = "term")
+
+m4_fixed %>%
+  mutate(
+    theta = c(0, 0, 0),
+    sigma_prior = c(50, 25, 25),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 15)
 
 # # # # # # # # # # # # # # # #
 # Figure 8                    #
@@ -594,6 +657,22 @@ m5_plot +
   scale_x_continuous(breaks=seq(-1000,1000,5)) + theme_bw()
 dev.off()
 
+# sensitivity analysis (Betancourt 2018)
+
+m5_fixed <- fixef(m5) %>% as_tibble(rownames = "term")
+
+m5_fixed %>%
+  mutate(
+    theta = c(0, 0, 0),
+    sigma_prior = c(200, 100, 100),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 15)
 
 
 # # # # # # # # # # # # # # # # #
@@ -712,6 +791,22 @@ m6_plot +
   scale_x_continuous(breaks=seq(0,1,0.05)) + theme_bw()
 dev.off()
 
+# sensitivity analysis (Betancourt 2018)
+
+m6_fixed <- fixef(m6) %>% as_tibble(rownames = "term")
+
+m6_fixed %>%
+  mutate(
+    theta = c(0, 0, 0),
+    sigma_prior = c(10, 5, 5),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 10)
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -851,6 +946,23 @@ m7_plot +
   scale_x_continuous(breaks=seq(-1000,1000,5)) + theme_bw()
 dev.off()
 
+# sensitivity analysis (Betancourt 2018)
+
+m7_fixed <- fixef(m7) %>% as_tibble(rownames = "term")
+
+m7_fixed %>%
+  mutate(
+    theta = c(0, 0, 0),
+    sigma_prior = c(3, 1, 1),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 100)
+
 
 # now, we look at the duration of the consonant nasalization
 subdat$DV <- subdat$dur.NN
@@ -944,6 +1056,22 @@ m8_plot +
   scale_x_continuous(breaks=seq(-1000,1000,5)) + theme_bw()
 dev.off()
 
+# sensitivity analysis (Betancourt 2018)
+
+m8_fixed <- fixef(m8) %>% as_tibble(rownames = "term")
+
+m8_fixed %>%
+  mutate(
+    theta = c(0, 0, 0),
+    sigma_prior = c(3, 1, 1),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 200)
 
 
 # # # # # # # # # # # # # # # # # # # # # #
@@ -1018,7 +1146,6 @@ m10_null <- brms::brm(
   save_all_pars = TRUE
 )
 
-
 # calculate the Bayes factor of the difference between the full and null models
 #brms::bayes_factor(m10, m10_null)
 
@@ -1064,6 +1191,22 @@ m10_plot +
   scale_x_continuous(breaks=seq(-1,1,0.1)) + theme_bw()
 dev.off()
 
+# sensitivity analysis (Betancourt 2018)
+
+m10_fixed <- fixef(m10) %>% as_tibble(rownames = "term")
+
+m10_fixed %>%
+  mutate(
+    theta = c(0, 0, 0),
+    sigma_prior = c(3, 3, 3),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 5)
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -1162,3 +1305,21 @@ m11_plot +
   geom_segment(aes(x=nt.ci[2], xend=nt.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
   scale_x_continuous(breaks=seq(-1,1,0.1)) + theme_bw()
 dev.off()
+
+
+# sensitivity analysis (Betancourt 2018)
+
+m11_fixed <- fixef(m11) %>% as_tibble(rownames = "term")
+
+m11_fixed %>%
+  mutate(
+    theta = c(0, 0, 0),
+    sigma_prior = c(3, 3, 3),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 5)
