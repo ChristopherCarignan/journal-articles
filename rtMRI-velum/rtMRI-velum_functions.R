@@ -212,6 +212,9 @@ m2 <- brms::brm(
 # model summary
 summary(m2)
 
+# posterior predictive check
+pp_check(m2, nsamples = 100)
+
 # reduced/null model
 m2_null <- brms::brm(
   DV ~
@@ -324,6 +327,9 @@ m3 <- brms::brm(
 
 # model summary
 summary(m3)
+
+# posterior predictive check
+pp_check(m3, nsamples = 100)
 
 # reduced/null model
 m3_null <- brms::brm(
@@ -459,6 +465,9 @@ m4 <- brms::brm(
 # model summary
 summary(m4)
 
+# posterior predictive check
+pp_check(m4, nsamples = 100)
+
 # reduced/null model
 m4_null <- brms::brm(
   DV ~
@@ -592,6 +601,9 @@ m5 <- brms::brm(
 # model summary
 summary(m5)
 
+# posterior predictive check
+pp_check(m5, nsamples = 100)
+
 # reduced/null model
 m5_null <- brms::brm(
   DV ~
@@ -724,6 +736,9 @@ m6 <- brms::brm(
 
 # model summary
 summary(m6)
+
+# posterior predictive check
+pp_check(m6, nsamples = 100)
 
 # reduced/null model
 m6_null <- brms::brm(
@@ -881,6 +896,9 @@ m7 <- brms::brm(
 # model summary
 summary(m7)
 
+# posterior predictive check
+pp_check(m7, nsamples = 100)
+
 # reduced/null model
 m7_null <- brms::brm(
   DV ~
@@ -989,6 +1007,9 @@ m8 <- brms::brm(
 
 # model summary
 summary(m8)
+
+# posterior predictive check
+pp_check(m8, nsamples = 100)
 
 # reduced/null model
 m8_null <- brms::brm(
@@ -1126,6 +1147,9 @@ m10 <- brms::brm(
 # model summary
 summary(m10)
 
+# posterior predictive check
+pp_check(m10, nsamples = 100)
+
 # reduced/null model
 m10_null <- brms::brm(
   DV ~
@@ -1239,6 +1263,9 @@ m11 <- brms::brm(
 
 # model summary
 summary(m11)
+
+# posterior predictive check
+pp_check(m11, nsamples = 100)
 
 # reduced/null model
 m11_null <- brms::brm(
