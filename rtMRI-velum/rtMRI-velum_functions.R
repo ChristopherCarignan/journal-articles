@@ -178,9 +178,8 @@ summary(onset)
 # reduced/null model
 onset_null <- brms::brm(
   DV ~
-    speech_rate_c +
-    (1 + voicing + speech_rate_c | speaker) +
-    (1 + voicing + speech_rate_c | word),
+    (1 + voicing | speaker) +
+    (1 + voicing | word),
   data = subdat,
   family = lognormal(),
   prior = c(prior(normal(0, 3), class = Intercept),
