@@ -389,7 +389,6 @@ integ_null <- brms::brm(
   data = subdat,
   family = gaussian(),
   prior = c(prior(normal(0, 50), class = Intercept),
-            prior(normal(0, 25), class = b, coef = voicingvoiceless),
             prior(cauchy(0, 1), class = sd),
             prior(cauchy(0, 1), class = sigma),
             prior(lkj(2), class = cor)),
