@@ -3,6 +3,8 @@ require(bayesplot)
 require(tidyverse)
 require(lme4)
 require(parallel)
+library(tidybayes)
+library(patchwork)
 
 #### Prepare data ####
 core.num <- parallel::detectCores()
@@ -1350,3 +1352,41 @@ m11_fixed %>%
   geom_point() +
   geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
   xlim(0, 1) + ylim(0, 5)
+
+# Composite marginal post plot ####
+
+time_post <- bind_rows(
+  m1_post %>% rename(`gesture duration` = DV) %>% pivot_longer(`gesture duration`, names_to = "outcome", values_to = "estimate"),
+  m2_post %>% rename(`gesture offset` = DV) %>% pivot_longer(`gesture offset`, names_to = "outcome", values_to = "estimate"),
+  m3_post %>% rename(`gesture onset` = DV) %>% pivot_longer(`gesture onset`, names_to = "outcome", values_to = "estimate")
+) %>%
+  mutate(outcome = factor(outcome, levels = c("gesture offset", "gesture onset", "gesture duration")))
+
+# same scale
+
+time_post %>%
+  ggplot(aes(estimate, outcome, group = context)) +
+  geom_halfeyeh(alpha = 0.5) +
+  labs(y = element_blank())
+
+# different scale
+
+p1 <- time_post %>%
+  filter(outcome == "gesture duration") %>%
+  ggplot(aes(estimate, outcome, group = context)) +
+  geom_halfeyeh(alpha = 0.5) +
+  labs(x = element_blank(), y = element_blank())
+
+p2 <- time_post %>%
+  filter(outcome == "gesture onset") %>%
+  ggplot(aes(estimate, outcome, group = context)) +
+  geom_halfeyeh(alpha = 0.5) +
+  labs(x = element_blank(), y = element_blank())
+
+p3 <- time_post %>%
+  filter(outcome == "gesture offset") %>%
+  ggplot(aes(estimate, outcome, group = context)) +
+  geom_halfeyeh(alpha = 0.5) +
+  labs(y = element_blank())
+
+p1 + p2 + p3 + plot_layout(ncol = 1, guides = "collect")
