@@ -1,8 +1,10 @@
 require(brms)
 require(bayesplot)
 require(tidyverse)
+require(tidybayes)
 require(lme4)
 require(parallel)
+require(patchwork)
 
 #### Prepare data ####
 core.num <- parallel::detectCores()
@@ -39,6 +41,8 @@ subdat <- matdat[matdat$post %in% coda & matdat$stress %in% stresses, ]
 # Figure X                #
 # Velum gesture duration  #
 # # # # # # # # # # # # # #
+
+The BRM for velum gesture duration was built using a log-normal distribution \citep{Rosen2005, Ratnikova2017, Gahl2019}. The following distributions were used as weakly informative priors (on the log-odds scale): for the intercept of duration (corresponding to \ips{nd} and overall mean speech rate), a normal distribution with mean 0 and standard deviation 3 (Normal(0, 3)); for the effect of voicing (when \ips{nt}) and centred speech rate, Normal(0, 1). These roughly correspond to a belief that the intercept is between 0 and 400 ms, and the duration changes (increase or decreases) by a factor of 0 to 7 in the \ips{nd} context, at 95\% confidence. For the model standard deviation and the random intercept standard deviation we used a half Cauchy distribution with location 0 and scale 0.1. For the correlation between random effects, an LKJ(2) distribution. The same prior specification was used for the other models in this section (velum gesture onset time and offset time).
 
 # create the dependent variable
 subdat$DV <- subdat$velumopening_gesture_dur*1000
@@ -456,6 +460,8 @@ dev.off()
 # Velum gesture peak (timing) #
 # # # # # # # # # # # # # # # #
 
+The BRM for the time point of the velum gesture peak was built using a Gaussian distribution; unlike the other measures of timing, the time point of the velum gesture peak is not expected to follow a one-sided distribution, since the peak can potentially occur before or after the vowel offset. The following distributions were used as weakly informative priors (on the milliseconds scale): for the intercept (corresponding to \ips{nd} and overall mean speech rate), Normal(0, 200); for the effect of voicing (when \ips{nt}) and centred speech rate, Normal(0, 100). These correspond to a belief that the intercept is between -400 and 400 ms, and that the time changes by -200 to 200 ms in the \ips{nt} context, at 95\% confidence. For the model standard deviation and the random intercept standard deviation we used HalfCauchy(0, 5). For the correlation between random effects, an LKJ(2) distribution.
+
 # create the dependent variable
 subdat$DV <- (subdat$velumopening_maxcon_on - subdat$Vokal_off)*1000
 
@@ -513,7 +519,7 @@ gest.max_null <- brms::brm(
 # calculate the marginal posteriors of the full model
 gest.max_post <- brms::posterior_samples(gest.max, pars="b_") %>%
   dplyr::mutate(
-    nd = b_Intercept,a
+    nd = b_Intercept,
     nt = b_Intercept + b_voicingvoiceless
   ) %>%    
   dplyr::select(nd, nt) %>%
@@ -558,6 +564,8 @@ dev.off()
 # Figure 9                      #
 # Velum gesture peak (magnitude)#
 # # # # # # # # # # # # # # # # #
+
+The BRM for the velum gesture magnitude was built using a Beta distribution, since the magnitude values are on a 0-1 scale. The following weakly informative priors were used: Normal(0, 10) for the intercept; Normal(0, 5) for voicing, speech rate, and the random effects standard deviations; the \textit{brms} default prior for the $\phi$ parameter of the beta distribution (gamma(0.01, 0.01)); and LKJ(2) prior for the random effects correlation.
 
 # create the dependent variable
 subdat$DV <- subdat$velum2US_velumopening_maxcon_onset
@@ -880,10 +888,10 @@ stiff.ons <- brms::brm(
     (1 + voicing | word),
   data = subdat,
   family = lognormal(),
-  prior = c(prior(normal(0, 30), class = Intercept),
-            prior(normal(0, 10), class = b, coef = voicingvoiceless),
-            prior(cauchy(0, 1), class = sd),
-            prior(cauchy(0, 1), class = sigma),
+  prior = c(prior(normal(0, 3), class = Intercept),
+            prior(normal(0, 1), class = b, coef = voicingvoiceless),
+            prior(cauchy(0, 0.1), class = sd),
+            prior(cauchy(0, 0.1), class = sigma),
             prior(lkj(2), class = cor)),
   seed = my.seed,
   iter = 4000,
@@ -906,9 +914,9 @@ stiff.ons_null <- brms::brm(
     (1 + voicing | word),
   data = subdat,
   family = lognormal(),
-  prior = c(prior(normal(0, 30), class = Intercept),
-            prior(cauchy(0, 1), class = sd),
-            prior(cauchy(0, 1), class = sigma),
+  prior = c(prior(normal(0, 3), class = Intercept),
+            prior(cauchy(0, 0.1), class = sd),
+            prior(cauchy(0, 0.1), class = sigma),
             prior(lkj(2), class = cor)),
   seed = my.seed,
   iter = 4000,
@@ -984,10 +992,10 @@ stiff.off <- brms::brm(
     (1 + voicing | word),
   data = subdat,
   family = lognormal(),
-  prior = c(prior(normal(0, 30), class = Intercept),
-            prior(normal(0, 10), class = b, coef = voicingvoiceless),
-            prior(cauchy(0, 1), class = sd),
-            prior(cauchy(0, 1), class = sigma),
+  prior = c(prior(normal(0, 3), class = Intercept),
+            prior(normal(0, 1), class = b, coef = voicingvoiceless),
+            prior(cauchy(0, 0.1), class = sd),
+            prior(cauchy(0, 0.1), class = sigma),
             prior(lkj(2), class = cor)),
   seed = my.seed,
   iter = 4000,
@@ -1010,10 +1018,9 @@ stiff.off_null <- brms::brm(
     (1 + voicing | word),
   data = subdat,
   family = lognormal(),
-  prior = c(prior(normal(0, 30), class = Intercept),
-            prior(normal(0, 10), class = b, coef = voicingvoiceless),
-            prior(cauchy(0, 1), class = sd),
-            prior(cauchy(0, 1), class = sigma),
+  prior = c(prior(normal(0, 3), class = Intercept),
+            prior(cauchy(0, 0.1), class = sd),
+            prior(cauchy(0, 0.1), class = sigma),
             prior(lkj(2), class = cor)),
   seed = my.seed,
   iter = 6000,
@@ -1076,40 +1083,118 @@ dev.off()
 
 
 # Composite marginal post plot ####
+my.cols <- c("#2c7fb8","#7fcdbb")
 
 time_post <- bind_rows(
-  dur_post %>% rename(`gesture duration` = DV) %>% pivot_longer(`gesture duration`, names_to = "outcome", values_to = "estimate"),
-  offset_post %>% rename(`gesture offset` = DV) %>% pivot_longer(`gesture offset`, names_to = "outcome", values_to = "estimate"),
-  onset_post %>% rename(`gesture onset` = DV) %>% pivot_longer(`gesture onset`, names_to = "outcome", values_to = "estimate")
+  dur_post %>% rename(`duration` = DV) %>% pivot_longer(`duration`, names_to = "outcome", values_to = "estimate"),
+  offset_post %>% rename(`offset` = DV) %>% pivot_longer(`offset`, names_to = "outcome", values_to = "estimate"),
+  onset_post %>% rename(`onset` = DV) %>% pivot_longer(`onset`, names_to = "outcome", values_to = "estimate"),
+  gest.max_post %>% rename(`peak` = DV) %>% pivot_longer(`peak`, names_to = "outcome", values_to = "estimate")
 ) %>%
-  mutate(outcome = factor(outcome, levels = c("gesture offset", "gesture onset", "gesture duration")))
+  mutate(outcome = factor(outcome, levels = c("duration", "onset", "offset", "peak")))
 
-# same scale
+time_post$estimate[time_post$outcome=="onset"] <- -time_post$estimate[time_post$outcome=="onset"]
 
-time_post %>%
-  ggplot(aes(estimate, outcome, group = context)) +
-  geom_halfeyeh(alpha = 0.5) +
-  labs(y = element_blank())
+time_post$outcome <- factor(time_post$outcome, levels = c("offset","peak","onset","duration"))
 
-# different scale
+
+# separate plots
 
 p1 <- time_post %>%
-  filter(outcome == "gesture duration") %>%
-  ggplot(aes(estimate, outcome, group = context)) +
-  geom_halfeyeh(alpha = 0.5) +
-  labs(x = element_blank(), y = element_blank())
+  filter(outcome == "duration") %>%
+  ggplot(aes(estimate, outcome, group = context, fill = context)) +
+  geom_halfeyeh(slab_color="black", slab_alpha=0.5) +
+  scale_x_continuous(breaks=seq(0,500,5)) +
+  coord_cartesian(ylim = c(1.3, 1.5), xlim = c(250,327)) +
+  scale_fill_manual(values = my.cols) +
+  labs(x = "Duration (ms)", y = element_blank()) + theme_bw() + theme(legend.position = "none",axis.text=element_text(size=12),axis.title=element_text(size=13))
 
 p2 <- time_post %>%
-  filter(outcome == "gesture onset") %>%
-  ggplot(aes(estimate, outcome, group = context)) +
-  geom_halfeyeh(alpha = 0.5) +
-  labs(x = element_blank(), y = element_blank())
+  filter(outcome %in% c("onset","peak","offset")) %>%
+  ggplot(aes(estimate, outcome, group = context, fill = context)) +
+  geom_halfeyeh(slab_color="black", slab_alpha=0.5) +
+  geom_vline(xintercept = 0, lty=2) +
+  scale_x_continuous(breaks=seq(-200,300,20)) +
+  coord_cartesian(xlim = c(-125,205)) +
+  scale_fill_manual(values=my.cols) +
+  labs(x = "Time (ms) relative to acoustic vowel offset", y = element_blank(), fill = "Context") + theme_bw() + theme(axis.text=element_text(size=12),axis.title=element_text(size=13),panel.grid.major.y=element_blank())
+
+pdf(file="./rtMRI-velum/plots/time_plots.pdf",width=9.5,height=5,onefile=T,pointsize=14)
+p1 + p2 + patchwork::plot_layout(ncol = 1, guides = "collect") + theme(legend.position = "right")
+dev.off()
+
+
+
+# Composite marginal post plot ####
+
+time_post <- bind_rows(
+  gest.max.mag_post %>% rename(`peak    \nmagnitude` = DV) %>% pivot_longer(`peak    \nmagnitude`, names_to = "outcome", values_to = "estimate"),
+  integ_post %>% rename(`gesture\nintegral` = DV) %>% pivot_longer(`gesture\nintegral`, names_to = "outcome", values_to = "estimate"),
+  accel_post %>% rename(`maximum  \nacceleration` = DV) %>% pivot_longer(`maximum  \nacceleration`, names_to = "outcome", values_to = "estimate"),
+  quad_post %>% rename(`quadratic \ncoefficient` = DV) %>% pivot_longer(`quadratic \ncoefficient`, names_to = "outcome", values_to = "estimate"),
+  stiff.ons_post %>% rename(`opening\nstiffness` = DV) %>% pivot_longer(`opening\nstiffness`, names_to = "outcome", values_to = "estimate"),
+  stiff.off_post %>% rename(`closing \nstiffness` = DV) %>% pivot_longer(`closing \nstiffness`, names_to = "outcome", values_to = "estimate")
+) %>%
+  mutate(outcome = factor(outcome, levels = c("peak    \nmagnitude", "gesture\nintegral", "maximum  \nacceleration", "quadratic \ncoefficient", "closing \nstiffness", "opening\nstiffness")))
+
+
+
+# separate plots
+
+p1 <- time_post %>%
+  filter(outcome == "peak    \nmagnitude") %>%
+  ggplot(aes(estimate, outcome, group = context, fill = context)) +
+  geom_halfeyeh(slab_color="black", slab_alpha=0.5) +
+  scale_x_continuous(breaks=seq(0,1,0.025)) +
+  coord_cartesian(xlim = c(0.58,0.775), ylim = c(1.4,1.4)) +
+  scale_fill_manual(values=my.cols) +
+  labs(x = "Velum opening magnitude (speaker-scaled)", y = element_blank(), fill = "Context") + theme_bw() + theme(axis.text=element_text(size=12),axis.title=element_text(size=13))
+
+p2 <- time_post %>%
+  filter(outcome == "gesture\nintegral") %>%
+  ggplot(aes(estimate, outcome, group = context, fill = context)) +
+  geom_halfeyeh(slab_color="black", slab_alpha=0.5) +
+  scale_x_continuous(breaks=seq(10,50,1)) +
+  coord_cartesian(xlim = c(18,32), ylim = c(1.4,1.4)) +
+  scale_fill_manual(values=my.cols) +
+  labs(x = "Velum displacement integral (time X magnitude)", y = element_blank(), fill = "Context") + theme_bw() + theme(axis.text=element_text(size=12),axis.title=element_text(size=13))
 
 p3 <- time_post %>%
-  filter(outcome == "gesture offset") %>%
-  ggplot(aes(estimate, outcome, group = context)) +
-  geom_halfeyeh(alpha = 0.5) +
-  labs(y = element_blank())
+  filter(outcome %in% c("maximum  \nacceleration","quadratic \ncoefficient")) %>%
+  ggplot(aes(estimate, outcome, group = context, fill = context)) +
+  geom_halfeyeh(slab_color="black", slab_alpha=0.5) +
+  scale_x_continuous(breaks=seq(-1,1,0.1)) +
+  coord_cartesian(xlim = c(-0.5,0.45), ylim = c(1.5,1.95)) +
+  scale_fill_manual(values=my.cols) +
+  labs(x = "z-scale normalized values", y = element_blank(), fill = "Context") + theme_bw() + theme(legend.position = "none",axis.text=element_text(size=12),axis.title=element_text(size=13),panel.grid.major.y=element_blank())
 
-p1 + p2 + p3 + plot_layout(ncol = 1, guides = "collect")
+p4 <- time_post %>%
+  filter(outcome %in% c("opening\nstiffness","closing \nstiffness")) %>%
+  ggplot(aes(estimate, outcome, group = context, fill = context)) +
+  geom_halfeyeh(slab_color="black", slab_alpha=0.5) +
+  scale_x_continuous(breaks=seq(0,30,0.5)) +
+  coord_cartesian(xlim = c(12,17.5), ylim = c(1.4,2.3)) +
+  scale_fill_manual(values=my.cols) +
+  labs(x = "Stiffness", y = element_blank(), fill = "Context") + theme_bw() + theme(axis.text=element_text(size=12),axis.title=element_text(size=13),panel.grid.major.y=element_blank())
 
+pdf(file="./rtMRI-velum/plots/shape_plots.pdf",width=9,height=9,onefile=T,pointsize=14)
+p1 + p2 + p3 + p4 + patchwork::plot_layout(ncol = 1, guides = "collect") + theme(legend.position = "right")
+dev.off()
+
+
+pdf(file="./rtMRI-velum/plots/magnitude_plot.pdf",width=9,height=3,onefile=T,pointsize=14)
+p1 + patchwork::plot_layout(ncol = 1, guides = "collect") + theme(legend.position = "right")
+dev.off()
+
+pdf(file="./rtMRI-velum/plots/integral_plot.pdf",width=9,height=3,onefile=T,pointsize=14)
+p2 + patchwork::plot_layout(ncol = 1, guides = "collect") + theme(legend.position = "right")
+dev.off()
+
+pdf(file="./rtMRI-velum/plots/peakiness_plots.pdf",width=9,height=4,onefile=T,pointsize=14)
+p3 + patchwork::plot_layout(ncol = 1, guides = "collect") + theme(legend.position = "right")
+dev.off()
+
+
+pdf(file="./rtMRI-velum/plots/stiffness_plots.pdf",width=9,height=4,onefile=T,pointsize=14)
+p4 + patchwork::plot_layout(ncol = 1, guides = "collect") + theme(legend.position = "right")
+dev.off()
