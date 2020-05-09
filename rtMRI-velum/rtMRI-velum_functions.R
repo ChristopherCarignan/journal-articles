@@ -38,7 +38,6 @@ subdat <- matdat[matdat$post %in% coda & matdat$stress %in% stresses, ]
 
 
 # # # # # # # # # # # # # #
-# Figure X                #
 # Velum gesture duration  #
 # # # # # # # # # # # # # #
 
@@ -73,9 +72,6 @@ dur <- brms::brm(
 # model summary
 summary(dur)
 
-# posterior predictive check
-pp_check(dur, nsamples = 100)
-
 # reduced/null model
 dur_null <- brms::brm(
   DV ~
@@ -99,7 +95,7 @@ dur_null <- brms::brm(
 )
 
 # calculate the Bayes factor of the difference between the full and null models
-#brms::bayes_factor(dur, dur_null)
+brms::bayes_factor(dur, dur_null)
 
 # calculate the marginal posteriors of the full model
 dur_post <- brms::posterior_samples(dur, pars="b_") %>%
@@ -110,43 +106,9 @@ dur_post <- brms::posterior_samples(dur, pars="b_") %>%
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
 
-# calculate the 95% credible intervals
-# 95% CI of /nd/ items
-nd.ci <- quantile(dur_post$DV[dur_post$context=="nd"], probs=c(0.025,0.975))
-# 95% CI of /nt/ items
-nt.ci <- quantile(dur_post$DV[dur_post$context=="nt"], probs=c(0.025,0.975))
-
-## create Figure 5
-pdf(file="./rtMRI-velum/plots/duration.pdf",width=7,height=3,onefile=T,pointsize=16)
-# perceptually distinct colors that are also safe for B/W printing
-my.cols <- c("#2c7fb8","#7fcdbb")
-# base plot
-post_plot <- dur_post %>%
-  ggplot(aes(DV, fill = context)) +
-  geom_density(alpha = 0.7) +
-  scale_fill_manual(values=my.cols) +
-  ggtitle("Velum gesture duration") + 
-  ylab("Posterior probability (density)") + xlab("Duration (ms)")
-# get y-range values of the base plot (for determining height of CI whisker bars)
-yrange <- ggplot_build(post_plot)$layout$panel_scales_y[[1]]$range$range
-yrange <- yrange[2] - yrange[1]
-# add CI whiskers to base plot
-post_plot + 
-  # whisker for context 1
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[2], y=-yrange/10, yend=-yrange/10), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[1], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[2], xend=nd.ci[2], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  # whisker for context 2
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[2], xend=nt.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  scale_x_continuous(breaks=seq(0,1000,5)) + theme_bw()
-dev.off()
-
 
 
 # # # # # # # # # # # #
-# Figure X            #
 # Velum gesture onset #
 # # # # # # # # # # # #
 
@@ -202,7 +164,7 @@ onset_null <- brms::brm(
 )
 
 # calculate the Bayes factor of the difference between the full and null models
-#brms::bayes_factor(onset, onset_null)
+brms::bayes_factor(onset, onset_null)
 
 # calculate the marginal posteriors of the full model
 onset_post <- brms::posterior_samples(onset, pars="b_") %>%
@@ -213,250 +175,9 @@ onset_post <- brms::posterior_samples(onset, pars="b_") %>%
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
 
-# calculate the 90% credible intervals
-# 95% CI of /nd/ items
-nd.ci <- quantile(-onset_post$DV[onset_post$context=="nd"], probs=c(0.025,0.975))
-# 95% CI of /nt/ items
-nt.ci <- quantile(-onset_post$DV[onset_post$context=="nt"], probs=c(0.025,0.975))
-
-## create Figure 7
-pdf(file="./rtMRI-velum/plots/onset.pdf",width=7,height=3,onefile=T,pointsize=16)
-# perceptually distinct colors that are also safe for B/W printing
-my.cols <- c("#2c7fb8","#7fcdbb")
-# base plot
-post_plot <- onset_post %>%
-  ggplot(aes(-DV, fill = context)) +
-  geom_density(alpha = 0.7) +
-  scale_fill_manual(values=my.cols) +
-  ggtitle("Velum gesture onset") + 
-  ylab("Posterior probability (density)") + xlab("Time (ms) relative to acoustic vowel offset")
-# get y-range values of the base plot (for determining height of CI whisker bars)
-yrange <- ggplot_build(post_plot)$layout$panel_scales_y[[1]]$range$range
-yrange <- yrange[2] - yrange[1]
-# add CI whiskers to base plot
-post_plot + 
-  # whisker for context 1
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[2], y=-yrange/10, yend=-yrange/10), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[1], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[2], xend=nd.ci[2], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  # whisker for context 2
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[2], xend=nt.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  scale_x_continuous(breaks=seq(-1000,1000,5)) + theme_bw()
-dev.off()
-
-
-
-# # # # # # # # # # # # #
-# Figure X              #
-# Velum gesture offset  #
-# # # # # # # # # # # # #
-
-# create the dependent variable
-subdat$DV <- (subdat$velumopening_gesture_off - subdat$Vokal_off)*1000
-
-# full model
-offset <- brms::brm(
-  DV ~ voicing +
-    (1 + voicing | speaker) +
-    (1 + voicing | word),
-  data = subdat,
-  family = lognormal(),
-  prior = c(prior(normal(0, 3), class = Intercept),
-            prior(normal(0, 1), class = b, coef = voicingvoiceless),
-            prior(cauchy(0, 0.1), class = sd),
-            prior(cauchy(0, 0.1), class = sigma),
-            prior(lkj(2), class = cor)),
-  seed = my.seed,
-  iter = 6000,
-  warmup = 3000,
-  chains = 4,
-  cores = core.num,
-  control = list(adapt_delta = 0.99,
-                 max_treedepth = 20),
-  file = "./rtMRI-velum/models/offset",
-  save_all_pars = TRUE
-)
-
-# model summary
-summary(offset)
-
-# reduced/null model
-offset_null <- brms::brm(
-  DV ~
-    (1 + voicing | speaker) +
-    (1 + voicing | word),
-  data = subdat,
-  family = lognormal(),
-  prior = c(prior(normal(0, 3), class = Intercept),
-            prior(cauchy(0, 0.1), class = sd),
-            prior(cauchy(0, 0.1), class = sigma),
-            prior(lkj(2), class = cor)),
-  seed = my.seed,
-  iter = 6000,
-  warmup = 3000,
-  chains = 4,
-  cores = core.num,
-  control = list(adapt_delta = 0.99,
-                 max_treedepth = 20),
-  file = "./rtMRI-velum/models/offset_null",
-  save_all_pars = TRUE
-)
-
-# calculate the Bayes factor of the difference between the full and null models
-#brms::bayes_factor(offset, offset_null)
-
-# calculate the marginal posteriors of the full model
-offset_post <- brms::posterior_samples(offset, pars="b_") %>%
-  dplyr::mutate(
-    nd = exp(b_Intercept),
-    nt = exp(b_Intercept) * exp(b_voicingvoiceless)
-  ) %>%
-  dplyr::select(nd, nt) %>%
-  tidyr::gather(context, DV)
-
-# calculate the 90% credible intervals
-# 95% CI of /nd/ items
-nd.ci <- quantile(offset_post$DV[offset_post$context=="nd"], probs=c(0.025,0.975))
-# 95% CI of /nt/ items
-nt.ci <- quantile(offset_post$DV[offset_post$context=="nt"], probs=c(0.025,0.975))
-
-## create Figure 6
-pdf(file="./rtMRI-velum/plots/offset.pdf",width=7,height=3,onefile=T,pointsize=16)
-# perceptually distinct colors that are also safe for B/W printing
-my.cols <- c("#2c7fb8","#7fcdbb")
-# base plot
-post_plot <- offset_post %>%
-  ggplot(aes(DV, fill = context)) +
-  geom_density(alpha = 0.7) +
-  scale_fill_manual(values=my.cols) +
-  ggtitle("Velum gesture offset") + 
-  ylab("Posterior probability (density)") + xlab("Time (ms) relative to acoustic vowel offset")
-# get y-range values of the base plot (for determining height of CI whisker bars)
-yrange <- ggplot_build(post_plot)$layout$panel_scales_y[[1]]$range$range
-yrange <- yrange[2] - yrange[1]
-# add CI whiskers to base plot
-post_plot + 
-  # whisker for context 1
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[2], y=-yrange/10, yend=-yrange/10), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[1], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[2], xend=nd.ci[2], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  # whisker for context 2
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[2], xend=nt.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  scale_x_continuous(breaks=seq(0,1000,5)) + theme_bw()
-dev.off()
-
-
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# Figure X                                                    #
-# Integral of velum movement in vowel (area under the curve)  #
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-# create the dependent variable
-subdat$DV <- subdat$vowel.integ
-
-# full model
-integ <- brms::brm(
-  DV ~ voicing +
-    (1 + voicing | speaker) +
-    (1 + voicing | word),
-  data = subdat,
-  family = gaussian(),
-  prior = c(prior(normal(0, 50), class = Intercept),
-            prior(normal(0, 25), class = b, coef = voicingvoiceless),
-            prior(cauchy(0, 1), class = sd),
-            prior(cauchy(0, 1), class = sigma),
-            prior(lkj(2), class = cor)),
-  seed = my.seed,
-  iter = 6000,
-  warmup = 3000,
-  chains = 4, 
-  cores = core.num,
-  control = list(adapt_delta = 0.99,
-                 max_treedepth = 20),
-  file = "./rtMRI-velum/models/vowel_integ",
-  save_all_pars = TRUE
-)
-
-# model summary
-summary(integ)
-
-# reduced/null model
-integ_null <- brms::brm(
-  DV ~
-    (1 + voicing | speaker) +
-    (1 + voicing | word),
-  data = subdat,
-  family = gaussian(),
-  prior = c(prior(normal(0, 50), class = Intercept),
-            prior(cauchy(0, 1), class = sd),
-            prior(cauchy(0, 1), class = sigma),
-            prior(lkj(2), class = cor)),
-  seed = my.seed,
-  iter = 6000,
-  warmup = 3000,
-  chains = 4,
-  cores = core.num,
-  control = list(adapt_delta = 0.99,
-                 max_treedepth = 20),
-  file = "./rtMRI-velum/models/vowel_integ_null",
-  save_all_pars = TRUE
-)
-
-
-# calculate the Bayes factor of the difference between the full and null models
-#brms::bayes_factor(integ, integ_null)
-
-# calculate the marginal posteriors of the full model
-integ_post <- brms::posterior_samples(integ, pars="b_") %>%
-  dplyr::mutate(
-    nd = b_Intercept,
-    nt = b_Intercept + b_voicingvoiceless
-  ) %>%
-  dplyr::select(nd, nt) %>%
-  tidyr::gather(context, DV)
-
-# calculate the 90% credible intervals
-# 95% CI of /nd/ items
-nd.ci <- quantile(integ_post$DV[integ_post$context=="nd"], probs=c(0.025,0.975))
-# 95% CI of /nt/ items
-nt.ci <- quantile(integ_post$DV[integ_post$context=="nt"], probs=c(0.025,0.975))
-
-## create Figure 9
-pdf(file="./rtMRI-velum/plots/vowel_integ.pdf",width=7,height=3,onefile=T,pointsize=16)
-# perceptually distinct colors that are also safe for B/W printing
-my.cols <- c("#2c7fb8","#7fcdbb")
-# base plot
-post_plot <- integ_post %>%
-  ggplot(aes(DV, fill = context)) +
-  geom_density(alpha = 0.7) +
-  scale_fill_manual(values=my.cols) +
-  ggtitle("Integral of velum movement in vowel interval") + 
-  ylab("Posterior probability (density)") + xlab("Velum movement integral (time X magnitude)")
-# get y-range values of the base plot (for determining height of CI whisker bars)
-yrange <- ggplot_build(post_plot)$layout$panel_scales_y[[1]]$range$range
-yrange <- yrange[2] - yrange[1]
-# add CI whiskers to base plot
-post_plot + 
-  # whisker for context 1
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[2], y=-yrange/10, yend=-yrange/10), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[1], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[2], xend=nd.ci[2], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  # whisker for context 2
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[2], xend=nt.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  scale_x_continuous(breaks=seq(0,100,5)) + theme_bw()
-dev.off()
-
 
 
 # # # # # # # # # # # # # # # #
-# Figure 8                    #
 # Velum gesture peak (timing) #
 # # # # # # # # # # # # # # # #
 
@@ -514,7 +235,7 @@ gest.max_null <- brms::brm(
 )
 
 # calculate the Bayes factor of the difference between the full and null models
-#brms::bayes_factor(gest.max, gest.max_null)
+brms::bayes_factor(gest.max, gest.max_null)
 
 # calculate the marginal posteriors of the full model
 gest.max_post <- brms::posterior_samples(gest.max, pars="b_") %>%
@@ -525,43 +246,78 @@ gest.max_post <- brms::posterior_samples(gest.max, pars="b_") %>%
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
 
-# calculate the 90% credible intervals
-# 95% CI of /nd/ items
-nd.ci <- quantile(gest.max_post$DV[gest.max_post$context=="nd"], probs=c(0.025,0.975))
-# 95% CI of /nt/ items
-nt.ci <- quantile(gest.max_post$DV[gest.max_post$context=="nt"], probs=c(0.025,0.975))
 
-## create Figure 8
-pdf(file="./rtMRI-velum/plots/gest_max.pdf",width=7,height=3,onefile=T,pointsize=16)
-# perceptually distinct colors that are also safe for B/W printing
-my.cols <- c("#2c7fb8","#7fcdbb")
-# base plot
-post_plot <- gest.max_post %>%
-  ggplot(aes(DV, fill = context)) +
-  geom_density(alpha = 0.7) +
-  scale_fill_manual(values=my.cols) +
-  ggtitle("Velum gesture peak (timing)") + 
-  ylab("Posterior probability (density)") + xlab("Time (ms) relative to acoustic vowel offset")
-# get y-range values of the base plot (for determining height of CI whisker bars)
-yrange <- ggplot_build(post_plot)$layout$panel_scales_y[[1]]$range$range
-yrange <- yrange[2] - yrange[1]
-# add CI whiskers to base plot
-post_plot + 
-  # whisker for context 1
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[2], y=-yrange/10, yend=-yrange/10), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[1], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[2], xend=nd.ci[2], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  # whisker for context 2
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[2], xend=nt.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  scale_x_continuous(breaks=seq(-1000,1000,5)) + theme_bw()
-dev.off()
+
+# # # # # # # # # # # # #
+# Velum gesture offset  #
+# # # # # # # # # # # # #
+
+# create the dependent variable
+subdat$DV <- (subdat$velumopening_gesture_off - subdat$Vokal_off)*1000
+
+# full model
+offset <- brms::brm(
+  DV ~ voicing +
+    (1 + voicing | speaker) +
+    (1 + voicing | word),
+  data = subdat,
+  family = lognormal(),
+  prior = c(prior(normal(0, 3), class = Intercept),
+            prior(normal(0, 1), class = b, coef = voicingvoiceless),
+            prior(cauchy(0, 0.1), class = sd),
+            prior(cauchy(0, 0.1), class = sigma),
+            prior(lkj(2), class = cor)),
+  seed = my.seed,
+  iter = 6000,
+  warmup = 3000,
+  chains = 4,
+  cores = core.num,
+  control = list(adapt_delta = 0.99,
+                 max_treedepth = 20),
+  file = "./rtMRI-velum/models/offset",
+  save_all_pars = TRUE
+)
+
+# model summary
+summary(offset)
+
+# reduced/null model
+offset_null <- brms::brm(
+  DV ~
+    (1 + voicing | speaker) +
+    (1 + voicing | word),
+  data = subdat,
+  family = lognormal(),
+  prior = c(prior(normal(0, 3), class = Intercept),
+            prior(cauchy(0, 0.1), class = sd),
+            prior(cauchy(0, 0.1), class = sigma),
+            prior(lkj(2), class = cor)),
+  seed = my.seed,
+  iter = 6000,
+  warmup = 3000,
+  chains = 4,
+  cores = core.num,
+  control = list(adapt_delta = 0.99,
+                 max_treedepth = 20),
+  file = "./rtMRI-velum/models/offset_null",
+  save_all_pars = TRUE
+)
+
+# calculate the Bayes factor of the difference between the full and null models
+brms::bayes_factor(offset, offset_null)
+
+# calculate the marginal posteriors of the full model
+offset_post <- brms::posterior_samples(offset, pars="b_") %>%
+  dplyr::mutate(
+    nd = exp(b_Intercept),
+    nt = exp(b_Intercept) * exp(b_voicingvoiceless)
+  ) %>%
+  dplyr::select(nd, nt) %>%
+  tidyr::gather(context, DV)
 
 
 
 # # # # # # # # # # # # # # # # #
-# Figure 9                      #
 # Velum gesture peak (magnitude)#
 # # # # # # # # # # # # # # # # #
 
@@ -618,9 +374,8 @@ gest.max.mag_null <- brms::brm(
   save_all_pars = TRUE
 )
 
-
 # calculate the Bayes factor of the difference between the full and null models
-#brms::bayes_factor(gest.max.mag, gest.max.mag_null)
+brms::bayes_factor(gest.max.mag, gest.max.mag_null)
 
 # calculate the marginal posteriors of the full model
 gest.max.mag_post <- brms::posterior_samples(gest.max.mag, pars="b_") %>%
@@ -631,252 +386,11 @@ gest.max.mag_post <- brms::posterior_samples(gest.max.mag, pars="b_") %>%
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
 
-# calculate the 90% credible intervals
-# 95% CI of /nd/ items
-nd.ci <- quantile(gest.max.mag_post$DV[gest.max.mag_post$context=="nd"], probs=c(0.025,0.975))
-# 95% CI of /nt/ items
-nt.ci <- quantile(gest.max.mag_post$DV[gest.max.mag_post$context=="nt"], probs=c(0.025,0.975))
-
-## create Figure 9
-pdf(file="./rtMRI-velum/plots/gest_max_mag.pdf",width=7,height=3,onefile=T,pointsize=16)
-# perceptually distinct colors that are also safe for B/W printing
-my.cols <- c("#2c7fb8","#7fcdbb")
-# base plot
-post_plot <- gest.max.mag_post %>%
-  ggplot(aes(DV, fill = context)) +
-  geom_density(alpha = 0.7) +
-  scale_fill_manual(values=my.cols) +
-  ggtitle("Velum gesture peak (magnitude)") + 
-  ylab("Posterior probability (density)") + xlab("Velum opening magnitude (speaker-scaled)")
-# get y-range values of the base plot (for determining height of CI whisker bars)
-yrange <- ggplot_build(post_plot)$layout$panel_scales_y[[1]]$range$range
-yrange <- yrange[2] - yrange[1]
-# add CI whiskers to base plot
-post_plot + 
-  # whisker for context 1
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[2], y=-yrange/10, yend=-yrange/10), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[1], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[2], xend=nd.ci[2], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  # whisker for context 2
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[2], xend=nt.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  scale_x_continuous(breaks=seq(0,1,0.05)) + theme_bw()
-dev.off()
 
 
-
-# # # # # # # # # # # # # # # # # # # # # #
-# Figure 11                               #
-# Velum gesture plateau acceleration peak #
-# # # # # # # # # # # # # # # # # # # # # #
-
-# create the dependent variable
-subdat$DV <- scale(subdat$accel.peak)
-
-# full model
-accel <- brms::brm(
-  DV ~ voicing +
-    (1 + voicing | speaker) +
-    (1 + voicing | word),
-  data = subdat,
-  family = gaussian(),
-  prior = c(prior(normal(0, 3), class = Intercept),
-            prior(normal(0, 3), class = b, coef = voicingvoiceless),
-            prior(cauchy(0, 1), class = sd),
-            prior(cauchy(0, 1), class = sigma),
-            prior(lkj(2), class = cor)),
-  seed = my.seed,
-  iter = 6000,
-  warmup = 3000,
-  chains = 4,
-  cores = core.num, 
-  control = list(adapt_delta = 0.99,
-                 max_treedepth = 20),
-  file = "./rtMRI-velum/models/accel_peak",
-  save_all_pars = TRUE
-)
-
-# model summary
-summary(accel)
-
-# reduced/null model
-accel_null <- brms::brm(
-  DV ~
-    (1 + voicing | speaker) +
-    (1 + voicing | word),
-  data = subdat,
-  family = gaussian(),
-  prior = c(prior(normal(0, 3), class = Intercept),
-            prior(cauchy(0, 1), class = sd),
-            prior(cauchy(0, 1), class = sigma),
-            prior(lkj(2), class = cor)),
-  seed = my.seed,
-  iter = 6000,
-  warmup = 3000,
-  chains = 4,
-  cores = core.num,
-  control = list(adapt_delta = 0.99,
-                 max_treedepth = 20),
-  file = "./rtMRI-velum/models/accel_peak_null",
-  save_all_pars = TRUE
-)
-
-
-# calculate the Bayes factor of the difference between the full and null models
-#brms::bayes_factor(accel, accel_null)
-
-# calculate the marginal posteriors of the full model
-accel_post <- brms::posterior_samples(accel, pars="b_") %>%
-  dplyr::mutate(
-    nd = b_Intercept,
-    nt = b_Intercept + b_voicingvoiceless
-  ) %>%
-  dplyr::select(nd, nt) %>%
-  tidyr::gather(context, DV)
-
-# calculate the 90% credible intervals
-# 95% CI of /nd/ items
-nd.ci <- quantile(accel_post$DV[accel_post$context=="nd"], probs=c(0.025,0.975))
-# 95% CI of /nt/ items
-nt.ci <- quantile(accel_post$DV[accel_post$context=="nt"], probs=c(0.025,0.975))
-
-## create Figure 9
-pdf(file="./rtMRI-velum/plots/plateau_accel_peak.pdf",width=7,height=3,onefile=T,pointsize=16)
-# perceptually distinct colors that are also safe for B/W printing
-my.cols <- c("#2c7fb8","#7fcdbb")
-# base plot
-post_plot <- accel_post %>%
-  ggplot(aes(DV, fill = context)) +
-  geom_density(alpha = 0.7) +
-  scale_fill_manual(values=my.cols) +
-  ggtitle("Maximum acceleration within gesture plateau") + 
-  ylab("Posterior probability (density)") + xlab("Velum movement acceleration (normalized mm/s^2)")
-# get y-range values of the base plot (for determining height of CI whisker bars)
-yrange <- ggplot_build(post_plot)$layout$panel_scales_y[[1]]$range$range
-yrange <- yrange[2] - yrange[1]
-# add CI whiskers to base plot
-post_plot + 
-  # whisker for context 1
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[2], y=-yrange/10, yend=-yrange/10), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[1], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[2], xend=nd.ci[2], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  # whisker for context 2
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[2], xend=nt.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  scale_x_continuous(breaks=seq(-1,1,0.1)) + theme_bw()
-dev.off()
-
-
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# Figure XX                                                   #
-# Integral of velum movement in vowel (area under the curve)  #
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-# create the dependent variable
-subdat$DV <- scale(abs(subdat$quad.coef))
-
-# full model
-quad <- brms::brm(
-  DV ~ voicing +
-    (1 + voicing| speaker) +
-    (1 + voicing | word),
-  data = subdat,
-  family = gaussian(),
-  prior = c(prior(normal(0, 3), class = Intercept),
-            prior(normal(0, 3), class = b, coef = voicingvoiceless),
-            prior(cauchy(0, 1), class = sd),
-            prior(cauchy(0, 1), class = sigma),
-            prior(lkj(2), class = cor)),
-  seed = my.seed,
-  iter = 6000,
-  warmup = 3000,
-  chains = 4, 
-  cores = core.num,
-  control = list(adapt_delta = 0.99,
-                 max_treedepth = 20),
-  file = "./rtMRI-velum/models/quad_coef",
-  save_all_pars = TRUE
-)
-
-# model summary
-summary(quad)
-
-# reduced/null model
-quad_null <- brms::brm(
-  DV ~
-    (1 + voicing | speaker) +
-    (1 + voicing | word),
-  data = subdat,
-  family = gaussian,
-  prior = c(prior(normal(0, 3), class = Intercept),
-            prior(cauchy(0, 1), class = sd),
-            prior(cauchy(0, 1), class = sigma),
-            prior(lkj(2), class = cor)),
-  seed = my.seed,
-  iter = 6000,
-  warmup = 3000,
-  chains = 4,
-  cores = core.num,
-  control = list(adapt_delta = 0.99,
-                 max_treedepth = 20),
-  file = "./rtMRI-velum/models/quad_coef_null",
-  save_all_pars = TRUE
-)
-
-# calculate the Bayes factor of the difference between the full and null models
-#brms::bayes_factor(quad, quad_null)
-
-# calculate the marginal posteriors of the full model
-quad_post <- brms::posterior_samples(quad, pars="b_") %>%
-  dplyr::mutate(
-    nd = b_Intercept,
-    nt = b_Intercept + b_voicingvoiceless
-  ) %>%
-  dplyr::select(nd, nt) %>%
-  tidyr::gather(context, DV)
-
-# calculate the 90% credible intervals
-# 95% CI of /nd/ items
-nd.ci <- quantile(quad_post$DV[quad_post$context=="nd"], probs=c(0.025,0.975))
-# 95% CI of /nt/ items
-nt.ci <- quantile(quad_post$DV[quad_post$context=="nt"], probs=c(0.025,0.975))
-
-## create Figure 9
-pdf(file="./rtMRI-velum/plots/quad_coef.pdf",width=7,height=3,onefile=T,pointsize=16)
-# perceptually distinct colors that are also safe for B/W printing
-my.cols <- c("#2c7fb8","#7fcdbb")
-# base plot
-post_plot <- quad_post %>%
-  ggplot(aes(DV, fill = context)) +
-  geom_density(alpha = 0.7) +
-  scale_fill_manual(values=my.cols) +
-  ggtitle("Quadratic coefficient of second-order polynomial") + 
-  ylab("Posterior probability (density)") + xlab("Quadratic coefficient (normalized)")
-# get y-range values of the base plot (for determining height of CI whisker bars)
-yrange <- ggplot_build(post_plot)$layout$panel_scales_y[[1]]$range$range
-yrange <- yrange[2] - yrange[1]
-# add CI whiskers to base plot
-post_plot + 
-  # whisker for context 1
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[2], y=-yrange/10, yend=-yrange/10), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[1], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[2], xend=nd.ci[2], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  # whisker for context 2
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[2], xend=nt.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  scale_x_continuous(breaks=seq(-1,1,0.1)) + theme_bw()
-dev.off()
-
-
-
-# # # # # # # # # # # # # # #
-# Figure XX                 #
-# Gesture onset stiffness   #
-# # # # # # # # # # # # # # #
+# # # # # # # # # # # # # #
+# Gesture onset stiffness #
+# # # # # # # # # # # # # #
 
 # create the dependent variable
 subdat$DV <- subdat$stiff.ons
@@ -929,56 +443,21 @@ stiff.ons_null <- brms::brm(
   save_all_pars = TRUE
 )
 
-
 # calculate the Bayes factor of the difference between the full and null models
-#brms::bayes_factor(stiff.ons, stiff.ons_null)
+brms::bayes_factor(stiff.ons, stiff.ons_null)
 
 # calculate the marginal posteriors of the full model
 stiff.ons_post <- brms::posterior_samples(stiff.ons, pars="b_") %>%
   dplyr::mutate(
     nd = exp(b_Intercept),
-    nt = exp(b_Intercept) * exp(b_voicingvoiceless)
+    nt = exp(b_Intercept + b_voicingvoiceless)
   ) %>%
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
 
-# calculate the 90% credible intervals
-# 95% CI of /nd/ items
-nd.ci <- quantile(stiff.ons_post$DV[stiff.ons_post$context=="nd"], probs=c(0.025,0.975))
-# 95% CI of /nt/ items
-nt.ci <- quantile(stiff.ons_post$DV[stiff.ons_post$context=="nt"], probs=c(0.025,0.975))
-
-## create Figure 9
-pdf(file="./rtMRI-velum/plots/stiff_ons.pdf",width=7,height=3,onefile=T,pointsize=16)
-# perceptually distinct colors that are also safe for B/W printing
-my.cols <- c("#2c7fb8","#7fcdbb")
-# base plot
-post_plot <- stiff.ons_post %>%
-  ggplot(aes(DV, fill = context)) +
-  geom_density(alpha = 0.7) +
-  scale_fill_manual(values=my.cols) +
-  ggtitle("Stiffness of the velum gesture onset") + 
-  ylab("Posterior probability (density)") + xlab("Stiffness")
-# get y-range values of the base plot (for determining height of CI whisker bars)
-yrange <- ggplot_build(post_plot)$layout$panel_scales_y[[1]]$range$range
-yrange <- yrange[2] - yrange[1]
-# add CI whiskers to base plot
-post_plot + 
-  # whisker for context 1
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[2], y=-yrange/10, yend=-yrange/10), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[1], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[2], xend=nd.ci[2], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  # whisker for context 2
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[2], xend=nt.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  scale_x_continuous(breaks=seq(-1,1,0.00125)) + theme_bw()
-dev.off()
-
 
 
 # # # # # # # # # # # # # # #
-# Figure XX                 #
 # Gesture offset stiffness  #
 # # # # # # # # # # # # # # #
 
@@ -1033,9 +512,8 @@ stiff.off_null <- brms::brm(
   save_all_pars = TRUE
 )
 
-
 # calculate the Bayes factor of the difference between the full and null models
-#brms::bayes_factor(stiff.off, stiff.off_null)
+brms::bayes_factor(stiff.off, stiff.off_null)
 
 # calculate the marginal posteriors of the full model
 stiff.off_post <- brms::posterior_samples(stiff.off, pars="b_") %>%
@@ -1046,61 +524,240 @@ stiff.off_post <- brms::posterior_samples(stiff.off, pars="b_") %>%
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
 
-# calculate the 90% credible intervals
-# 95% CI of /nd/ items
-nd.ci <- quantile(stiff.off_post$DV[stiff.off_post$context=="nd"], probs=c(0.025,0.975))
-# 95% CI of /nt/ items
-nt.ci <- quantile(stiff.off_post$DV[stiff.off_post$context=="nt"], probs=c(0.025,0.975))
 
-## create Figure 9
-pdf(file="./rtMRI-velum/plots/stiff_off.pdf",width=7,height=3,onefile=T,pointsize=16)
-# perceptually distinct colors that are also safe for B/W printing
+
+# # # # # # #
+# Kurtosis  #
+# # # # # # #
+
+# create the dependent variable
+subdat$DV <- subdat$kurtosis
+
+# full model
+kurt <- brms::brm(
+  DV ~ voicing +
+    (1 + voicing | speaker) +
+    (1 + voicing | word),
+  data = subdat,
+  family = lognormal(),
+  prior = c(prior(normal(0, 3), class = Intercept),
+            prior(normal(0, 3), class = b, coef = voicingvoiceless),
+            prior(cauchy(0, 1), class = sd),
+            prior(cauchy(0, 1), class = sigma),
+            prior(lkj(2), class = cor)),
+  seed = my.seed,
+  iter = 4000,
+  warmup = 2000,
+  chains = 4,
+  cores = core.num,
+  control = list(adapt_delta = 0.99,
+                 max_treedepth = 20),
+  file = "./rtMRI-velum/models/kurtosis",
+  save_all_pars = TRUE
+)
+
+# model summary
+summary(kurt)
+
+# reduced/null model
+kurt_null <- brms::brm(
+  DV ~
+    (1 + voicing | speaker) +
+    (1 + voicing | word),
+  data = subdat,
+  family = lognormal(),
+  prior = c(prior(normal(0, 3), class = Intercept),
+            prior(cauchy(0, 1), class = sd),
+            prior(cauchy(0, 1), class = sigma),
+            prior(lkj(2), class = cor)),
+  seed = my.seed,
+  iter = 4000,
+  warmup = 2000,
+  chains = 4,
+  cores = core.num,
+  control = list(adapt_delta = 0.99,
+                 max_treedepth = 20),
+  file = "./rtMRI-velum/models/kurtosis_null",
+  save_all_pars = TRUE
+)
+
+# calculate the Bayes factor of the difference between the full and null models
+brms::bayes_factor(kurt, kurt_null)
+
+# calculate the marginal posteriors of the full model
+kurt_post <- brms::posterior_samples(kurt, pars="b_") %>%
+  dplyr::mutate(
+    nd = exp(b_Intercept),
+    nt = exp(b_Intercept + b_voicingvoiceless)
+  ) %>%
+  dplyr::select(nd, nt) %>%
+  tidyr::gather(context, DV)
+
+
+
+# # # # # # # # #
+# Crest factor  #
+# # # # # # # # #
+
+# create the dependent variable
+subdat$DV <- subdat$crest.fact
+
+# full model
+crest.fact <- brms::brm(
+  DV ~ voicing +
+    (1 + voicing | speaker) +
+    (1 + voicing | word),
+  data = subdat,
+  family = lognormal(),
+  prior = c(prior(normal(0, 3), class = Intercept),
+            prior(normal(0, 3), class = b, coef = voicingvoiceless),
+            prior(cauchy(0, 1), class = sd),
+            prior(cauchy(0, 1), class = sigma),
+            prior(lkj(2), class = cor)),
+  seed = my.seed,
+  iter = 4000,
+  warmup = 2000,
+  chains = 4,
+  cores = core.num,
+  control = list(adapt_delta = 0.99,
+                 max_treedepth = 20),
+  file = "./rtMRI-velum/models/crest_factor",
+  save_all_pars = TRUE
+)
+
+# model summary
+summary(crest.fact)
+
+# reduced/null model
+crest.fact_null <- brms::brm(
+  DV ~
+    (1 + voicing | speaker) +
+    (1 + voicing | word),
+  data = subdat,
+  family = lognormal(),
+  prior = c(prior(normal(0, 3), class = Intercept),
+            prior(cauchy(0, 1), class = sd),
+            prior(cauchy(0, 1), class = sigma),
+            prior(lkj(2), class = cor)),
+  seed = my.seed,
+  iter = 4000,
+  warmup = 2000,
+  chains = 4,
+  cores = core.num,
+  control = list(adapt_delta = 0.99,
+                 max_treedepth = 20),
+  file = "./rtMRI-velum/models/crest_factor_null",
+  save_all_pars = TRUE
+)
+
+# calculate the Bayes factor of the difference between the full and null models
+brms::bayes_factor(crest.fact, crest.fact_null)
+
+# calculate the marginal posteriors of the full model
+crest.fact_post <- brms::posterior_samples(crest.fact, pars="b_") %>%
+  dplyr::mutate(
+    nd = exp(b_Intercept),
+    nt = exp(b_Intercept + b_voicingvoiceless)
+  ) %>%
+  dplyr::select(nd, nt) %>%
+  tidyr::gather(context, DV)
+
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# Integral of velum movement in vowel (area under the curve)  #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# create the dependent variable
+subdat$DV <- subdat$vowel.integ
+
+# full model
+integ <- brms::brm(
+  DV ~ voicing +
+    (1 + voicing | speaker) +
+    (1 + voicing | word),
+  data = subdat,
+  family = gaussian(),
+  prior = c(prior(normal(0, 50), class = Intercept),
+            prior(normal(0, 25), class = b, coef = voicingvoiceless),
+            prior(cauchy(0, 1), class = sd),
+            prior(cauchy(0, 1), class = sigma),
+            prior(lkj(2), class = cor)),
+  seed = my.seed,
+  iter = 6000,
+  warmup = 3000,
+  chains = 4, 
+  cores = core.num,
+  control = list(adapt_delta = 0.99,
+                 max_treedepth = 20),
+  file = "./rtMRI-velum/models/vowel_integ",
+  save_all_pars = TRUE
+)
+
+# model summary
+summary(integ)
+
+# reduced/null model
+integ_null <- brms::brm(
+  DV ~
+    (1 + voicing | speaker) +
+    (1 + voicing | word),
+  data = subdat,
+  family = gaussian(),
+  prior = c(prior(normal(0, 50), class = Intercept),
+            prior(cauchy(0, 1), class = sd),
+            prior(cauchy(0, 1), class = sigma),
+            prior(lkj(2), class = cor)),
+  seed = my.seed,
+  iter = 6000,
+  warmup = 3000,
+  chains = 4,
+  cores = core.num,
+  control = list(adapt_delta = 0.99,
+                 max_treedepth = 20),
+  file = "./rtMRI-velum/models/vowel_integ_null",
+  save_all_pars = TRUE
+)
+
+# calculate the Bayes factor of the difference between the full and null models
+brms::bayes_factor(integ, integ_null)
+
+# calculate the marginal posteriors of the full model
+integ_post <- brms::posterior_samples(integ, pars="b_") %>%
+  dplyr::mutate(
+    nd = b_Intercept,
+    nt = b_Intercept + b_voicingvoiceless
+  ) %>%
+  dplyr::select(nd, nt) %>%
+  tidyr::gather(context, DV)
+
+
+
+# # # # # # # # # # # #
+# Plotting posteriors #
+# # # # # # # # # # # #
+
+
+# colors to be used for plotting (suitable for B/W printing
 my.cols <- c("#2c7fb8","#7fcdbb")
-# base plot
-post_plot <- stiff.off_post %>%
-  ggplot(aes(DV, fill = context)) +
-  geom_density(alpha = 0.7) +
-  scale_fill_manual(values=my.cols) +
-  ggtitle("Stiffness of the velum gesture offset") + 
-  ylab("Posterior probability (density)") + xlab("Stiffness")
-# get y-range values of the base plot (for determining height of CI whisker bars)
-yrange <- ggplot_build(post_plot)$layout$panel_scales_y[[1]]$range$range
-yrange <- yrange[2] - yrange[1]
-# add CI whiskers to base plot
-post_plot + 
-  # whisker for context 1
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[2], y=-yrange/10, yend=-yrange/10), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[1], xend=nd.ci[1], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  geom_segment(aes(x=nd.ci[2], xend=nd.ci[2], y=(-yrange/10+yrange/40), yend=(-yrange/10-yrange/40)), col=my.cols[1]) +
-  # whisker for context 2
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[2], y=-yrange/20, yend=-yrange/20),col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[1], xend=nt.ci[1], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  geom_segment(aes(x=nt.ci[2], xend=nt.ci[2], y=(-yrange/20+yrange/40), yend=(-yrange/20-yrange/40)), col=my.cols[2]) +
-  scale_x_continuous(breaks=seq(-1,1,0.00125)) + theme_bw()
-dev.off()
 
 
+## Figure 5: duration, onset, peak (timing), offset ##
 
-
-# Composite marginal post plot ####
-my.cols <- c("#2c7fb8","#7fcdbb")
-
-time_post <- bind_rows(
+# gather posteriors
+fig5_post <- bind_rows(
   dur_post %>% rename(`duration` = DV) %>% pivot_longer(`duration`, names_to = "outcome", values_to = "estimate"),
-  offset_post %>% rename(`offset` = DV) %>% pivot_longer(`offset`, names_to = "outcome", values_to = "estimate"),
   onset_post %>% rename(`onset` = DV) %>% pivot_longer(`onset`, names_to = "outcome", values_to = "estimate"),
-  gest.max_post %>% rename(`peak` = DV) %>% pivot_longer(`peak`, names_to = "outcome", values_to = "estimate")
+  gest.max_post %>% rename(`peak` = DV) %>% pivot_longer(`peak`, names_to = "outcome", values_to = "estimate"),
+  offset_post %>% rename(`offset` = DV) %>% pivot_longer(`offset`, names_to = "outcome", values_to = "estimate")
 ) %>%
-  mutate(outcome = factor(outcome, levels = c("duration", "onset", "offset", "peak")))
+  mutate(outcome = factor(outcome, levels = c("offset","peak","onset","duration")))
 
-time_post$estimate[time_post$outcome=="onset"] <- -time_post$estimate[time_post$outcome=="onset"]
+# flip sign of velum gesture onset posteriors for interpretability
+fig5_post$estimate[fig5_post$outcome=="onset"] <- -fig5_post$estimate[fig5_post$outcome=="onset"]
 
-time_post$outcome <- factor(time_post$outcome, levels = c("offset","peak","onset","duration"))
-
-
-# separate plots
-
-p1 <- time_post %>%
+# make separate plots
+p1 <- fig5_post %>%
   filter(outcome == "duration") %>%
   ggplot(aes(estimate, outcome, group = context, fill = context)) +
   geom_halfeyeh(slab_color="black", slab_alpha=0.5) +
@@ -1109,7 +766,7 @@ p1 <- time_post %>%
   scale_fill_manual(values = my.cols) +
   labs(x = "Duration (ms)", y = element_blank()) + theme_bw() + theme(legend.position = "none",axis.text=element_text(size=12),axis.title=element_text(size=13))
 
-p2 <- time_post %>%
+p2 <- fig5_post %>%
   filter(outcome %in% c("onset","peak","offset")) %>%
   ggplot(aes(estimate, outcome, group = context, fill = context)) +
   geom_halfeyeh(slab_color="black", slab_alpha=0.5) +
@@ -1119,29 +776,21 @@ p2 <- time_post %>%
   scale_fill_manual(values=my.cols) +
   labs(x = "Time (ms) relative to acoustic vowel offset", y = element_blank(), fill = "Context") + theme_bw() + theme(axis.text=element_text(size=12),axis.title=element_text(size=13),panel.grid.major.y=element_blank())
 
+# save coposite plot
 pdf(file="./rtMRI-velum/plots/time_plots.pdf",width=9.5,height=5,onefile=T,pointsize=14)
-p1 + p2 + patchwork::plot_layout(ncol = 1, guides = "collect") + theme(legend.position = "right")
+(p1 + p2) + patchwork::plot_layout(ncol = 1, guides = "collect") + theme(legend.position = "right")
 dev.off()
 
 
+## Figure 6: peak (magnitude) ##
 
-# Composite marginal post plot ####
+# gather posteriors
+fig6_post <- bind_rows(
+  gest.max.mag_post %>% rename(`peak    \nmagnitude` = DV) %>% pivot_longer(`peak    \nmagnitude`, names_to = "outcome", values_to = "estimate")
+) 
 
-time_post <- bind_rows(
-  gest.max.mag_post %>% rename(`peak    \nmagnitude` = DV) %>% pivot_longer(`peak    \nmagnitude`, names_to = "outcome", values_to = "estimate"),
-  integ_post %>% rename(`gesture\nintegral` = DV) %>% pivot_longer(`gesture\nintegral`, names_to = "outcome", values_to = "estimate"),
-  accel_post %>% rename(`maximum  \nacceleration` = DV) %>% pivot_longer(`maximum  \nacceleration`, names_to = "outcome", values_to = "estimate"),
-  quad_post %>% rename(`quadratic \ncoefficient` = DV) %>% pivot_longer(`quadratic \ncoefficient`, names_to = "outcome", values_to = "estimate"),
-  stiff.ons_post %>% rename(`opening\nstiffness` = DV) %>% pivot_longer(`opening\nstiffness`, names_to = "outcome", values_to = "estimate"),
-  stiff.off_post %>% rename(`closing \nstiffness` = DV) %>% pivot_longer(`closing \nstiffness`, names_to = "outcome", values_to = "estimate")
-) %>%
-  mutate(outcome = factor(outcome, levels = c("peak    \nmagnitude", "gesture\nintegral", "maximum  \nacceleration", "quadratic \ncoefficient", "closing \nstiffness", "opening\nstiffness")))
-
-
-
-# separate plots
-
-p1 <- time_post %>%
+# make plot
+p1 <- fig6_post %>%
   filter(outcome == "peak    \nmagnitude") %>%
   ggplot(aes(estimate, outcome, group = context, fill = context)) +
   geom_halfeyeh(slab_color="black", slab_alpha=0.5) +
@@ -1150,25 +799,22 @@ p1 <- time_post %>%
   scale_fill_manual(values=my.cols) +
   labs(x = "Velum opening magnitude (speaker-scaled)", y = element_blank(), fill = "Context") + theme_bw() + theme(axis.text=element_text(size=12),axis.title=element_text(size=13))
 
-p2 <- time_post %>%
-  filter(outcome == "gesture\nintegral") %>%
-  ggplot(aes(estimate, outcome, group = context, fill = context)) +
-  geom_halfeyeh(slab_color="black", slab_alpha=0.5) +
-  scale_x_continuous(breaks=seq(10,50,1)) +
-  coord_cartesian(xlim = c(18,32), ylim = c(1.4,1.4)) +
-  scale_fill_manual(values=my.cols) +
-  labs(x = "Velum displacement integral (time X magnitude)", y = element_blank(), fill = "Context") + theme_bw() + theme(axis.text=element_text(size=12),axis.title=element_text(size=13))
+# save plot
+pdf(file="./rtMRI-velum/plots/magnitude_plot.pdf",width=9,height=3,onefile=T,pointsize=14)
+p1
+dev.off()
 
-p3 <- time_post %>%
-  filter(outcome %in% c("maximum  \nacceleration","quadratic \ncoefficient")) %>%
-  ggplot(aes(estimate, outcome, group = context, fill = context)) +
-  geom_halfeyeh(slab_color="black", slab_alpha=0.5) +
-  scale_x_continuous(breaks=seq(-1,1,0.1)) +
-  coord_cartesian(xlim = c(-0.5,0.45), ylim = c(1.5,1.95)) +
-  scale_fill_manual(values=my.cols) +
-  labs(x = "z-scale normalized values", y = element_blank(), fill = "Context") + theme_bw() + theme(legend.position = "none",axis.text=element_text(size=12),axis.title=element_text(size=13),panel.grid.major.y=element_blank())
 
-p4 <- time_post %>%
+## Figure 7: opening stiffness, closing stiffness ##
+
+# gather posteriors
+fig7_post <- bind_rows(
+  stiff.ons_post %>% rename(`opening\nstiffness` = DV) %>% pivot_longer(`opening\nstiffness`, names_to = "outcome", values_to = "estimate"),
+  stiff.off_post %>% rename(`closing \nstiffness` = DV) %>% pivot_longer(`closing \nstiffness`, names_to = "outcome", values_to = "estimate")
+) 
+
+# make composite plot on same scale
+p1 <- fig7_post %>%
   filter(outcome %in% c("opening\nstiffness","closing \nstiffness")) %>%
   ggplot(aes(estimate, outcome, group = context, fill = context)) +
   geom_halfeyeh(slab_color="black", slab_alpha=0.5) +
@@ -1177,24 +823,65 @@ p4 <- time_post %>%
   scale_fill_manual(values=my.cols) +
   labs(x = "Stiffness", y = element_blank(), fill = "Context") + theme_bw() + theme(axis.text=element_text(size=12),axis.title=element_text(size=13),panel.grid.major.y=element_blank())
 
-pdf(file="./rtMRI-velum/plots/shape_plots.pdf",width=9,height=9,onefile=T,pointsize=14)
-p1 + p2 + p3 + p4 + patchwork::plot_layout(ncol = 1, guides = "collect") + theme(legend.position = "right")
-dev.off()
-
-
-pdf(file="./rtMRI-velum/plots/magnitude_plot.pdf",width=9,height=3,onefile=T,pointsize=14)
-p1 + patchwork::plot_layout(ncol = 1, guides = "collect") + theme(legend.position = "right")
-dev.off()
-
-pdf(file="./rtMRI-velum/plots/integral_plot.pdf",width=9,height=3,onefile=T,pointsize=14)
-p2 + patchwork::plot_layout(ncol = 1, guides = "collect") + theme(legend.position = "right")
-dev.off()
-
-pdf(file="./rtMRI-velum/plots/peakiness_plots.pdf",width=9,height=4,onefile=T,pointsize=14)
-p3 + patchwork::plot_layout(ncol = 1, guides = "collect") + theme(legend.position = "right")
-dev.off()
-
-
+# save plot
 pdf(file="./rtMRI-velum/plots/stiffness_plots.pdf",width=9,height=4,onefile=T,pointsize=14)
-p4 + patchwork::plot_layout(ncol = 1, guides = "collect") + theme(legend.position = "right")
+p1
 dev.off()
+
+
+## Figure 9: kurtosis, crest factor ##
+
+# gather posteriors
+fig9_post <- bind_rows(
+  kurt_post %>% rename(`kurtosis` = DV) %>% pivot_longer(`kurtosis`, names_to = "outcome", values_to = "estimate"),
+  crest.fact_post %>% rename(`crest \nfactor` = DV) %>% pivot_longer(`crest \nfactor`, names_to = "outcome", values_to = "estimate")
+) 
+
+# make separate plots
+p1 <- fig9_post %>%
+  filter(outcome == "kurtosis") %>%
+  ggplot(aes(estimate, outcome, group = context, fill = context)) +
+  geom_halfeyeh(slab_color="black", slab_alpha=0.5) +
+  scale_x_continuous(breaks=seq(0,5,0.05)) +
+  coord_cartesian(xlim = c(2.81,3.18), ylim = c(1.4,1.4)) +
+  scale_fill_manual(values=my.cols) +
+  labs(x = "Kurtosis", y = element_blank(), fill = "Context") + theme_bw() + theme(legend.position = "none",axis.text=element_text(size=12),axis.title=element_text(size=13),panel.grid.major.y=element_blank())
+
+p2 <- fig9_post %>%
+  filter(outcome == "crest \nfactor") %>%
+  ggplot(aes(estimate, outcome, group = context, fill = context)) +
+  geom_halfeyeh(slab_color="black", slab_alpha=0.5) +
+  scale_x_continuous(breaks=seq(0,3,0.01)) +
+  coord_cartesian(xlim = c(1.805,1.885), ylim = c(1.4,1.4)) +
+  scale_fill_manual(values=my.cols) +
+  labs(x = "Crest factor (ratio of peak to average displacement)", y = element_blank(), fill = "Context") + theme_bw() + theme(legend.position = "none",axis.text=element_text(size=12),axis.title=element_text(size=13),panel.grid.major.y=element_blank())
+
+# save composite plot
+pdf(file="./rtMRI-velum/plots/peakedness_plots.pdf",width=9,height=5,onefile=T,pointsize=14)
+(p1 + p2) + patchwork::plot_layout(ncol = 1, guides = "collect") + theme(legend.position = "right")
+dev.off()
+
+
+## Figure 10: velum displacement integral
+
+# gather posteriors
+fig10_post <- bind_rows(
+  integ_post %>% rename(`gesture\nintegral` = DV) %>% pivot_longer(`gesture\nintegral`, names_to = "outcome", values_to = "estimate")
+) 
+
+# make plot
+p1 <- fig10_post %>%
+  filter(outcome == "gesture\nintegral") %>%
+  ggplot(aes(estimate, outcome, group = context, fill = context)) +
+  geom_halfeyeh(slab_color="black", slab_alpha=0.5) +
+  scale_x_continuous(breaks=seq(10,50,1)) +
+  coord_cartesian(xlim = c(18,32), ylim = c(1.4,1.4)) +
+  scale_fill_manual(values=my.cols) +
+  labs(x = "Velum displacement integral (time X magnitude)", y = element_blank(), fill = "Context") + theme_bw() + theme(axis.text=element_text(size=12),axis.title=element_text(size=13))
+
+# save plot
+pdf(file="./rtMRI-velum/plots/integral_plot.pdf",width=9,height=3,onefile=T,pointsize=14)
+p1
+dev.off()
+
+
