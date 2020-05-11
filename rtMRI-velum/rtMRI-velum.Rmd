@@ -54,7 +54,7 @@ subdat <- matdat[matdat$post %in% coda & matdat$stress %in% stresses, ]
 
 Since no specific information on expectations for velum gesture duration can be found in the literature, we followed more general expectations for speech segment durations, coded as very weakly informative priors.
 The BRM for velum gesture duration was built using a log-normal distribution, since speech segment duration has been shown to be log-normally distributed [@Rosen2005, @Ratnikova2017, @Gahl2019].
-The following distributions were used as weakly informative priors (on the log-odds scale): for the intercept of duration (corresponding to ND and overall mean speech rate), a normal distribution with mean = 0 and standard deviation = 3 ($Normal(0, 3)$); for the effect of voicing (when NT), $Normal(0, 1)$.
+The following distributions were used as weakly informative priors (on the log-odds scale): for the intercept of duration (corresponding to ND), a normal distribution with mean = 0 and standard deviation = 3 ($Normal(0, 3)$); for the effect of voicing (when NT), $Normal(0, 1)$.
 These roughly correspond to a belief that the intercept of velum gesture duration (when the context is ND) is between 0 and 400 ms ($e^{3 \times 2} = 403 $), and the duration changes (increases or decreases) by a factor of 1 to 7.4 in the ND context ($e^{1 \times 2} = 7.4$), at 95% confidence.
 For the model standard deviation and the random intercept standard deviation we used a half-Cauchy distribution with location 0 and scale 0.1 ($HalfCauchy(0, 0.1)$); this corresponds to a 95% HDI = [0, 2.55] in log-odds, i.e. a factor change of 1 to 12.75 ($e^2.55 = 12.75$).
 
@@ -142,6 +142,12 @@ dur_post <- brms::posterior_samples(dur, pars="b_") %>%
 ```{r dur-pp}
 pp_check(dur, nsamples = 50) + theme_minimal()
 ```
+
+Sensitivity analysis from @Betancourt2018.
+$s$ (posterior shrinkage) indicates the contribution of the data to the posterior (values closer to 1 are better).
+$z$ (posterior z-score) indicates how close the inference is to the data generating process (lower values are better).
+An ideal fit should have $s$ = 1 and $z$ = 0.
+Posteriors with high $s$ and high $z$ indicate overfit (the data dominate the posterior), while posteriors with low $s$ and low $z$ indicate that the model is poorly identified (the data is not contributing to the model and the priors dominate).
 
 ```{r dur-sens}
 dur_fixed <- fixef(dur) %>% as_tibble(rownames = "term")
@@ -237,11 +243,44 @@ onset_post <- brms::posterior_samples(onset, pars="b_") %>%
   tidyr::gather(context, DV)
 ```
 
+## Checks
+
+```{r onset-pp}
+pp_check(onset, nsamples = 50) + theme_minimal()
+```
+
+```{r onset-sens}
+onset_fixed <- fixef(onset) %>% as_tibble(rownames = "term")
+
+onset_fixed %>%
+  mutate(
+    theta = c(0, 0),
+    sigma_prior = c(3, 1),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 250) +
+  theme_minimal()
+```
+
 # Velum gesture peak (timing)
 
-The BRM for the time point of the velum gesture peak was built using a Gaussian distribution; unlike the other measures of timing, the time point of the velum gesture peak is not expected to follow a one-sided distribution, since the peak can potentially occur before or after the vowel offset. The following distributions were used as weakly informative priors (on the milliseconds scale): for the intercept (corresponding to \ips{nd} and overall mean speech rate), Normal(0, 200); for the effect of voicing (when \ips{nt}) and centred speech rate, Normal(0, 100). These correspond to a belief that the intercept is between -400 and 400 ms, and that the time changes by -200 to 200 ms in the \ips{nt} context, at 95\% confidence. For the model standard deviation and the random intercept standard deviation we used HalfCauchy(0, 5). For the correlation between random effects, an LKJ(2) distribution.
+The BRM for the time point of the velum gesture peak was built using a Gaussian distribution; unlike the other measures of timing, the time point of the velum gesture peak is not expected to follow a one-sided (positive support) distribution, since the peak can potentially occur before or after the vowel offset.
+The following distributions were used as weakly informative priors (on the milliseconds scale): for the intercept (corresponding to ND), $Normal(0, 200)$; for the effect of voicing (when NT), $Normal(0, 100)$.
+These correspond to a belief that the intercept is between -400 and 400 ms from the vowel offset, and that the time changes by -200 to 200 ms in the NT context, at 95% confidence.
+For the model standard deviation and the random intercept standard deviation we used $HalfCauchy(0, 5)$, which corresponds to a 95% HDI = [0, 127] ms.
 
-```{r gest.max}
+```{r half-cauchy-get-max}
+inverseCDF(c(0.025, 0.975), phcauchy, sigma = 5)
+```
+
+For the correlation between random effects, an $LKJ(2)$ distribution.
+
+```{r gest-max}
 # create the dependent variable
 subdat$DV <- (subdat$velumopening_maxcon_on - subdat$Vokal_off)*1000
 
@@ -311,6 +350,30 @@ gest.max_post <- brms::posterior_samples(gest.max, pars="b_") %>%
   ) %>%    
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
+```
+
+## Checks
+
+```{r gest-max-pp}
+pp_check(gest.max, nsamples = 50) + theme_minimal()
+```
+
+```{r gest-max-sens}
+gest.max_fixed <- fixef(gest.max) %>% as_tibble(rownames = "term")
+
+gest.max_fixed %>%
+  mutate(
+    theta = c(0, 0),
+    sigma_prior = c(200, 100),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 250) +
+  theme_minimal()
 ```
 
 # Velum gesture offset
@@ -389,9 +452,34 @@ offset_post <- brms::posterior_samples(offset, pars="b_") %>%
   tidyr::gather(context, DV)
 ```
 
+## Checks
+
+```{r offset-pp}
+pp_check(offset, nsamples = 50) + theme_minimal()
+```
+
+```{r offset-sens}
+offset_fixed <- fixef(offset) %>% as_tibble(rownames = "term")
+
+offset_fixed %>%
+  mutate(
+    theta = c(0, 0),
+    sigma_prior = c(3, 1),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 250) +
+  theme_minimal()
+```
+
 # Velum gesture peak (magnitude)
 
-The BRM for the velum gesture magnitude was built using a Beta distribution, since the magnitude values are on a 0-1 scale. The following weakly informative priors were used: Normal(0, 10) for the intercept; Normal(0, 5) for voicing, speech rate, and the random effects standard deviations; the \textit{brms} default prior for the $\phi$ parameter of the beta distribution (gamma(0.01, 0.01)); and LKJ(2) prior for the random effects correlation.
+The BRM for the velum gesture magnitude was built using a Beta distribution, since the magnitude values are on a 0-1 scale.
+The following practically flat priors were used: $Normal(0, 10)$ for the intercept; $Normal(0, 5)$ for voicing and the random effects standard deviations; the brms default prior for the $\phi$ parameter of the beta distribution ($gamma(0.01, 0.01)$); and $LKJ(2)$ prior for the random effects correlation.
 
 ```{r gest-max-mag}
 # create the dependent variable
@@ -463,6 +551,30 @@ gest.max.mag_post <- brms::posterior_samples(gest.max.mag, pars="b_") %>%
   ) %>%
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
+```
+
+## Checks
+
+```{r gest-max-mag-pp}
+pp_check(gest.max.mag, nsamples = 50) + theme_minimal()
+```
+
+```{r onset-sens}
+gest.max.mag_fixed <- fixef(gest.max.mag) %>% as_tibble(rownames = "term")
+
+gest.max.mag_fixed %>%
+  mutate(
+    theta = c(0, 0),
+    sigma_prior = c(10, 5),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 250) +
+  theme_minimal()
 ```
 
 # Gesture offset stiffness
@@ -539,6 +651,30 @@ stiff.ons_post <- brms::posterior_samples(stiff.ons, pars="b_") %>%
   tidyr::gather(context, DV)
 ```
 
+## Checks
+
+```{r stiff-ons-pp}
+pp_check(stiff.ons, nsamples = 50) + theme_minimal()
+```
+
+```{r stiff-ons-sens}
+stiff.ons_fixed <- fixef(stiff.ons) %>% as_tibble(rownames = "term")
+
+stiff.ons_fixed %>%
+  mutate(
+    theta = c(0, 0),
+    sigma_prior = c(3, 1),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 250) +
+  theme_minimal()
+```
+
 # Gesture offset stiffness
 
 ```{r stiff-off}
@@ -611,6 +747,30 @@ stiff.off_post <- brms::posterior_samples(stiff.off, pars="b_") %>%
   ) %>%
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
+```
+
+## Checks
+
+```{r stiff-ons-pp}
+pp_check(stiff.off, nsamples = 50) + theme_minimal()
+```
+
+```{r stiff-off-sens}
+stiff.off_fixed <- fixef(stiff.off) %>% as_tibble(rownames = "term")
+
+stiff.off_fixed %>%
+  mutate(
+    theta = c(0, 0),
+    sigma_prior = c(3, 1),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 250) +
+  theme_minimal()
 ```
 
 # Kurtosis
@@ -687,6 +847,30 @@ kurt_post <- brms::posterior_samples(kurt, pars="b_") %>%
   tidyr::gather(context, DV)
 ```
 
+## Checks
+
+```{r kurt-pp}
+pp_check(kurt, nsamples = 50) + theme_minimal()
+```
+
+```{r kurt-sens}
+kurt_fixed <- fixef(kurt) %>% as_tibble(rownames = "term")
+
+kurt_fixed %>%
+  mutate(
+    theta = c(0, 0),
+    sigma_prior = c(3, 1),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 250) +
+  theme_minimal()
+```
+
 # Crest factor
 
 ```{r crest-fact}
@@ -761,6 +945,30 @@ crest.fact_post <- brms::posterior_samples(crest.fact, pars="b_") %>%
   tidyr::gather(context, DV)
 ```
 
+## Checks
+
+```{r crest-fact-pp}
+pp_check(crest.fact, nsamples = 50) + theme_minimal()
+```
+
+```{r crest-fact-sens}
+crest.fact_fixed <- fixef(crest.fact) %>% as_tibble(rownames = "term")
+
+crest.fact_fixed %>%
+  mutate(
+    theta = c(0, 0),
+    sigma_prior = c(3, 1),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 250) +
+  theme_minimal()
+```
+
 # Integral of velum movement in vowel (area under the curve)
 
 ```{r integ}
@@ -833,6 +1041,30 @@ integ_post <- brms::posterior_samples(integ, pars="b_") %>%
   ) %>%
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
+```
+
+## Checks
+
+```{r integ-pp}
+pp_check(integ, nsamples = 50) + theme_minimal()
+```
+
+```{r integ-sens}
+integ_fixed <- fixef(integ) %>% as_tibble(rownames = "term")
+
+integ_fixed %>%
+  mutate(
+    theta = c(0, 0),
+    sigma_prior = c(3, 1),
+    # it's called here std.error but is the standard deviation
+    z = abs((Estimate - theta) / Est.Error),
+    s = 1 - (Est.Error^2 / sigma_prior^2)
+  ) %>%
+  ggplot(aes(s, z, label = term)) +
+  geom_point() +
+  geom_label(nudge_x = -0.1, size = 2, alpha = 0.5) +
+  xlim(0, 1) + ylim(0, 250) +
+  theme_minimal()
 ```
 
 # Plotting posteriors
