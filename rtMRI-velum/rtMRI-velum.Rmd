@@ -121,7 +121,7 @@ dur_null <- brms::brm(
 )
 ```
 
-```{r dur-bf}
+```{r dur-bf, cache=TRUE, dependson=c("dur", "dur-null")}
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(dur, dur_null)
 ```
@@ -227,7 +227,7 @@ onset_null <- brms::brm(
 )
 ```
 
-```{r onset-bf}
+```{r onset-bf, cache=TRUE, dependson=c("onset", "onset-null")}
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(onset, onset_null)
 ```
@@ -336,7 +336,7 @@ gest.max_null <- brms::brm(
 )
 ```
 
-```{r gest-max-bf}
+```{r gest-max-bf, cache=TRUE, dependson=c("gest-max", "gest-max-null")}
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(gest.max, gest.max_null)
 ```
@@ -436,7 +436,7 @@ offset_null <- brms::brm(
 )
 ```
 
-```{r offset-bf}
+```{r offset-bf, cache=TRUE, dependson=c("offset", "offset-null")}
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(offset, offset_null)
 ```
@@ -537,7 +537,7 @@ gest.max.mag_null <- brms::brm(
 )
 ```
 
-```{r gest-max-mag-bf}
+```{r gest-max-mag-bf, cache=TRUE, dependson=c("gest-max-mag", "gest-max-mag-null")}
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(gest.max.mag, gest.max.mag_null)
 ```
@@ -635,7 +635,7 @@ stiff.ons_null <- brms::brm(
 )
 ```
 
-```{r stiff-ons-bf}
+```{r stiff-ons-bf, cache=TRUE, dependson=c("stiff-ons", "stiff-ons-null")}
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(stiff.ons, stiff.ons_null)
 ```
@@ -733,7 +733,7 @@ stiff.off_null <- brms::brm(
 )
 ```
 
-```{r stiff-off-bf}
+```{r stiff-off-bf, cache=TRUE, dependson=c("stiff-off", "stiff-off-null")}
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(stiff.off, stiff.off_null)
 ```
@@ -831,7 +831,7 @@ kurt_null <- brms::brm(
 )
 ```
 
-```{r kurt-bf}
+```{r kurt-bf, cache=TRUE, dependson=c("kurt", "kurt-null")}
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(kurt, kurt_null)
 ```
@@ -929,7 +929,7 @@ crest.fact_null <- brms::brm(
 )
 ```
 
-```{r creast-fact-bf}
+```{r creast-fact-bf, cache=TRUE, dependson=c("crest-fact", "crest-fact-null")}
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(crest.fact, crest.fact_null)
 ```
@@ -1027,7 +1027,7 @@ integ_null <- brms::brm(
 )
 ```
 
-```{r integ-bf}
+```{r integ-bf, cache=TRUE, dependson=c("integ", "integ-null")}
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(integ, integ_null)
 ```
