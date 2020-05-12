@@ -65,7 +65,7 @@ inverseCDF(c(0.025, 0.975), phcauchy, sigma = 0.1)
 For the correlation between random effects, an $LKJ(2)$ distribution, as recommended by [...].
 The same prior specification was used for the models of velum gesture onset time and velum gesture offset time.
 
-```{r dur}
+```{r dur, cache=TRUE}
 # create the dependent variable
 subdat$DV <- subdat$velumopening_gesture_dur*1000
 
@@ -97,7 +97,7 @@ dur <- brms::brm(
 dur
 ```
 
-```{r dur-null}
+```{r dur-null, cache=TRUE}
 # reduced/null model
 dur_null <- brms::brm(
   DV ~
@@ -171,7 +171,7 @@ dur_fixed %>%
 
 See velum gesture duration for prior specification.
 
-```{r onset}
+```{r onset, cache=TRUE}
 # create the dependent variable
 subdat$DV <- -(subdat$velumopening_gesture_on - subdat$Vokal_off)*1000
 
@@ -203,7 +203,7 @@ onset <- brms::brm(
 onset
 ```
 
-```{r onset-null}
+```{r onset-null, cache=TRUE}
 # reduced/null model
 onset_null <- brms::brm(
   DV ~
@@ -280,7 +280,7 @@ inverseCDF(c(0.025, 0.975), phcauchy, sigma = 5)
 
 For the correlation between random effects, an $LKJ(2)$ distribution.
 
-```{r gest-max}
+```{r gest-max, cache=TRUE}
 # create the dependent variable
 subdat$DV <- (subdat$velumopening_maxcon_on - subdat$Vokal_off)*1000
 
@@ -312,7 +312,7 @@ gest.max <- brms::brm(
 gest.max
 ```
 
-```{r gest-max-null}
+```{r gest-max-null, cache=TRUE}
 # reduced/null model
 gest.max_null <- brms::brm(
   DV ~
@@ -380,7 +380,7 @@ gest.max_fixed %>%
 
 See velum gesture duration for prior specification.
 
-```{r offset}
+```{r offset, cache=TRUE}
 # create the dependent variable
 subdat$DV <- (subdat$velumopening_gesture_off - subdat$Vokal_off)*1000
 
@@ -412,7 +412,7 @@ offset <- brms::brm(
 offset
 ```
 
-```{r offset-null}
+```{r offset-null, cache=TRUE}
 # reduced/null model
 offset_null <- brms::brm(
   DV ~
@@ -481,7 +481,7 @@ offset_fixed %>%
 The BRM for the velum gesture magnitude was built using a Beta distribution, since the magnitude values are on a 0-1 scale.
 The following practically flat priors were used: $Normal(0, 10)$ for the intercept; $Normal(0, 5)$ for voicing and the random effects standard deviations; the brms default prior for the $\phi$ parameter of the beta distribution ($gamma(0.01, 0.01)$); and $LKJ(2)$ prior for the random effects correlation.
 
-```{r gest-max-mag}
+```{r gest-max-mag, cache=TRUE}
 # create the dependent variable
 subdat$DV <- subdat$velum2US_velumopening_maxcon_onset
 
@@ -513,7 +513,7 @@ gest.max.mag <- brms::brm(
 gest.max.mag
 ```
 
-```{r gest-max-mag-null}
+```{r gest-max-mag-null, cache=TRUE}
 # reduced/null model
 gest.max.mag_null <- brms::brm(
   DV ~
@@ -579,7 +579,7 @@ gest.max.mag_fixed %>%
 
 # Gesture offset stiffness
 
-```{r stiff-ons}
+```{r stiff-ons, cache=TRUE}
 # create the dependent variable
 subdat$DV <- subdat$stiff.ons
 
@@ -611,7 +611,7 @@ stiff.ons <- brms::brm(
 stiff.ons
 ```
 
-```{r stiff-ons-null}
+```{r stiff-ons-null, cache=TRUE}
 # reduced/null model
 stiff.ons_null <- brms::brm(
   DV ~
@@ -709,7 +709,7 @@ stiff.off <- brms::brm(
 stiff.off
 ```
 
-```{r stiff-off-null}
+```{r stiff-off-null, cache=TRUE}
 # reduced/null model
 stiff.off_null <- brms::brm(
   DV ~
@@ -775,7 +775,7 @@ stiff.off_fixed %>%
 
 # Kurtosis
 
-```{r kurt}
+```{r kurt, cache=TRUE}
 # create the dependent variable
 subdat$DV <- subdat$kurtosis
 
@@ -807,7 +807,7 @@ kurt <- brms::brm(
 kurt
 ```
 
-```{r kurt-null}
+```{r kurt-null, cache=TRUE}
 # reduced/null model
 kurt_null <- brms::brm(
   DV ~
@@ -873,7 +873,7 @@ kurt_fixed %>%
 
 # Crest factor
 
-```{r crest-fact}
+```{r crest-fact, cache=TRUE}
 # create the dependent variable
 subdat$DV <- subdat$crest.fact
 
@@ -905,7 +905,7 @@ crest.fact <- brms::brm(
 crest.fact
 ```
 
-```{r crest-fact-null}
+```{r crest-fact-null, cache=TRUE}
 # reduced/null model
 crest.fact_null <- brms::brm(
   DV ~
@@ -971,7 +971,7 @@ crest.fact_fixed %>%
 
 # Integral of velum movement in vowel (area under the curve)
 
-```{r integ}
+```{r integ, cache=TRUE}
 # create the dependent variable
 subdat$DV <- subdat$vowel.integ
 
@@ -1003,7 +1003,7 @@ integ <- brms::brm(
 integ
 ```
 
-```{r integ-null}
+```{r integ-null, cache=TRUE}
 # reduced/null model
 integ_null <- brms::brm(
   DV ~
