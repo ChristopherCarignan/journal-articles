@@ -559,7 +559,7 @@ gest.max.mag_post <- brms::posterior_samples(gest.max.mag, pars="b_") %>%
 pp_check(gest.max.mag, nsamples = 50) + theme_minimal()
 ```
 
-```{r onset-sens}
+```{r gest-max-mag-sens}
 gest.max.mag_fixed <- fixef(gest.max.mag) %>% as_tibble(rownames = "term")
 
 gest.max.mag_fixed %>%
@@ -751,7 +751,7 @@ stiff.off_post <- brms::posterior_samples(stiff.off, pars="b_") %>%
 
 ## Checks
 
-```{r stiff-ons-pp}
+```{r stiff-off-pp}
 pp_check(stiff.off, nsamples = 50) + theme_minimal()
 ```
 
