@@ -41,8 +41,6 @@ subdat <- matdat[matdat$post %in% coda & matdat$stress %in% stresses, ]
 # Velum gesture duration  #
 # # # # # # # # # # # # # #
 
-The BRM for velum gesture duration was built using a log-normal distribution \citep{Rosen2005, Ratnikova2017, Gahl2019}. The following distributions were used as weakly informative priors (on the log-odds scale): for the intercept of duration (corresponding to \ips{nd} and overall mean speech rate), a normal distribution with mean 0 and standard deviation 3 (Normal(0, 3)); for the effect of voicing (when \ips{nt}) and centred speech rate, Normal(0, 1). These roughly correspond to a belief that the intercept is between 0 and 400 ms, and the duration changes (increase or decreases) by a factor of 0 to 7 in the \ips{nd} context, at 95\% confidence. For the model standard deviation and the random intercept standard deviation we used a half Cauchy distribution with location 0 and scale 0.1. For the correlation between random effects, an LKJ(2) distribution. The same prior specification was used for the other models in this section (velum gesture onset time and offset time).
-
 # create the dependent variable
 subdat$DV <- subdat$velumopening_gesture_dur*1000
 
@@ -181,8 +179,6 @@ onset_post <- brms::posterior_samples(onset, pars="b_") %>%
 # Velum gesture peak (timing) #
 # # # # # # # # # # # # # # # #
 
-The BRM for the time point of the velum gesture peak was built using a Gaussian distribution; unlike the other measures of timing, the time point of the velum gesture peak is not expected to follow a one-sided distribution, since the peak can potentially occur before or after the vowel offset. The following distributions were used as weakly informative priors (on the milliseconds scale): for the intercept (corresponding to \ips{nd} and overall mean speech rate), Normal(0, 200); for the effect of voicing (when \ips{nt}) and centred speech rate, Normal(0, 100). These correspond to a belief that the intercept is between -400 and 400 ms, and that the time changes by -200 to 200 ms in the \ips{nt} context, at 95\% confidence. For the model standard deviation and the random intercept standard deviation we used HalfCauchy(0, 5). For the correlation between random effects, an LKJ(2) distribution.
-
 # create the dependent variable
 subdat$DV <- (subdat$velumopening_maxcon_on - subdat$Vokal_off)*1000
 
@@ -320,8 +316,6 @@ offset_post <- brms::posterior_samples(offset, pars="b_") %>%
 # # # # # # # # # # # # # # # # #
 # Velum gesture peak (magnitude)#
 # # # # # # # # # # # # # # # # #
-
-The BRM for the velum gesture magnitude was built using a Beta distribution, since the magnitude values are on a 0-1 scale. The following weakly informative priors were used: Normal(0, 10) for the intercept; Normal(0, 5) for voicing, speech rate, and the random effects standard deviations; the \textit{brms} default prior for the $\phi$ parameter of the beta distribution (gamma(0.01, 0.01)); and LKJ(2) prior for the random effects correlation.
 
 # create the dependent variable
 subdat$DV <- subdat$velum2US_velumopening_maxcon_onset
@@ -677,12 +671,12 @@ integ <- brms::brm(
     (1 + voicing | speaker) +
     (1 + voicing | word),
   data = subdat,
-  family = gaussian(),
-  prior = c(prior(normal(0, 50), class = Intercept),
-            prior(normal(0, 25), class = b, coef = voicingvoiceless),
-            prior(cauchy(0, 1), class = sd),
-            prior(cauchy(0, 1), class = sigma),
-            prior(lkj(2), class = cor)),
+  family = lognormal(),
+  prior = c(prior(normal(4, 10), class = Intercept),
+            prior(normal(0, 10), class = b, coef = voicingvoiceless),
+            prior(cauchy(0, 10), class = sd),
+            prior(cauchy(0, 10), class = sigma),
+            prior(lkj(1), class = cor)),
   seed = my.seed,
   iter = 6000,
   warmup = 3000,
@@ -703,11 +697,11 @@ integ_null <- brms::brm(
     (1 + voicing | speaker) +
     (1 + voicing | word),
   data = subdat,
-  family = gaussian(),
-  prior = c(prior(normal(0, 50), class = Intercept),
-            prior(cauchy(0, 1), class = sd),
-            prior(cauchy(0, 1), class = sigma),
-            prior(lkj(2), class = cor)),
+  family = lognormal(),
+  prior = c(prior(normal(4, 10), class = Intercept),
+            prior(cauchy(0, 10), class = sd),
+            prior(cauchy(0, 10), class = sigma),
+            prior(lkj(1), class = cor)),
   seed = my.seed,
   iter = 6000,
   warmup = 3000,
@@ -725,8 +719,8 @@ brms::bayes_factor(integ, integ_null)
 # calculate the marginal posteriors of the full model
 integ_post <- brms::posterior_samples(integ, pars="b_") %>%
   dplyr::mutate(
-    nd = b_Intercept,
-    nt = b_Intercept + b_voicingvoiceless
+    nd = exp(b_Intercept),
+    nt = exp(b_Intercept + b_voicingvoiceless)
   ) %>%
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
@@ -874,10 +868,10 @@ p1 <- fig10_post %>%
   filter(outcome == "gesture\nintegral") %>%
   ggplot(aes(estimate, outcome, group = context, fill = context)) +
   geom_halfeyeh(slab_color="black", slab_alpha=0.5) +
-  scale_x_continuous(breaks=seq(10,50,1)) +
-  coord_cartesian(xlim = c(18,32), ylim = c(1.4,1.4)) +
+  scale_x_continuous(breaks=seq(0,100,2)) +
+  coord_cartesian(xlim = c(31,64.5), ylim = c(1.4,1.4)) +
   scale_fill_manual(values=my.cols) +
-  labs(x = "Velum displacement integral (time X magnitude)", y = element_blank(), fill = "Context") + theme_bw() + theme(axis.text=element_text(size=12),axis.title=element_text(size=13))
+  labs(x = "Velum displacement integral: time (ms) X magnitude (normalized)", y = element_blank(), fill = "Context") + theme_bw() + theme(axis.text=element_text(size=12),axis.title=element_text(size=13))
 
 # save plot
 pdf(file="./rtMRI-velum/plots/integral_plot.pdf",width=9,height=3,onefile=T,pointsize=14)
