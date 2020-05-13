@@ -130,7 +130,6 @@ Fixed effects:
 - prosody
 - vowel:voicing
 - prosody:voicing
-- centred speech rate
 
 Random effects:
 
@@ -146,7 +145,6 @@ m1_vow_bf <- bf(
     prosody +
     vowel:voicing +
     prosody:voicing +
-    speech_rate_c +
     (voicing + vowel + prosody | speaker) +
     (voicing + vowel + prosody | pre) +
     (1 | word)
