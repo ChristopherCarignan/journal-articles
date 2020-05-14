@@ -677,7 +677,7 @@ stiff.ons_fixed %>%
 
 # Gesture offset stiffness
 
-```{r stiff-off}
+```{r stiff-off, cache=TRUE}
 # create the dependent variable
 subdat$DV <- subdat$stiff.off
 
