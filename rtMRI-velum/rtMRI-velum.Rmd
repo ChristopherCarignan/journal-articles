@@ -981,9 +981,9 @@ integ <- brms::brm(
     (1 + voicing | speaker) +
     (1 + voicing | word),
   data = subdat,
-  family = gaussian(),
-  prior = c(prior(normal(0, 50), class = Intercept),
-            prior(normal(0, 25), class = b, coef = voicingvoiceless),
+  family = lognormal(),
+  prior = c(prior(normal(0, 5), class = Intercept),
+            prior(normal(0, 5), class = b, coef = voicingvoiceless),
             prior(cauchy(0, 1), class = sd),
             prior(cauchy(0, 1), class = sigma),
             prior(lkj(2), class = cor)),
@@ -1010,8 +1010,8 @@ integ_null <- brms::brm(
     (1 + voicing | speaker) +
     (1 + voicing | word),
   data = subdat,
-  family = gaussian(),
-  prior = c(prior(normal(0, 50), class = Intercept),
+  family = lognormal(),
+  prior = c(prior(normal(0, 5), class = Intercept),
             prior(cauchy(0, 1), class = sd),
             prior(cauchy(0, 1), class = sigma),
             prior(lkj(2), class = cor)),
@@ -1036,8 +1036,8 @@ brms::bayes_factor(integ, integ_null)
 # calculate the marginal posteriors of the full model
 integ_post <- brms::posterior_samples(integ, pars="b_") %>%
   dplyr::mutate(
-    nd = b_Intercept,
-    nt = b_Intercept + b_voicingvoiceless
+    nd = exp(b_Intercept),
+    nt = exp(b_Intercept + b_voicingvoiceless)
   ) %>%
   dplyr::select(nd, nt) %>%
   tidyr::gather(context, DV)
@@ -1219,10 +1219,10 @@ p1 <- fig10_post %>%
   filter(outcome == "gesture\nintegral") %>%
   ggplot(aes(estimate, outcome, group = context, fill = context)) +
   geom_halfeyeh(slab_color="black", slab_alpha=0.5) +
-  scale_x_continuous(breaks=seq(10,50,1)) +
-  coord_cartesian(xlim = c(18,32), ylim = c(1.4,1.4)) +
+  scale_x_continuous(breaks=seq(0,100,2)) +
+  coord_cartesian(xlim = c(31,64.5), ylim = c(1.4,1.4)) +
   scale_fill_manual(values=my.cols) +
-  labs(x = "Velum displacement integral (time X magnitude)", y = element_blank(), fill = "Context") + theme_bw() + theme(axis.text=element_text(size=12),axis.title=element_text(size=13))
+  labs(x = "Velum displacement integral: time (ms) X magnitude (normalized)", y = element_blank(), fill = "Context") + theme_bw() + theme(axis.text=element_text(size=12),axis.title=element_text(size=13))
 ```
 
 ```{r figure-10-save}
