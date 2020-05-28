@@ -1,4 +1,4 @@
-## ----setup, include=TRUE, message=FALSE------------------------------------------
+## ----setup, include=TRUE, message=FALSE--------------------------------------------------------------
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = here::here())
 library(tidyverse)
@@ -15,7 +15,7 @@ my.seed <- 123
 set.seed(my.seed)
 
 
-## ----read-data-------------------------------------------------------------------
+## ----read-data---------------------------------------------------------------------------------------
 matdat <- read.csv("./rtMRI-velum/velum_data.csv", header = T)
 
 # get rid of items that gesture onsets that begin *after* the vowel offset (only 5/7152 total items)
@@ -39,11 +39,11 @@ stresses <- c("N")
 subdat <- matdat[matdat$post %in% coda & matdat$stress %in% stresses, ]
 
 
-## ----half-cauchy-----------------------------------------------------------------
+## ----half-cauchy-------------------------------------------------------------------------------------
 inverseCDF(c(0.025, 0.975), phcauchy, sigma = 0.1)
 
 
-## ----dur, cache=TRUE-------------------------------------------------------------
+## ----dur, cache=TRUE---------------------------------------------------------------------------------
 # create the dependent variable
 subdat$DV <- subdat$velumopening_gesture_dur*1000
 
@@ -71,11 +71,11 @@ dur <- brms::brm(
 )
 
 
-## ----dur-summary-----------------------------------------------------------------
+## ----dur-summary-------------------------------------------------------------------------------------
 dur
 
 
-## ----dur-null, cache=TRUE--------------------------------------------------------
+## ----dur-null, cache=TRUE----------------------------------------------------------------------------
 # reduced/null model
 dur_null <- brms::brm(
   DV ~
@@ -99,12 +99,12 @@ dur_null <- brms::brm(
 )
 
 
-## ----dur-bf, cache=TRUE, dependson=c("dur", "dur-null")--------------------------
+## ----dur-bf, cache=TRUE, dependson=c("dur", "dur-null")----------------------------------------------
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(dur, dur_null)
 
 
-## ----dur-post--------------------------------------------------------------------
+## ----dur-post----------------------------------------------------------------------------------------
 # calculate the marginal posteriors of the full model
 dur_post <- brms::posterior_samples(dur, pars="b_") %>%
   dplyr::mutate(
@@ -115,11 +115,11 @@ dur_post <- brms::posterior_samples(dur, pars="b_") %>%
   tidyr::gather(context, DV)
 
 
-## ----dur-pp----------------------------------------------------------------------
+## ----dur-pp------------------------------------------------------------------------------------------
 pp_check(dur, nsamples = 50) + theme_minimal()
 
 
-## ----dur-sens--------------------------------------------------------------------
+## ----dur-sens----------------------------------------------------------------------------------------
 dur_fixed <- fixef(dur) %>% as_tibble(rownames = "term")
 
 dur_fixed %>%
@@ -137,7 +137,7 @@ dur_fixed %>%
   theme_minimal()
 
 
-## ----onset, cache=TRUE-----------------------------------------------------------
+## ----onset, cache=TRUE-------------------------------------------------------------------------------
 # create the dependent variable
 subdat$DV <- -(subdat$velumopening_gesture_on - subdat$Vokal_off)*1000
 
@@ -165,11 +165,11 @@ onset <- brms::brm(
 )
 
 
-## ----onset-summary---------------------------------------------------------------
+## ----onset-summary-----------------------------------------------------------------------------------
 onset
 
 
-## ----onset-null, cache=TRUE------------------------------------------------------
+## ----onset-null, cache=TRUE--------------------------------------------------------------------------
 # reduced/null model
 onset_null <- brms::brm(
   DV ~
@@ -193,12 +193,12 @@ onset_null <- brms::brm(
 )
 
 
-## ----onset-bf, cache=TRUE, dependson=c("onset", "onset-null")--------------------
+## ----onset-bf, cache=TRUE, dependson=c("onset", "onset-null")----------------------------------------
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(onset, onset_null)
 
 
-## ----onset-post------------------------------------------------------------------
+## ----onset-post--------------------------------------------------------------------------------------
 # calculate the marginal posteriors of the full model
 onset_post <- brms::posterior_samples(onset, pars="b_") %>%
   dplyr::mutate(
@@ -209,11 +209,11 @@ onset_post <- brms::posterior_samples(onset, pars="b_") %>%
   tidyr::gather(context, DV)
 
 
-## ----onset-pp--------------------------------------------------------------------
+## ----onset-pp----------------------------------------------------------------------------------------
 pp_check(onset, nsamples = 50) + theme_minimal()
 
 
-## ----onset-sens------------------------------------------------------------------
+## ----onset-sens--------------------------------------------------------------------------------------
 onset_fixed <- fixef(onset) %>% as_tibble(rownames = "term")
 
 onset_fixed %>%
@@ -231,11 +231,11 @@ onset_fixed %>%
   theme_minimal()
 
 
-## ----half-cauchy-get-max---------------------------------------------------------
+## ----half-cauchy-get-max-----------------------------------------------------------------------------
 inverseCDF(c(0.025, 0.975), phcauchy, sigma = 5)
 
 
-## ----gest-max, cache=TRUE--------------------------------------------------------
+## ----gest-max, cache=TRUE----------------------------------------------------------------------------
 # create the dependent variable
 subdat$DV <- (subdat$velumopening_maxcon_on - subdat$Vokal_off)*1000
 
@@ -263,11 +263,11 @@ gest.max <- brms::brm(
 )
 
 
-## ----gest-max-summary------------------------------------------------------------
+## ----gest-max-summary--------------------------------------------------------------------------------
 gest.max
 
 
-## ----gest-max-null, cache=TRUE---------------------------------------------------
+## ----gest-max-null, cache=TRUE-----------------------------------------------------------------------
 # reduced/null model
 gest.max_null <- brms::brm(
   DV ~
@@ -291,12 +291,12 @@ gest.max_null <- brms::brm(
 )
 
 
-## ----gest-max-bf, cache=TRUE, dependson=c("gest-max", "gest-max-null")-----------
+## ----gest-max-bf, cache=TRUE, dependson=c("gest-max", "gest-max-null")-------------------------------
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(gest.max, gest.max_null)
 
 
-## ----gest-max-post---------------------------------------------------------------
+## ----gest-max-post-----------------------------------------------------------------------------------
 # calculate the marginal posteriors of the full model
 gest.max_post <- brms::posterior_samples(gest.max, pars="b_") %>%
   dplyr::mutate(
@@ -307,11 +307,11 @@ gest.max_post <- brms::posterior_samples(gest.max, pars="b_") %>%
   tidyr::gather(context, DV)
 
 
-## ----gest-max-pp-----------------------------------------------------------------
+## ----gest-max-pp-------------------------------------------------------------------------------------
 pp_check(gest.max, nsamples = 50) + theme_minimal()
 
 
-## ----gest-max-sens---------------------------------------------------------------
+## ----gest-max-sens-----------------------------------------------------------------------------------
 gest.max_fixed <- fixef(gest.max) %>% as_tibble(rownames = "term")
 
 gest.max_fixed %>%
@@ -329,7 +329,7 @@ gest.max_fixed %>%
   theme_minimal()
 
 
-## ----offset, cache=TRUE----------------------------------------------------------
+## ----offset, cache=TRUE------------------------------------------------------------------------------
 # create the dependent variable
 subdat$DV <- (subdat$velumopening_gesture_off - subdat$Vokal_off)*1000
 
@@ -357,11 +357,11 @@ offset <- brms::brm(
 )
 
 
-## ----offset-summary--------------------------------------------------------------
+## ----offset-summary----------------------------------------------------------------------------------
 offset
 
 
-## ----offset-null, cache=TRUE-----------------------------------------------------
+## ----offset-null, cache=TRUE-------------------------------------------------------------------------
 # reduced/null model
 offset_null <- brms::brm(
   DV ~
@@ -385,12 +385,12 @@ offset_null <- brms::brm(
 )
 
 
-## ----offset-bf, cache=TRUE, dependson=c("offset", "offset-null")-----------------
+## ----offset-bf, cache=TRUE, dependson=c("offset", "offset-null")-------------------------------------
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(offset, offset_null)
 
 
-## ----offset-post-----------------------------------------------------------------
+## ----offset-post-------------------------------------------------------------------------------------
 # calculate the marginal posteriors of the full model
 offset_post <- brms::posterior_samples(offset, pars="b_") %>%
   dplyr::mutate(
@@ -401,11 +401,11 @@ offset_post <- brms::posterior_samples(offset, pars="b_") %>%
   tidyr::gather(context, DV)
 
 
-## ----offset-pp-------------------------------------------------------------------
+## ----offset-pp---------------------------------------------------------------------------------------
 pp_check(offset, nsamples = 50) + theme_minimal()
 
 
-## ----offset-sens-----------------------------------------------------------------
+## ----offset-sens-------------------------------------------------------------------------------------
 offset_fixed <- fixef(offset) %>% as_tibble(rownames = "term")
 
 offset_fixed %>%
@@ -423,7 +423,7 @@ offset_fixed %>%
   theme_minimal()
 
 
-## ----gest-max-mag, cache=TRUE----------------------------------------------------
+## ----gest-max-mag, cache=TRUE------------------------------------------------------------------------
 # create the dependent variable
 subdat$DV <- subdat$velum2US_velumopening_maxcon_onset
 
@@ -451,11 +451,11 @@ gest.max.mag <- brms::brm(
 )
 
 
-## ----gest-max-mag-summary--------------------------------------------------------
+## ----gest-max-mag-summary----------------------------------------------------------------------------
 gest.max.mag
 
 
-## ----gest-max-mag-null, cache=TRUE-----------------------------------------------
+## ----gest-max-mag-null, cache=TRUE-------------------------------------------------------------------
 # reduced/null model
 gest.max.mag_null <- brms::brm(
   DV ~
@@ -479,12 +479,12 @@ gest.max.mag_null <- brms::brm(
 )
 
 
-## ----gest-max-mag-bf, cache=TRUE, dependson=c("gest-max-mag", "gest-max-mag-null")----
+## ----gest-max-mag-bf, cache=TRUE, dependson=c("gest-max-mag", "gest-max-mag-null")-------------------
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(gest.max.mag, gest.max.mag_null)
 
 
-## ----gest-max-mag-post-----------------------------------------------------------
+## ----gest-max-mag-post-------------------------------------------------------------------------------
 # calculate the marginal posteriors of the full model
 gest.max.mag_post <- brms::posterior_samples(gest.max.mag, pars="b_") %>%
   dplyr::mutate(
@@ -495,11 +495,11 @@ gest.max.mag_post <- brms::posterior_samples(gest.max.mag, pars="b_") %>%
   tidyr::gather(context, DV)
 
 
-## ----gest-max-mag-pp-------------------------------------------------------------
+## ----gest-max-mag-pp---------------------------------------------------------------------------------
 pp_check(gest.max.mag, nsamples = 50) + theme_minimal()
 
 
-## ----gest-max-mag-sens-----------------------------------------------------------
+## ----gest-max-mag-sens-------------------------------------------------------------------------------
 gest.max.mag_fixed <- fixef(gest.max.mag) %>% as_tibble(rownames = "term")
 
 gest.max.mag_fixed %>%
@@ -517,7 +517,7 @@ gest.max.mag_fixed %>%
   theme_minimal()
 
 
-## ----stiff-ons, cache=TRUE-------------------------------------------------------
+## ----stiff-ons, cache=TRUE---------------------------------------------------------------------------
 # create the dependent variable
 subdat$DV <- subdat$stiff.ons
 
@@ -545,11 +545,11 @@ stiff.ons <- brms::brm(
 )
 
 
-## ----stiff-ons-summary-----------------------------------------------------------
+## ----stiff-ons-summary-------------------------------------------------------------------------------
 stiff.ons
 
 
-## ----stiff-ons-null, cache=TRUE--------------------------------------------------
+## ----stiff-ons-null, cache=TRUE----------------------------------------------------------------------
 # reduced/null model
 stiff.ons_null <- brms::brm(
   DV ~
@@ -573,12 +573,12 @@ stiff.ons_null <- brms::brm(
 )
 
 
-## ----stiff-ons-bf, cache=TRUE, dependson=c("stiff-ons", "stiff-ons-null")--------
+## ----stiff-ons-bf, cache=TRUE, dependson=c("stiff-ons", "stiff-ons-null")----------------------------
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(stiff.ons, stiff.ons_null)
 
 
-## ----stiff-ons-post--------------------------------------------------------------
+## ----stiff-ons-post----------------------------------------------------------------------------------
 # calculate the marginal posteriors of the full model
 stiff.ons_post <- brms::posterior_samples(stiff.ons, pars="b_") %>%
   dplyr::mutate(
@@ -589,11 +589,11 @@ stiff.ons_post <- brms::posterior_samples(stiff.ons, pars="b_") %>%
   tidyr::gather(context, DV)
 
 
-## ----stiff-ons-pp----------------------------------------------------------------
+## ----stiff-ons-pp------------------------------------------------------------------------------------
 pp_check(stiff.ons, nsamples = 50) + theme_minimal()
 
 
-## ----stiff-ons-sens--------------------------------------------------------------
+## ----stiff-ons-sens----------------------------------------------------------------------------------
 stiff.ons_fixed <- fixef(stiff.ons) %>% as_tibble(rownames = "term")
 
 stiff.ons_fixed %>%
@@ -611,7 +611,7 @@ stiff.ons_fixed %>%
   theme_minimal()
 
 
-## ----stiff-off, cache=TRUE-------------------------------------------------------
+## ----stiff-off, cache=TRUE---------------------------------------------------------------------------
 # create the dependent variable
 subdat$DV <- subdat$stiff.off
 
@@ -639,11 +639,11 @@ stiff.off <- brms::brm(
 )
 
 
-## ----stiff-off-summary-----------------------------------------------------------
+## ----stiff-off-summary-------------------------------------------------------------------------------
 stiff.off
 
 
-## ----stiff-off-null, cache=TRUE--------------------------------------------------
+## ----stiff-off-null, cache=TRUE----------------------------------------------------------------------
 # reduced/null model
 stiff.off_null <- brms::brm(
   DV ~
@@ -667,12 +667,12 @@ stiff.off_null <- brms::brm(
 )
 
 
-## ----stiff-off-bf, cache=TRUE, dependson=c("stiff-off", "stiff-off-null")--------
+## ----stiff-off-bf, cache=TRUE, dependson=c("stiff-off", "stiff-off-null")----------------------------
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(stiff.off, stiff.off_null)
 
 
-## ----stiff-off-post--------------------------------------------------------------
+## ----stiff-off-post----------------------------------------------------------------------------------
 # calculate the marginal posteriors of the full model
 stiff.off_post <- brms::posterior_samples(stiff.off, pars="b_") %>%
   dplyr::mutate(
@@ -683,11 +683,11 @@ stiff.off_post <- brms::posterior_samples(stiff.off, pars="b_") %>%
   tidyr::gather(context, DV)
 
 
-## ----stiff-off-pp----------------------------------------------------------------
+## ----stiff-off-pp------------------------------------------------------------------------------------
 pp_check(stiff.off, nsamples = 50) + theme_minimal()
 
 
-## ----stiff-off-sens--------------------------------------------------------------
+## ----stiff-off-sens----------------------------------------------------------------------------------
 stiff.off_fixed <- fixef(stiff.off) %>% as_tibble(rownames = "term")
 
 stiff.off_fixed %>%
@@ -705,7 +705,7 @@ stiff.off_fixed %>%
   theme_minimal()
 
 
-## ----kurt, cache=TRUE------------------------------------------------------------
+## ----kurt, cache=TRUE--------------------------------------------------------------------------------
 # create the dependent variable
 subdat$DV <- subdat$kurtosis
 
@@ -733,11 +733,11 @@ kurt <- brms::brm(
 )
 
 
-## ----kurt-summary----------------------------------------------------------------
+## ----kurt-summary------------------------------------------------------------------------------------
 kurt
 
 
-## ----kurt-null, cache=TRUE-------------------------------------------------------
+## ----kurt-null, cache=TRUE---------------------------------------------------------------------------
 # reduced/null model
 kurt_null <- brms::brm(
   DV ~
@@ -761,12 +761,12 @@ kurt_null <- brms::brm(
 )
 
 
-## ----kurt-bf, cache=TRUE, dependson=c("kurt", "kurt-null")-----------------------
+## ----kurt-bf, cache=TRUE, dependson=c("kurt", "kurt-null")-------------------------------------------
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(kurt, kurt_null)
 
 
-## ----kurt-post-------------------------------------------------------------------
+## ----kurt-post---------------------------------------------------------------------------------------
 # calculate the marginal posteriors of the full model
 kurt_post <- brms::posterior_samples(kurt, pars="b_") %>%
   dplyr::mutate(
@@ -777,11 +777,11 @@ kurt_post <- brms::posterior_samples(kurt, pars="b_") %>%
   tidyr::gather(context, DV)
 
 
-## ----kurt-pp---------------------------------------------------------------------
+## ----kurt-pp-----------------------------------------------------------------------------------------
 pp_check(kurt, nsamples = 50) + theme_minimal()
 
 
-## ----kurt-sens-------------------------------------------------------------------
+## ----kurt-sens---------------------------------------------------------------------------------------
 kurt_fixed <- fixef(kurt) %>% as_tibble(rownames = "term")
 
 kurt_fixed %>%
@@ -799,7 +799,7 @@ kurt_fixed %>%
   theme_minimal()
 
 
-## ----crest-fact, cache=TRUE------------------------------------------------------
+## ----crest-fact, cache=TRUE--------------------------------------------------------------------------
 # create the dependent variable
 subdat$DV <- subdat$crest.fact
 
@@ -827,11 +827,11 @@ crest.fact <- brms::brm(
 )
 
 
-## ----crest-fact-summary----------------------------------------------------------
+## ----crest-fact-summary------------------------------------------------------------------------------
 crest.fact
 
 
-## ----crest-fact-null, cache=TRUE-------------------------------------------------
+## ----crest-fact-null, cache=TRUE---------------------------------------------------------------------
 # reduced/null model
 crest.fact_null <- brms::brm(
   DV ~
@@ -855,12 +855,12 @@ crest.fact_null <- brms::brm(
 )
 
 
-## ----creast-fact-bf, cache=TRUE, dependson=c("crest-fact", "crest-fact-null")----
+## ----creast-fact-bf, cache=TRUE, dependson=c("crest-fact", "crest-fact-null")------------------------
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(crest.fact, crest.fact_null)
 
 
-## ----crest-fact-post-------------------------------------------------------------
+## ----crest-fact-post---------------------------------------------------------------------------------
 # calculate the marginal posteriors of the full model
 crest.fact_post <- brms::posterior_samples(crest.fact, pars="b_") %>%
   dplyr::mutate(
@@ -871,11 +871,11 @@ crest.fact_post <- brms::posterior_samples(crest.fact, pars="b_") %>%
   tidyr::gather(context, DV)
 
 
-## ----crest-fact-pp---------------------------------------------------------------
+## ----crest-fact-pp-----------------------------------------------------------------------------------
 pp_check(crest.fact, nsamples = 50) + theme_minimal()
 
 
-## ----crest-fact-sens-------------------------------------------------------------
+## ----crest-fact-sens---------------------------------------------------------------------------------
 crest.fact_fixed <- fixef(crest.fact) %>% as_tibble(rownames = "term")
 
 crest.fact_fixed %>%
@@ -893,7 +893,7 @@ crest.fact_fixed %>%
   theme_minimal()
 
 
-## ----integ, cache=TRUE-----------------------------------------------------------
+## ----integ, cache=TRUE-------------------------------------------------------------------------------
 # create the dependent variable
 subdat$DV <- subdat$vowel.integ
 
@@ -921,11 +921,11 @@ integ <- brms::brm(
 )
 
 
-## ----integ-summary---------------------------------------------------------------
+## ----integ-summary-----------------------------------------------------------------------------------
 integ
 
 
-## ----integ-null, cache=TRUE------------------------------------------------------
+## ----integ-null, cache=TRUE--------------------------------------------------------------------------
 # reduced/null model
 integ_null <- brms::brm(
   DV ~
@@ -949,12 +949,12 @@ integ_null <- brms::brm(
 )
 
 
-## ----integ-bf, cache=TRUE, dependson=c("integ", "integ-null")--------------------
+## ----integ-bf, cache=TRUE, dependson=c("integ", "integ-null")----------------------------------------
 # calculate the Bayes factor of the difference between the full and null models
 brms::bayes_factor(integ, integ_null)
 
 
-## ----integ-post------------------------------------------------------------------
+## ----integ-post--------------------------------------------------------------------------------------
 # calculate the marginal posteriors of the full model
 integ_post <- brms::posterior_samples(integ, pars="b_") %>%
   dplyr::mutate(
@@ -965,11 +965,11 @@ integ_post <- brms::posterior_samples(integ, pars="b_") %>%
   tidyr::gather(context, DV)
 
 
-## ----integ-pp--------------------------------------------------------------------
+## ----integ-pp----------------------------------------------------------------------------------------
 pp_check(integ, nsamples = 50) + theme_minimal()
 
 
-## ----integ-sens------------------------------------------------------------------
+## ----integ-sens--------------------------------------------------------------------------------------
 integ_fixed <- fixef(integ) %>% as_tibble(rownames = "term")
 
 integ_fixed %>%
@@ -987,18 +987,26 @@ integ_fixed %>%
   theme_minimal()
 
 
-## ----cols------------------------------------------------------------------------
+## ----cols--------------------------------------------------------------------------------------------
 # colors to be used for plotting (suitable for B/W printing)
 my.cols <- c("#2c7fb8","#7fcdbb")
 
 
-## ----figure-5--------------------------------------------------------------------
+## ----figure-5----------------------------------------------------------------------------------------
 # gather posteriors
 fig5_post <- bind_rows(
-  dur_post %>% rename(`duration` = DV) %>% pivot_longer(`duration`, names_to = "outcome", values_to = "estimate"),
-  onset_post %>% rename(`onset` = DV) %>% pivot_longer(`onset`, names_to = "outcome", values_to = "estimate"),
-  gest.max_post %>% rename(`peak` = DV) %>% pivot_longer(`peak`, names_to = "outcome", values_to = "estimate"),
-  offset_post %>% rename(`offset` = DV) %>% pivot_longer(`offset`, names_to = "outcome", values_to = "estimate")
+  dur_post %>%
+    rename(`duration` = DV)
+  %>% pivot_longer(`duration`, names_to = "outcome", values_to = "estimate"),
+  onset_post %>%
+    rename(`onset` = DV) %>%
+    pivot_longer(`onset`, names_to = "outcome", values_to = "estimate"),
+  gest.max_post %>%
+    rename(`peak` = DV) %>%
+    pivot_longer(`peak`, names_to = "outcome", values_to = "estimate"),
+  offset_post %>%
+    rename(`offset` = DV) %>%
+    pivot_longer(`offset`, names_to = "outcome", values_to = "estimate")
 ) %>%
   mutate(outcome = factor(outcome, levels = c("offset","peak","onset","duration")))
 
@@ -1013,7 +1021,10 @@ p1 <- fig5_post %>%
   scale_x_continuous(breaks=seq(0,500,5)) +
   coord_cartesian(ylim = c(1.3, 1.5), xlim = c(250,327)) +
   scale_fill_manual(values = my.cols) +
-  labs(x = "Duration (ms)", y = element_blank()) + theme_bw() + theme(legend.position = "none",axis.text=element_text(size=12),axis.title=element_text(size=13))
+  labs(x = "Duration (ms)", y = element_blank()) + theme_bw() +
+  theme(legend.position = "none",
+        axis.text=element_text(size=12),
+        axis.title=element_text(size=13))
 
 p2 <- fig5_post %>%
   filter(outcome %in% c("onset","peak","offset")) %>%
@@ -1023,20 +1034,28 @@ p2 <- fig5_post %>%
   scale_x_continuous(breaks=seq(-200,300,20)) +
   coord_cartesian(xlim = c(-125,205)) +
   scale_fill_manual(values=my.cols) +
-  labs(x = "Time (ms) relative to acoustic vowel offset", y = element_blank(), fill = "Context") + theme_bw() + theme(axis.text=element_text(size=12),axis.title=element_text(size=13),panel.grid.major.y=element_blank())
+  labs(x = "Time (ms) relative to acoustic vowel offset",
+       y = element_blank(), fill = "Context") + theme_bw() + 
+  theme(axis.text=element_text(size=12),axis.title=element_text(size=13),
+        panel.grid.major.y=element_blank())
 
 
-## ----figure-5-save---------------------------------------------------------------
+## ----figure-5-save-----------------------------------------------------------------------------------
 # save coposite plot
-pdf(file="./rtMRI-velum/plots/time_plots.pdf",width=9.5,height=5,onefile=T,pointsize=14)
-(p1 + p2) + patchwork::plot_layout(ncol = 1, guides = "collect") + theme(legend.position = "right")
+pdf(file="./rtMRI-velum/plots/time_plots.pdf",width=9.5,height=5,
+    onefile=T,pointsize=14)
+(p1 + p2) + patchwork::plot_layout(ncol = 1, guides = "collect") +
+  theme(legend.position = "right")
 dev.off()
 
 
-## ----figure-6--------------------------------------------------------------------
+## ----figure-6----------------------------------------------------------------------------------------
 # gather posteriors
 fig6_post <- bind_rows(
-  gest.max.mag_post %>% rename(`peak    \nmagnitude` = DV) %>% pivot_longer(`peak    \nmagnitude`, names_to = "outcome", values_to = "estimate")
+  gest.max.mag_post %>%
+    rename(`peak    \nmagnitude` = DV) %>%
+    pivot_longer(`peak    \nmagnitude`, names_to = "outcome",
+                 values_to = "estimate")
 ) 
 
 # make plot
@@ -1047,21 +1066,26 @@ p1 <- fig6_post %>%
   scale_x_continuous(breaks=seq(0,1,0.025)) +
   coord_cartesian(xlim = c(0.58,0.775), ylim = c(1.4,1.4)) +
   scale_fill_manual(values=my.cols) +
-  labs(x = "Velum opening magnitude (speaker-scaled)", y = element_blank(), fill = "Context") + theme_bw() + theme(axis.text=element_text(size=12),axis.title=element_text(size=13))
+  labs(x = "Velum opening magnitude (speaker-scaled)", y = element_blank(),
+       fill = "Context") + theme_bw() +
+  theme(axis.text=element_text(size=12),axis.title=element_text(size=13))
 
 
-## ----figure-6-save---------------------------------------------------------------
+## ----figure-6-save-----------------------------------------------------------------------------------
 # save plot
-pdf(file="./rtMRI-velum/plots/magnitude_plot.pdf",width=9,height=3,onefile=T,pointsize=14)
+pdf(file="./rtMRI-velum/plots/magnitude_plot.pdf",width=9,height=3,onefile=T,
+    pointsize=14)
 p1
 dev.off()
 
 
-## ----figure-7--------------------------------------------------------------------
+## ----figure-7----------------------------------------------------------------------------------------
 # gather posteriors
 fig7_post <- bind_rows(
-  stiff.ons_post %>% rename(`opening\nstiffness` = DV) %>% pivot_longer(`opening\nstiffness`, names_to = "outcome", values_to = "estimate"),
-  stiff.off_post %>% rename(`closing \nstiffness` = DV) %>% pivot_longer(`closing \nstiffness`, names_to = "outcome", values_to = "estimate")
+  stiff.ons_post %>% rename(`opening\nstiffness` = DV) %>%
+    pivot_longer(`opening\nstiffness`, names_to = "outcome", values_to = "estimate"),
+  stiff.off_post %>% rename(`closing \nstiffness` = DV) %>%
+    pivot_longer(`closing \nstiffness`, names_to = "outcome", values_to = "estimate")
 ) 
 
 # make composite plot on same scale
@@ -1072,21 +1096,26 @@ p1 <- fig7_post %>%
   scale_x_continuous(breaks=seq(0,30,0.5)) +
   coord_cartesian(xlim = c(12,17.5), ylim = c(1.4,2.3)) +
   scale_fill_manual(values=my.cols) +
-  labs(x = "Stiffness", y = element_blank(), fill = "Context") + theme_bw() + theme(axis.text=element_text(size=12),axis.title=element_text(size=13),panel.grid.major.y=element_blank())
+  labs(x = "Stiffness", y = element_blank(), fill = "Context") + theme_bw() +
+  theme(axis.text=element_text(size=12),axis.title=element_text(size=13),
+        panel.grid.major.y=element_blank())
 
 
-## ----figure-7-save---------------------------------------------------------------
+## ----figure-7-save-----------------------------------------------------------------------------------
 # save plot
-pdf(file="./rtMRI-velum/plots/stiffness_plots.pdf",width=9,height=4,onefile=T,pointsize=14)
+pdf(file="./rtMRI-velum/plots/stiffness_plots.pdf",width=9,height=4,onefile=T,
+    pointsize=14)
 p1
 dev.off()
 
 
-## ----figure-9--------------------------------------------------------------------
+## ----figure-9----------------------------------------------------------------------------------------
 # gather posteriors
 fig9_post <- bind_rows(
-  kurt_post %>% rename(`kurtosis` = DV) %>% pivot_longer(`kurtosis`, names_to = "outcome", values_to = "estimate"),
-  crest.fact_post %>% rename(`crest \nfactor` = DV) %>% pivot_longer(`crest \nfactor`, names_to = "outcome", values_to = "estimate")
+  kurt_post %>% rename(`kurtosis` = DV) %>%
+    pivot_longer(`kurtosis`, names_to = "outcome", values_to = "estimate"),
+  crest.fact_post %>% rename(`crest \nfactor` = DV) %>%
+    pivot_longer(`crest \nfactor`, names_to = "outcome", values_to = "estimate")
 ) 
 
 # make separate plots
@@ -1097,7 +1126,10 @@ p1 <- fig9_post %>%
   scale_x_continuous(breaks=seq(0,5,0.05)) +
   coord_cartesian(xlim = c(2.81,3.18), ylim = c(1.4,1.4)) +
   scale_fill_manual(values=my.cols) +
-  labs(x = "Kurtosis", y = element_blank(), fill = "Context") + theme_bw() + theme(legend.position = "none",axis.text=element_text(size=12),axis.title=element_text(size=13),panel.grid.major.y=element_blank())
+  labs(x = "Kurtosis", y = element_blank(), fill = "Context") +
+  theme_bw() +
+  theme(legend.position = "none",axis.text=element_text(size=12),
+        axis.title=element_text(size=13),panel.grid.major.y=element_blank())
 
 p2 <- fig9_post %>%
   filter(outcome == "crest \nfactor") %>%
@@ -1106,20 +1138,27 @@ p2 <- fig9_post %>%
   scale_x_continuous(breaks=seq(0,3,0.01)) +
   coord_cartesian(xlim = c(1.805,1.885), ylim = c(1.4,1.4)) +
   scale_fill_manual(values=my.cols) +
-  labs(x = "Crest factor (ratio of peak to average displacement)", y = element_blank(), fill = "Context") + theme_bw() + theme(legend.position = "none",axis.text=element_text(size=12),axis.title=element_text(size=13),panel.grid.major.y=element_blank())
+  labs(x = "Crest factor (ratio of peak to average displacement)",
+       y = element_blank(), fill = "Context") + theme_bw() +
+  theme(legend.position = "none",axis.text=element_text(size=12),
+        axis.title=element_text(size=13),panel.grid.major.y=element_blank())
 
 
-## ----figure-9-save---------------------------------------------------------------
+## ----figure-9-save-----------------------------------------------------------------------------------
 # save composite plot
-pdf(file="./rtMRI-velum/plots/peakedness_plots.pdf",width=9,height=5,onefile=T,pointsize=14)
-(p1 + p2) + patchwork::plot_layout(ncol = 1, guides = "collect") + theme(legend.position = "right")
+pdf(file="./rtMRI-velum/plots/peakedness_plots.pdf",width=9,height=5,
+    onefile=T,pointsize=14)
+(p1 + p2) + patchwork::plot_layout(ncol = 1, guides = "collect") +
+  theme(legend.position = "right")
 dev.off()
 
 
-## ----figure-10-------------------------------------------------------------------
+## ----figure-10---------------------------------------------------------------------------------------
 # gather posteriors
 fig10_post <- bind_rows(
-  integ_post %>% rename(`gesture\nintegral` = DV) %>% pivot_longer(`gesture\nintegral`, names_to = "outcome", values_to = "estimate")
+  integ_post %>% rename(`gesture\nintegral` = DV) %>%
+    pivot_longer(`gesture\nintegral`, names_to = "outcome",
+                 values_to = "estimate")
 ) 
 
 # make plot
@@ -1130,12 +1169,15 @@ p1 <- fig10_post %>%
   scale_x_continuous(breaks=seq(0,100,2)) +
   coord_cartesian(xlim = c(31,64.5), ylim = c(1.4,1.4)) +
   scale_fill_manual(values=my.cols) +
-  labs(x = "Velum displacement integral: time (ms) X magnitude (normalized)", y = element_blank(), fill = "Context") + theme_bw() + theme(axis.text=element_text(size=12),axis.title=element_text(size=13))
+  labs(x = "Velum displacement integral: time (ms) X magnitude (normalized)",
+       y = element_blank(), fill = "Context") + theme_bw() + 
+  theme(axis.text=element_text(size=12),axis.title=element_text(size=13))
 
 
-## ----figure-10-save--------------------------------------------------------------
+## ----figure-10-save----------------------------------------------------------------------------------
 # save plot
-pdf(file="./rtMRI-velum/plots/integral_plot.pdf",width=9,height=3,onefile=T,pointsize=14)
+pdf(file="./rtMRI-velum/plots/integral_plot.pdf",width=9,height=3,onefile=T,
+    pointsize=14)
 p1
 dev.off()
 
