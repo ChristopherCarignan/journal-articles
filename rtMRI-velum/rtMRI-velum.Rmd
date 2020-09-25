@@ -58,16 +58,18 @@ subdat <- matdat[matdat$post %in% coda & matdat$stress %in% stresses, ]
 # Velum gesture duration
 
 Since no specific information on expectations for velum gesture duration can be found in the literature, we followed more general expectations for speech segment durations, coded as very weakly informative priors.
-The BRM for velum gesture duration was built using a log-normal distribution, since speech segment duration has been shown to be log-normally distributed [@Rosen2005, @Ratnikova2017, @Gahl2019].
+The BRM for velum gesture duration was built using a log-normal distribution, since speech segment duration has been shown to be log-normally distributed [@Rosen2005; @Ratnikova2017; @Gahl2019].
 The following distributions were used as weakly informative priors (on the log-odds scale): for the intercept of duration (corresponding to ND), a normal distribution with mean = 0 and standard deviation = 3 ($Normal(0, 3)$); for the effect of voicing (when NT), $Normal(0, 1)$.
 These roughly correspond to a belief that the intercept of velum gesture duration (when the context is ND) is between 0 and 400 ms ($e^{3 \times 2} = 403$), and the duration changes (increases or decreases) by a factor of 1 to 7.4 in the ND context ($e^{1 \times 2} = 7.4$), at 95% confidence.
 For the model standard deviation and the random intercept standard deviation we used a half-Cauchy distribution with location 0 and scale 0.1 ($HalfCauchy(0, 0.1)$); this corresponds to a 95% HDI = [0, 2.55] in log-odds, i.e. a factor change of 1 to 12.75 ($e^2.55 = 12.75$).
+
+NOTE: Warnings about $\hat{R}$ and sample size are false warnings, and are not signs of problems with fitting and they can safely be ignored. See <https://github.com/paul-buerkner/brms/issues/864>.
 
 ```{r half-cauchy}
 inverseCDF(c(0.025, 0.975), phcauchy, sigma = 0.1)
 ```
 
-For the correlation between random effects, an $LKJ(2)$ distribution, as recommended by [...].
+For the correlation between random effects, an $LKJ(2)$ distribution, as recommended by [@vasishth2018].
 The same prior specification was used for the models of velum gesture onset time and velum gesture offset time.
 
 ```{r dur, cache=TRUE}
@@ -1279,3 +1281,4 @@ p1
 dev.off()
 ```
 
+# References
