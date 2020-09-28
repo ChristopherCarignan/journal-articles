@@ -34,7 +34,7 @@ set.seed(my.seed)
 ```{r read-data}
 matdat <- read.csv("./rtMRI-velum/velum_data.csv", header = T)
 
-# get rid of items that gesture onsets that begin *after* the vowel offset (only 5/7152 total items)
+# get rid of items with gesture onsets that begin *after* the vowel offset (only 5/7152 total items)
 matdat <- matdat[(matdat$velumopening_gesture_on - matdat$Vokal_off) < 0,]
 
 # separate coda contexts by alveolar voiced stop vs. alveolar voiceless stop
@@ -63,14 +63,14 @@ The following distributions were used as weakly informative priors (on the log-o
 These roughly correspond to a belief that the intercept of velum gesture duration (when the context is ND) is between 0 and 400 ms ($e^{3 \times 2} = 403$), and the duration changes (increases or decreases) by a factor of 1 to 7.4 in the ND context ($e^{1 \times 2} = 7.4$), at 95% confidence.
 For the model standard deviation and the random intercept standard deviation we used a half-Cauchy distribution with location 0 and scale 0.1 ($HalfCauchy(0, 0.1)$); this corresponds to a 95% HDI = [0, 2.55] in log-odds, i.e. a factor change of 1 to 12.75 ($e^2.55 = 12.75$).
 
-NOTE: Warnings about $\hat{R}$ and sample size are false warnings, and are not signs of problems with fitting and they can safely be ignored. See <https://github.com/paul-buerkner/brms/issues/864>.
-
 ```{r half-cauchy}
 inverseCDF(c(0.025, 0.975), phcauchy, sigma = 0.1)
 ```
 
-For the correlation between random effects, an $LKJ(2)$ distribution, as recommended by [@vasishth2018].
+For the correlation between random effects, we used an $LKJ(2)$ distribution, as recommended by @vasishth2018.
 The same prior specification was used for the models of velum gesture onset time and velum gesture offset time.
+
+NOTE: Warnings about $\hat{R}$ and sample size are false warnings, and are not signs of problems with fitting and they can safely be ignored. See <https://github.com/paul-buerkner/brms/issues/864>.
 
 ```{r dur, cache=TRUE}
 # create the dependent variable
@@ -150,8 +150,8 @@ dur_post <- brms::posterior_samples(dur, pars="b_") %>%
 pp_check(dur, nsamples = 50) + theme_minimal()
 ```
 
-Sensitivity analysis from @Betancourt2018.
-$s$ (posterior shrinkage) indicates the contribution of the data to the posterior (values closer to 1 are better).
+For the sensitivity analysis we followed the method introduced in @Betancourt2018.
+In the following plot, $s$ (posterior shrinkage) indicates the contribution of the data to the posterior (values closer to 1 are better).
 $z$ (posterior z-score) indicates how close the inference is to the data generating process (lower values are better).
 An ideal fit should have $s$ = 1 and $z$ = 0.
 Posteriors with high $s$ and high $z$ indicate overfit (the data dominate the posterior), while posteriors with low $s$ and low $z$ indicate that the model is poorly identified (the data is not contributing to the model and the priors dominate).
